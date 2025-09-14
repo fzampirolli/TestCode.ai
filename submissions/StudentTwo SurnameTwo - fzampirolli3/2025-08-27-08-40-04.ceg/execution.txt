@@ -1,0 +1,367 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 90.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Mensagem recebida
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>90
+
+
+<|--
+-Question 2:
+
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.py
+>Habilidades: 
+
+Avaliação: 0.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Failed tests
+Test 1: test_1
+Test 2: test_2
+Test 3: test_3
+Test 4: test_4
+Test 5: test_5
+Test 6: test_6
+Test 7: test_7
+Test 8: test_8
+Test 9: test_9
+Test 10: test_10
+--|>
+
+<|--
+-Test 1: test_1 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 3; graduacao
+>Estatística
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 49, in <module>
+>    curso = Graduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 22, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Estatística
+
+-Test 2: test_2 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 3; graduacao
+>Estatística; Química; Ética
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 49, in <module>
+>    curso = Graduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 22, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Estatística; Química; Ética
+
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Matemática; 9; pos
+>Química; Estatística
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 52, in <module>
+>    curso = PosGraduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 33, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1206
+>Disciplinas: Química; Estatística
+
+-Test 4: test_4 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; -1; graduacao
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 46, in <module>
+>    entradas_d.append(input().split("; "))
+>                      ^^^^^^^
+>EOFError: EOF when reading a line
+
+ --- Expected output (text)---
+>ValueError: Duração inválida
+
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 8; pos
+>Cálculo; Ética; Inglês
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 52, in <module>
+>    curso = PosGraduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 33, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1072
+>Disciplinas: Cálculo; Ética; Inglês
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Psicologia; 8; pos
+>Química; Metodologia; Ética
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 52, in <module>
+>    curso = PosGraduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 33, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1072
+>Disciplinas: Química; Metodologia; Ética
+
+-Test 7: test_7 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 9; graduacao
+>Cálculo
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 49, in <module>
+>    curso = Graduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 22, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 1800
+>Disciplinas: Cálculo
+
+-Test 8: test_8 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; -1; pos
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 46, in <module>
+>    entradas_d.append(input().split("; "))
+>                      ^^^^^^^
+>EOFError: EOF when reading a line
+
+ --- Expected output (text)---
+>ValueError: Duração inválida
+
+-Test 9: test_9 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 10; pos
+>Estatística
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 52, in <module>
+>    curso = PosGraduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 33, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1340
+>Disciplinas: Estatística
+
+-Test 10: test_10 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 3; graduacao
+>Química; Estatística
+
+ --- Program output ---
+>Traceback (most recent call last):
+>  File "/home/p10476/Q2.py", line 49, in <module>
+>    curso = Graduacao(nome, duracao)
+>            ^^^^^^^^^^^^^^^^^^^^^^^^
+>  File "/home/p10476/Q2.py", line 22, in __init__
+>    super().__init__(nome, duracao)
+>  File "/home/p10476/Q2.py", line 13, in __init__
+>    if self.duracao < 0:
+>       ^^^^^^^^^^^^^^^^
+>TypeError: '<' not supported between instances of 'str' and 'int'
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Química; Estatística
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 0 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>> 0
+
+
+<|--
+-Nota: 22.50
+--|>
+Grade :=>> 22.500
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+🚫 Erro detectado: problema de compilação (sintaxe) ou execução (lógica)!
+
+🔍 Abaixo, uma sugestão de correção com base na análise do erro:
+
+=== INÍCIO [🤖 modelo: llama-3.1-8b-instant] ===
+
+ ### Q1.py
+O erro é que o programa está emitindo várias mensagens de "Nova conexão" ao invés de apenas uma, quando a conexão é estabelecida.
+
+Sugestão: Verificar a condição de verificação e alterar para apenas imprimir uma vez.
+
+### Q2.py
+Não há o código para análise. Favor forneçer o código para que possamos proceder com a análise.
+
+### Q3.py
+Não há o código para análise. Favor forneçer o código para que possamos proceder com a análise.
+
+### Q4.py
+Não há o código para análise. Favor forneçer o código para que possamos proceder com a análise.
+
+### Q5.py
+Não há o código para análise. Favor forneçer o código para que possamos proceder com a análise.
+
+### Q6.py
+Não há o código para análise. Favor forneçer o código para que possamos proceder com a análise.
+
+=== FIM [⏰  2025-08-27 08:40:10] ===
+--|>

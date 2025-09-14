@@ -1,0 +1,139 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.800/1 (80.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 80.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Failed tests
+Test 3: test_3
+Test 6: test_6
+--|>
+
+<|--
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Atualização disponível
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Atualização disponível
+>Notificações:
+>Nova Conexão
+>Atualização disponível
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Atualização disponível
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 8 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>80
+
+
+<|--
+-Question 2:
+
+>Erro: Arquivo esperado não encontrado
+>Arquivo para questão não encontrado.
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: 
+>Habilidades: 
+
+Avaliação: 0.00%
+--|>
+
+
+
+<|--
+-Nota: 20.00
+--|>
+Grade :=>> 20.000
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: llama-3.1-8b-instant] ===
+
+ Q1.py
+
+1. A classe CentralNotificacoes é uma classe Singleton, mas em um momento específico, ela adiciona uma notificação ao invés de listar as notificações quando o comando é "listar".
+2. A variável msg capturada pelo usuário não é usada corretamente, pois o usuário pode digitar uma string que não seja uma notificação.
+3. A classe CentralNotificacoes não tem um método para encerrar a instância.
+4. O método listar não imprime corretamente as notificações, pois as imprime uma após a outra, em vez de em uma única linha.
+5. A instância da classe CentralNotificacoes pode ser criada várias vezes, resultando em múltiplas instâncias da classe.
+
+ Sugestões:
+
+* Verificar a lógica da classe CentralNotificacoes, especialmente no método listar.
+* Considerar a adição de um método para encerrar a instância da classe.
+* Verificar se a variável msg está sendo usada corretamente.
+* Considerar a adição de uma validação para garantir que as notificações sejam strings válidas.
+
+=== FIM [⏰  2025-08-27 08:15:01] ===
+--|>

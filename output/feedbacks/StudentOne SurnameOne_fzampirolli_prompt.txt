@@ -1,0 +1,336 @@
+
+# AVALIAÇÃO AUTOMATIZADA DETALHADA - OOP Assessment - P1
+Data: 2025-09-13 21:08:27
+
+## INSTRUÇÕES GERAIS
+Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
+Forneça um feedback DETALHADO!
+
+Para cada questão, CONSIDERANDO RIGOROSAMENTE A RUBRICA FORNECIDA:
+1.  Forneça um feedback construtivo e aprofundado.
+2.  Destaque os pontos positivos e onde o aluno acertou.
+3.  Aponte os erros ou áreas de melhoria de forma clara.
+4.  Ofereça sugestões práticas e exemplos de como o código poderia ser melhorado ou corrigido.
+5.  No final da análise de cada questão, forneça a nota formatada.
+
+PARA CADA ITEM X DA RUBRICA, explique se foi atendido ou não, e por quê:
+   - ✅ CORRETO: item X atendido
+   - ❌ INCORRETO: item X não atendido
+   - ⚠️ PARCIALMENTE CORRETO: item X atendido parcialmente
+
+FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
+- QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
+
+
+---
+## Singleton Pattern (Q1) - Máximo: 25 pontos
+
+### RUBRICA DE AVALIAÇÃO:
+########################################################################
+# RUBRICA DE CORREÇÃO - QUESTÃO 1: PADRÃO SINGLETON                    #
+########################################################################
+
+## CONTEXTO DA QUESTÃO
+Avalie exclusivamente se o código implementa corretamente o padrão 
+Singleton conforme especificado no enunciado da prova.
+
+## CRITÉRIOS DE AVALIAÇÃO (Todos devem estar presentes)
+
+### 1. INSTÂNCIA ÚNICA (Obrigatório)
+✅ CORRETO: Existe mecanismo para garantir apenas uma instância
+   - Atributo estático/privado para armazenar a instância
+   - Verificação se instância já existe antes de criar nova
+❌ INCORRETO: Permite múltiplas instâncias ou não tem controle
+
+### 2. MÉTODO DE ACESSO (Obrigatório)  
+✅ CORRETO: Método público que retorna sempre a mesma instância
+   - Método estático (ex: getInstance(), get_instance())
+   - Retorna a instância única, criando apenas se não existir
+❌ INCORRETO: Não tem método de acesso ou permite múltiplos objetos
+
+### 3. CONSTRUTOR PRIVADO/PROTEGIDO (Obrigatório)
+✅ CORRETO: Construtor inacessível externamente
+   - Construtor privado (Java/C++) ou método __new__ controlado (Python)
+   - Impossível criar instâncias via new/() diretamente
+❌ INCORRETO: Construtor público permite instanciação direta
+
+### 4. EXECUÇÃO CORRETA (Obrigatório)
+✅ CORRETO: Código executa sem erros de sintaxe
+   - Sintaxe válida na linguagem utilizada
+   - Lógica coerente e funcional
+❌ INCORRETO: Erros de compilação/execução ou lógica inválida
+
+## SISTEMA DE PONTUAÇÃO (Escala: 0 a 25 pontos)
+
+- **25 pontos**: TODOS os 4 critérios corretos (implementação perfeita)
+- **20 pontos**: 3 critérios corretos, 1 incorreto (quase perfeito)  
+- **15 pontos**: 2 critérios corretos, 2 incorretos (implementação parcial)
+- **10 pontos**: 1 critério correto, 3 incorretos (tentativa mínima)
+- **5 pontos**: Tentativa de implementação, mas todos os critérios falham
+- **0 pontos**: Ausente, vazio ou completamente incorreto
+
+## FORMATO OBRIGATÓRIO DA RESPOSTA
+
+Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: XX pontos (máx: 25)
+==================================================
+
+Onde XX é a nota de 0 a 25 baseada nos critérios acima.
+
+## INSTRUÇÕES ESPECÍFICAS
+- Analise APENAS o padrão Singleton, ignore outros aspectos
+- Seja rigoroso com os 4 critérios obrigatórios  
+- Forneça feedback construtivo explicando erros encontrados
+- Use a linguagem do código submetido em seus exemplos
+
+### CÓDIGO SUBMETIDO PELO ALUNO:
+import java.io.*;
+import java.util.*;
+
+public class Q1{
+    
+    public static class CentralNotificacoes{
+        
+        // o teste 4 me parece estar com as saidas erradas, ele pede 'alerta de bateria'
+        // mas o usuario nunca da input de alerta de bateria neste teste (ele da em outros)
+        
+        static CentralNotificacoes instance = null;
+        
+        ArrayList<String> notificacoes = new ArrayList<>();
+        
+        private CentralNotificacoes(){
+            
+        }
+        
+        public static CentralNotificacoes getInstance(){
+            if(instance ==  null){
+                instance = new CentralNotificacoes();
+                System.out.println("Central iniciada");
+            } else {
+                System.out.println("Central já ativa");
+            }
+            return instance;
+        }
+        
+        public void listar(){
+            System.out.println("Notificações:");
+            for (String notif : notificacoes){
+                System.out.println(notif);
+            }
+        }
+        
+        public void adicionar(String notif){
+            System.out.println("Nova notificação: " + notif);
+            notificacoes.add(notif);
+        }
+    }
+    
+    public static void main(String args[]) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        String notif = r.readLine();
+        CentralNotificacoes instance = CentralNotificacoes.getInstance();
+        
+        while(r.ready()){
+            switch(r.readLine()){
+                case "nova_instancia": CentralNotificacoes.getInstance(); break;
+                case "adicionar": instance.adicionar(notif); break;
+            }   
+        }
+    }
+}
+
+Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
+
+
+---
+## Inheritance and Composition (Q2) - Máximo: 75 pontos
+
+### RUBRICA DE AVALIAÇÃO:
+########################################################################
+# RUBRICA DE CORREÇÃO - QUESTÃO 2: HERANÇA, COMPOSIÇÃO E EXCEÇÕES     #
+########################################################################
+
+## CONTEXTO DA QUESTÃO
+Avalie se o código implementa corretamente:
+- Herança com classe abstrata e métodos abstratos
+- Composição/Agregação com classe auxiliar
+- Tratamento de exceções em construtores
+
+## CRITÉRIOS DE AVALIAÇÃO (Todos devem estar presentes)
+
+### 1. CLASSE ABSTRATA BASE (Obrigatório — 10 pontos)
+✅ CORRETO: Classe base abstrata bem definida
+   - Classe marcada como abstrata (abstract class, ABC, virtual)
+   - Contém atributos básicos especificados no enunciado
+   - Estrutura coerente para herança
+❌ INCORRETO: Não é abstrata ou faltam atributos essenciais
+
+### 2. MÉTODO ABSTRATO (Obrigatório — 10 pontos)
+✅ CORRETO: Método abstrato implementado corretamente
+   - Definido na classe base como abstrato
+   - Sobrescrito em TODAS as subclasses filhas
+   - Lógica específica por subclasse (ex.: cálculo de preço, desconto)
+❌ INCORRETO: Não é abstrato ou não foi sobrescrito corretamente
+
+### 3. HERANÇA CORRETA (Obrigatório — 10 pontos)
+✅ CORRETO: Subclasses herdam da classe abstrata
+   - Sintaxe de herança correta na linguagem
+   - Implementam todos os métodos abstratos obrigatórios
+   - Adicionam funcionalidades específicas quando necessário
+❌ INCORRETO: Não herdam ou herança mal implementada
+
+### 4. CLASSE AUXILIAR (Obrigatório — 10 pontos)
+✅ CORRETO: Classe auxiliar bem definida
+   - Classe separada com pelo menos um atributo
+   - Representa conceito coerente (ex.: Autor, Equipamento, Disciplina)
+   - Estrutura adequada para composição/agregação
+❌ INCORRETO: Ausente ou inadequada para composição
+
+### 5. COMPOSIÇÃO/AGREGAÇÃO (Obrigatório — 10 pontos)
+✅ CORRETO: Relacionamento implementado funcionalmente
+   - Classe principal contém lista/coleção de objetos auxiliares
+   - Método para adicionar objetos à coleção
+   - Relacionamento coerente e funcional
+❌ INCORRETO: Não implementa relacionamento ou mal funcional
+
+### 6. TRATAMENTO DE EXCEÇÕES (Obrigatório — 10 pontos)
+✅ CORRETO: Exceções tratadas no construtor
+   - Validação de parâmetros (ex.: valores negativos, nulos)
+   - Lança exceção apropriada (ValueError, IllegalArgumentException, etc.)
+   - Try/catch ou validação prévia adequada
+❌ INCORRETO: Não trata exceções ou tratamento inadequado
+
+### 7. EXECUÇÃO CORRETA (Obrigatório — 15 pontos)
+✅ CORRETO: Código funciona sem erros
+   - Sintaxe correta na linguagem utilizada
+   - Lógica coerente e executável
+❌ INCORRETO: Erros de compilação/execução
+
+> Observação: os pontos por critério foram ajustados para que a soma máxima seja 75 pontos (critério 1–6 = 10 pontos cada; critério 7 = 15 pontos).
+
+## SISTEMA DE PONTUAÇÃO (Escala: 0 a 75 pontos)
+
+Método de cálculo (preferível e preciso): some os pontos de cada critério conforme atribuído acima.
+(Ex.: se faltarem validações de exceção e houver erro de execução, pontuação = 75 − 10 − 15 = 50.)
+
+Para referência rápida (escala proporcional baseada no sistema anterior — arredondada):
+
+- 75 pontos: TODOS os 7 critérios corretos (implementação completa)
+- 63 pontos: 6 critérios corretos, 1 incorreto (quase completo — proporcional ao anterior)
+- 52 pontos: 5 critérios corretos, 2 incorretos (bom desenvolvimento)
+- 40 pontos: 4 critérios corretos, 3 incorretos (desenvolvimento parcial)
+- 29 pontos: 3 critérios corretos, 4 incorretos (tentativa limitada)
+- 17 pontos: 1–2 critérios corretos (tentativa mínima)
+- 5 pontos: Tentativa presente mas critérios essenciais falham
+- 0 pontos: Ausente, vazio ou completamente incorreto
+
+## FORMATO OBRIGATÓRIO DA RESPOSTA
+
+Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: XX pontos (máx: 75)
+==================================================
+
+Onde XX é a nota de 0 a 75 baseada nos critérios acima.
+
+## INSTRUÇÕES ESPECÍFICAS
+- Analise rigorosamente cada um dos 7 critérios
+- Forneça exemplos de correção quando possível
+- Explique claramente quais critérios falharam e por quê
+- Seja construtivo no feedback para auxiliar aprendizado
+
+
+### CÓDIGO SUBMETIDO PELO ALUNO:
+import java.io.*;
+import java.util.*;
+
+public class Q2 {
+    
+    
+    public abstract static class Curso {
+        String nome;
+        int duracao; // semestres
+        List<Disciplina> disciplinas = new ArrayList<>();
+        
+        public abstract int calcularCargaHoraria();
+        public Curso(String nome, int duracao){
+            if(duracao < 0){
+                throw new ValueError();
+            }
+            this.nome = nome; this.duracao = duracao;
+        }
+        public void adicionarDisciplina(Disciplina d){
+            disciplinas.add(d);
+        }
+        public void printData(){
+            System.out.println("Carga horária: " + calcularCargaHoraria());
+            String disc = "Disciplinas: ";
+            for(int i = 0; i < disciplinas.size(); i++){
+                Disciplina d = disciplinas.get(i);
+                disc += d.nome;
+                if(i < disciplinas.size() - 1){
+                    disc += "; ";
+                }
+            }
+            System.out.println(disc);
+        }
+    }
+    
+    public static class Graduacao extends Curso{
+        public Graduacao(String nome, int duracao){
+            super(nome,duracao);
+            System.out.println("Graduação criada");
+        }
+        
+        public int calcularCargaHoraria(){
+            return duracao * 184;
+        }
+    }
+    
+    public static class PosGraduacao extends Curso{
+        public PosGraduacao(String nome, int duracao){
+            super(nome,duracao);
+            System.out.println("Pós-graduação criada");
+        }
+        
+        public int calcularCargaHoraria(){
+            return duracao * 137;
+        }
+    }
+    
+    public static class Disciplina{
+        String nome;
+        public Disciplina(String nome){
+            this.nome = nome;
+        }
+    }
+    
+    public static class ValueError extends RuntimeException{ //presumo que seja uma excessão nativa em python
+        public ValueError(){
+            super("ValueError: Duração inválida");
+        }
+    }
+    
+    public static void main(String args[]) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        String[] cursoData = r.readLine().split("; ");
+        try{ 
+            int h = Integer.parseInt(cursoData[1]);        
+            Curso curso = cursoData[2].equals("pos") ? new PosGraduacao(cursoData[0],h) : new Graduacao(cursoData[0],h);
+            String[] discData = r.readLine().split("; "); 
+            for(String disc : discData){
+                Disciplina d = new Disciplina(disc);
+                curso.adicionarDisciplina(d);
+            }
+            
+            curso.printData();
+        } catch (ValueError e){
+            System.out.println(e);
+        }
+    }
+}
+
+Lembre-se de incluir a linha: QUESTAO_Q2: [NOTA]/75 - [comentário]

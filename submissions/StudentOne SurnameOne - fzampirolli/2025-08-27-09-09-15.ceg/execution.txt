@@ -1,0 +1,126 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.class
+Q1.java
+>Habilidades: 
+
+Avaliação: 90.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Test 4: test_4 (-10.000)
+Incorrect program output
+ --- Input ---
+>Atualização disponível
+>listar
+
+ --- Program output ---
+>Central iniciada
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Atualização disponível
+>Notificações:
+>Alerta de bateria
+>Atualização disponível
+>Atualização disponível
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>90
+
+
+<|--
+-Question 2:
+
+Avaliação: 3.000/3 (100.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.class
+Q2.java
+>Habilidades: 
+
+Avaliação: 100.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/10 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>100
+
+
+<|--
+-Nota: 97.50
+--|>
+Grade :=>> 97.500
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: llama-3.3-70b-versatile] ===
+
+ Q1.java
+1. A classe CentralNotificacoes está implementando o padrão de projeto Singleton, porém, o método getInstance está sendo chamado duas vezes no mesmo escopo, o que pode ser desnecessário.
+2. O método adicionar da classe CentralNotificacoes está adicionando notificações à lista, mas não está verificando se a notificação já existe antes de adicioná-la.
+3. O método main não está fechando o BufferedReader após o uso, o que pode causar problemas de recursos não liberados.
+4. O método main não está tratando a exceção IOException que pode ser lançada pelo BufferedReader.
+
+Q2.java
+1. A classe Curso está sendo definida como abstract static, o que não é uma combinação válida em Java, pois as classes abstract não podem ser static.
+2. A classe Curso está lançando uma exceção ValueError, mas essa exceção não é nativa em Java, é uma exceção do Python.
+3. A classe Disciplina não está sendo utilizada como deveria, pois não está sendo herdada ou implementada por outras classes.
+4. O método main não está fechando o BufferedReader após o uso, o que pode causar problemas de recursos não liberados.
+5. O método main não está tratando a exceção IOException que pode ser lançada pelo BufferedReader.
+6. O método main está utilizando um try-catch genérico para tratar a exceção ValueError, o que pode não ser o melhor jeito de tratar exceções específicas.
+7. A classe ValueError está sendo extendida de RuntimeException, mas não está sendo utilizada como exceção checking ou unchecked.
+
+=== FIM [⏰  2025-08-27 09:09:22] ===
+--|>

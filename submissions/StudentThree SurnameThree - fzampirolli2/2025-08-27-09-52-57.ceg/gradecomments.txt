@@ -1,0 +1,235 @@
+
+-Question 1:
+
+Avaliação: 1.000/1 (100.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 100.00%
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/10 tests passed |
+>+------------------------------+
+
+-Question 2:
+
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.py
+>Habilidades: 
+
+Avaliação: 0.00%
+-Failed tests
+Test 1: test_1
+Test 2: test_2
+Test 3: test_3
+Test 4: test_4
+Test 5: test_5
+Test 6: test_6
+Test 7: test_7
+Test 8: test_8
+Test 9: test_9
+Test 10: test_10
+-Test 1: test_1 (-10.000)
+Incorrect program output
+ --- Input ---
+>Ana; 7090.3; gerente
+>Automação; API REST
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1489.0
+>Projetos: Automação; API REST
+
+-Test 2: test_2 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 4924.37; gerente
+>Dashboard BI
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1034.1
+>Projetos: Dashboard BI
+
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 2201.72; gerente
+>Dashboard BI
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 462.4
+>Projetos: Dashboard BI
+
+-Test 4: test_4 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 2142.55; desenvolvedor
+>Dashboard BI; Sistema Web
+>ProjetoInvalido
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 235.7
+>TypeError: Projeto inválido
+>Projetos: Dashboard BI; Sistema Web
+
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 3510.56; desenvolvedor
+>Automação
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 386.2
+>Projetos: Automação
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 2552.86; gerente
+>Automação
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 536.1
+>Projetos: Automação
+
+-Test 7: test_7 (-10.000)
+Incorrect program output
+ --- Input ---
+>Gabriela; 3811.13; gerente
+>Banco de Dados
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 800.3
+>Projetos: Banco de Dados
+
+-Test 8: test_8 (-10.000)
+Incorrect program output
+ --- Input ---
+>Eva; 7963.61; gerente
+>Automação
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1672.4
+>Projetos: Automação
+
+-Test 9: test_9 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 9274.21; desenvolvedor
+>Aplicativo Mobile
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 1020.2
+>Projetos: Aplicativo Mobile
+
+-Test 10: test_10 (-10.000)
+Incorrect program output
+ --- Input ---
+>Eva; 6746.67; gerente
+>Sistema Web; API REST
+
+ --- Program output ---
+>Funcionario não encontrado
+>Erro: name 'funcionario' is not defined
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1416.8
+>Projetos: Sistema Web; API REST
+
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 0 tests passed |
+>+------------------------------+
+
+-Nota: 25.00
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: meta-llama/llama-4-scout-17b-16e-instruct] ===
+
+ **Q1.py**
+
+1. A classe `SomSistema` implementa o padrão de projeto Singleton, mas não há necessidade de utilizar `sys` como módulo importado.
+2. O método `__new__` da classe `SomSistema` verifica se uma instância já existe e cria uma nova instância somente se necessário.
+3. Os métodos `tocar_som` e `som_atual` manipulam o atributo `somp` da instância.
+4. O código principal lê duas entradas do usuário: uma para o som e outra para o comando.
+5. O comando "tocar_som" chama o método `tocar_som` com a entrada como argumento.
+6. O comando "som_atual" chama o método `som_atual`, mas antes chama `tocar_som` novamente com a entrada como argumento, o que não faz sentido.
+7. O comando "nova_instancia" cria uma nova instância de `SomSistema`, mas não a utiliza.
+
+Sugestões:
+
+* Remover o import desnecessário de `sys`.
+* Corrigir o comando "som_atual" para não chamar `tocar_som` novamente.
+* Corrigir o comando "nova_instancia" para utilizar a nova instância.
+
+**Q2.py**
+
+1. A classe `Funcionario` é uma classe abstrata com um atributo `nome`, `salario` e `listaprojetos`.
+2. O método `__init__` da classe `Funcionario` verifica se o salário é válido e lança um `ValueError` se não for.
+3. O método `adicionar_projeto` adiciona um projeto à lista de projetos do funcionário.
+4. As classes `Desenvolvedor` e `Gerente` herdam de `Funcionario` e implementam o método `calcular_bonus`.
+5. A classe `Projeto` tem um atributo `nome`.
+6. O código principal lê entradas do usuário e cria instâncias de `Funcionario` e `Projeto`.
+7. O código principal também calcula e imprime o bônus do funcionário e a lista de projetos.
+
+Sugestões:
+
+* Verificar se o salário é um número válido antes de converter para float.
+* Tratar a exceção de `ValueError` de forma mais específica.
+* Considerar a utilização de um dicionário para mapear os tipos de funcionários.
+
+=== FIM [⏰  2025-08-27 09:53:54] ===

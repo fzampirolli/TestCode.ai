@@ -1,0 +1,352 @@
+
+-Question 1:
+
+Avaliação: 0.300/1 (30.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 30.00%
+-Failed tests
+Test 1: test_1
+Test 2: test_2
+Test 3: test_3
+Test 5: test_5
+Test 7: test_7
+Test 8: test_8
+Test 9: test_9
+-Test 1: test_1 (-10.000)
+Incorrect program output
+ --- Input ---
+>Erro
+>tocar_som
+
+ --- Program output ---
+>Gerenciador de som criado
+>Traceback (most recent call last):
+>  File "/home/p11074/Q1.py", line 32, in <module>
+>    print(sistema.toca_som())
+>          ^^^^^^^^^^^^^^^^
+>AttributeError: 'SomSistema' object has no attribute 'toca_som'. Did you mean: 'tocar_som'?
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Erro
+
+-Test 2: test_2 (-10.000)
+Incorrect program output
+ --- Input ---
+>Erro
+>som_atual
+
+ --- Program output ---
+>Gerenciador de som criado
+>Som atual: Erro
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Erro
+>Som atual: Erro
+
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Campainha
+>som_atual
+
+ --- Program output ---
+>Gerenciador de som criado
+>Som atual: Campainha
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Campainha
+>Som atual: Campainha
+
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Campainha
+>som_atual
+
+ --- Program output ---
+>Gerenciador de som criado
+>Som atual: Campainha
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Campainha
+>Som atual: Campainha
+
+-Test 7: test_7 (-10.000)
+Incorrect program output
+ --- Input ---
+>Notificação
+>tocar_som
+
+ --- Program output ---
+>Gerenciador de som criado
+>Traceback (most recent call last):
+>  File "/home/p11074/Q1.py", line 32, in <module>
+>    print(sistema.toca_som())
+>          ^^^^^^^^^^^^^^^^
+>AttributeError: 'SomSistema' object has no attribute 'toca_som'. Did you mean: 'tocar_som'?
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Notificação
+
+-Test 8: test_8 (-10.000)
+Incorrect program output
+ --- Input ---
+>Alerta
+>tocar_som
+
+ --- Program output ---
+>Gerenciador de som criado
+>Traceback (most recent call last):
+>  File "/home/p11074/Q1.py", line 32, in <module>
+>    print(sistema.toca_som())
+>          ^^^^^^^^^^^^^^^^
+>AttributeError: 'SomSistema' object has no attribute 'toca_som'. Did you mean: 'tocar_som'?
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Alerta
+
+-Test 9: test_9 (-10.000)
+Incorrect program output
+ --- Input ---
+>Notificação
+>som_atual
+
+ --- Program output ---
+>Gerenciador de som criado
+>Som atual: Notificação
+
+ --- Expected output (text)---
+>Gerenciador de som criado
+>Tocando som: Notificação
+>Som atual: Notificação
+
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 3 tests passed |
+>+------------------------------+
+
+-Question 2:
+
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.py
+>Habilidades: 
+
+Avaliação: 0.00%
+-Failed tests
+Test 1: test_1
+Test 2: test_2
+Test 3: test_3
+Test 4: test_4
+Test 5: test_5
+Test 6: test_6
+Test 7: test_7
+Test 8: test_8
+Test 9: test_9
+Test 10: test_10
+-Test 1: test_1 (-10.000)
+Incorrect program output
+ --- Input ---
+>Ana; 7090.3; gerente
+>Automação; API REST
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1489.0
+>Projetos: Automação; API REST
+
+-Test 2: test_2 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 4924.37; gerente
+>Dashboard BI
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1034.1
+>Projetos: Dashboard BI
+
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 2201.72; gerente
+>Dashboard BI
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 462.4
+>Projetos: Dashboard BI
+
+-Test 4: test_4 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 2142.55; desenvolvedor
+>Dashboard BI; Sistema Web
+>ProjetoInvalido
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 235.7
+>TypeError: Projeto inválido
+>Projetos: Dashboard BI; Sistema Web
+
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Daniel; 3510.56; desenvolvedor
+>Automação
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 386.2
+>Projetos: Automação
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 2552.86; gerente
+>Automação
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 536.1
+>Projetos: Automação
+
+-Test 7: test_7 (-10.000)
+Incorrect program output
+ --- Input ---
+>Gabriela; 3811.13; gerente
+>Banco de Dados
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 800.3
+>Projetos: Banco de Dados
+
+-Test 8: test_8 (-10.000)
+Incorrect program output
+ --- Input ---
+>Eva; 7963.61; gerente
+>Automação
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1672.4
+>Projetos: Automação
+
+-Test 9: test_9 (-10.000)
+Incorrect program output
+ --- Input ---
+>Bruno; 9274.21; desenvolvedor
+>Aplicativo Mobile
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Desenvolvedor criado
+>Bonus: 1020.2
+>Projetos: Aplicativo Mobile
+
+-Test 10: test_10 (-10.000)
+Incorrect program output
+ --- Input ---
+>Eva; 6746.67; gerente
+>Sistema Web; API REST
+
+ --- Program output ---
+>  File "/home/p11074/Q2.py", line 19
+>    def adicionar_projeto(self, projeto)
+>                                        ^
+>SyntaxError: expected ':'
+
+ --- Expected output (text)---
+>Gerente criado
+>Bonus: 1416.8
+>Projetos: Sistema Web; API REST
+
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 0 tests passed |
+>+------------------------------+
+
+-Nota: 7.50
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+🚫 Erro detectado: problema de compilação (sintaxe) ou execução (lógica)!
+
+🔍 Abaixo, uma sugestão de correção com base na análise do erro:
+
+=== INÍCIO [🤖 modelo: llama-3.3-70b-versatile] ===
+
+ Q1.py
+1. O erro apresentado indica que o objeto SomSistema não possui o atributo toca_som, mas sim tocar_som.
+2. O aluno deve verificar se o método tocar_som foi corretamente definido na classe SomSistema.
+3. A correção envolve alterar a chamada do método para o nome correto, que é tocar_som.
+4. Verificar se o método tocar_som está implementado corretamente na classe SomSistema.
+5. O aluno deve garantir que o método tocar_som esteja acessível e seja um método da classe SomSistema.
+
+=== FIM [⏰  2025-08-27 09:25:17] ===

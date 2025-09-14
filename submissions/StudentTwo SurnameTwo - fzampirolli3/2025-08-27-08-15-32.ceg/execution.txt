@@ -1,0 +1,108 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 90.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Mensagem recebida
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>90
+
+
+<|--
+-Question 2:
+
+>Erro: Arquivo esperado não encontrado
+>Arquivo para questão não encontrado.
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: 
+>Habilidades: 
+
+Avaliação: 0.00%
+--|>
+
+
+
+<|--
+-Nota: 22.50
+--|>
+Grade :=>> 22.500
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: llama-3.3-70b-versatile] ===
+
+ Q1.py
+1. A classe CentralNotificacoes foi definida como uma classe de singleton, porém o atributo msg foi adicionado diretamente à instância na criação, o que poderia ser feito de forma mais organizada.
+2. O método adicionar adiciona uma mensagem à lista de notificações, mas não verifica se a mensagem é nula ou vazia.
+3. O método listar imprime todas as notificações, mas não há um método para remover notificações.
+4. No código principal, quando o comando é "listar", o método adicionar é chamado antes de listar as notificações, o que pode não ser o comportamento desejado.
+5. Quando o comando é "nova_instancia", uma nova instância da classe CentralNotificacoes é criada, mas isso não afeta a instância original, que continua sendo a mesma.
+6. A variável msg é usada para armazenar a mensagem a ser adicionada ou listada, mas seu valor é obtido apenas uma vez no início do programa.
+7. O programa não lida com exceções ou erros que possam ocorrer durante a execução.
+8. A impressão de mensagens no console pode ser substituída por um mecanismo de logging mais robusto.
+
+=== FIM [⏰  2025-08-27 08:15:37] ===
+--|>

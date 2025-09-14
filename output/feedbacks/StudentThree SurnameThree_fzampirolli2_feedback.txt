@@ -1,0 +1,84 @@
+
+FEEDBACK DA AVALIAÇÃO - OOP Assessment - P1
+═══════════════════════════════════════════════════════════
+Aluno: StudentThree SurnameThree (fzampirolli2)
+Data: 2025-09-13 21:08:31
+Nota Final (de 1 tentativa): 100.00 pontos
+Total de Chamadas à API: 1
+
+### Questão 1: Padrão Singleton
+
+#### Análise do Código
+
+O código submetido implementa uma classe `SomSistema` que parece seguir o padrão Singleton. Aqui
+está a análise detalhada com base nos critérios fornecidos:
+
+1. **Instância Única**:
+   - ✅ CORRETO: A classe utiliza um atributo estático/privado `_instancia` para armazenar a
+instância única.
+   - ✅ CORRETO: Verifica se a instância já existe antes de criar uma nova.
+
+2. **Método de Acesso**:
+   - ✅ CORRETO: O método `__new__` atua como um método de acesso que retorna sempre a mesma
+instância, criando-a apenas se não existir.
+
+3. **Construtor Privado/Protegido**:
+   - ✅ CORRETO: O método `__new__` controlado serve como um construtor inacessível externamente,
+impedindo a criação direta de instâncias.
+
+4. **Execução Correta**:
+   - ✅ CORRETO: O código executa sem erros de sintaxe aparentes.
+
+#### Feedback e Nota
+
+- Todos os critérios foram atendidos corretamente.
+- A implementação do padrão Singleton está correta.
+
+**QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.**
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
+==================================================
+
+### Questão 2: Herança, Composição e Exceções
+
+#### Análise do Código
+
+O código submetido implementa classes relacionadas a funcionários e projetos, envolvendo herança,
+composição e tratamento de exceções. Aqui está a análise detalhada:
+
+1. **Classe Abstrata Base**:
+   - ✅ CORRETO: A classe `Funcionario` é abstrata e bem definida, com atributos básicos.
+
+2. **Método Abstrato**:
+   - ✅ CORRETO: O método `calcular_bonus` é abstrato e implementado corretamente nas subclasses.
+
+3. **Herança Correta**:
+   - ✅ CORRETO: As subclasses `Desenvolvedor` e `Gerente` herdam corretamente de `Funcionario`.
+
+4. **Classe Auxiliar**:
+   - ✅ CORRETO: A classe `Projeto` é auxiliar e bem definida.
+
+5. **Composição/Agregação**:
+   - ✅ CORRETO: O relacionamento de composição está implementado funcionalmente.
+
+6. **Tratamento de Exceções**:
+   - ✅ CORRETO: Exceções são tratadas no construtor de `Funcionario` para salário inválido.
+
+7. **Execução Correta**:
+   - ✅ CORRETO: O código funciona sem erros aparentes.
+
+#### Feedback e Nota
+
+- Todos os critérios foram atendidos corretamente.
+- A implementação de herança, composição e tratamento de exceções está correta.
+
+**QUESTAO_Q2: 75/75 - Implementação completa e correta.**
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: 75 pontos (máx:75)
+==================================================
+
+═══════════════════════════════════════════════════════════
+Este feedback foi gerado automaticamente por IA e pode
+necessitar de revisão pelo professor.

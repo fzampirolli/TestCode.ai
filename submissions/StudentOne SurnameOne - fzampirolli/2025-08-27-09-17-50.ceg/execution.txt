@@ -1,0 +1,140 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.class
+Q1.java
+>Habilidades: 
+
+Avaliação: 90.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Test 4: test_4 (-10.000)
+Incorrect program output
+ --- Input ---
+>Atualização disponível
+>listar
+
+ --- Program output ---
+>Central iniciada
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Atualização disponível
+>Notificações:
+>Alerta de bateria
+>Atualização disponível
+>Atualização disponível
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>90
+
+
+<|--
+-Question 2:
+
+Avaliação: 3.000/3 (100.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.class
+Q2.java
+>Habilidades: 
+
+Avaliação: 100.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/10 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>100
+
+
+<|--
+-Nota: 97.50
+--|>
+Grade :=>> 97.500
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: meta-llama/llama-4-scout-17b-16e-instruct] ===
+
+ Segue a análise dos arquivos:
+
+**Q1.java**
+
+1. A classe `CentralNotificacoes` implementa o padrão de projeto Singleton, mas não é thread-safe.
+2. O método `getInstance()` imprime mensagens desnecessárias.
+3. O método `listar()` não verifica se há notificações antes de imprimir.
+4. O método `adicionar()` não verifica se a notificação é nula antes de adicioná-la.
+5. No `main()`, a variável `notif` é lida apenas uma vez e usada em um loop que pode não ser o esperado.
+6. O `while` no `main()` pode causar problemas se a entrada for muito grande.
+
+**Q2.java**
+
+1. A classe `Curso` tem um construtor que verifica se a duração é negativa, mas não verifica se o nome é nulo ou vazio.
+2. A classe `Curso` usa uma lista de disciplinas, mas não verifica se as disciplinas são nulas antes de adicioná-las.
+3. O método `calcularCargaHoraria()` é abstrato e deve ser implementado pelas subclasses.
+4. As subclasses `Graduacao` e `PosGraduacao` têm construtores que imprimem mensagens desnecessárias.
+5. A classe `Disciplina` tem um construtor que não verifica se o nome é nulo ou vazio.
+6. A classe `ValueError` é uma exceção personalizada, mas seu nome não segue as convenções de nomenclatura Java.
+7. No `main()`, a entrada é lida e processada sem verificar se é válida.
+
+Orientações:
+
+* Verificar se as variáveis são nulas ou vazias antes de usá-las.
+* Implementar verificações de entrada para garantir que os dados sejam válidos.
+* Remover mensagens desnecessárias.
+* Considerar thread-safety para a classe `CentralNotificacoes`.
+* Melhorar a nomenclatura das classes e métodos para seguir as convenções de nomenclatura Java.
+
+=== FIM [⏰  2025-08-27 09:17:57] ===
+--|>

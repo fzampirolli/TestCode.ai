@@ -1,0 +1,58 @@
+########################################################################
+# RUBRICA DE CORREÇÃO - QUESTÃO 1: PADRÃO SINGLETON                    #
+########################################################################
+
+## CONTEXTO DA QUESTÃO
+Avalie exclusivamente se o código implementa corretamente o padrão 
+Singleton conforme especificado no enunciado da prova.
+
+## CRITÉRIOS DE AVALIAÇÃO (Todos devem estar presentes)
+
+### 1. INSTÂNCIA ÚNICA (Obrigatório)
+✅ CORRETO: Existe mecanismo para garantir apenas uma instância
+   - Atributo estático/privado para armazenar a instância
+   - Verificação se instância já existe antes de criar nova
+❌ INCORRETO: Permite múltiplas instâncias ou não tem controle
+
+### 2. MÉTODO DE ACESSO (Obrigatório)  
+✅ CORRETO: Método público que retorna sempre a mesma instância
+   - Método estático (ex: getInstance(), get_instance())
+   - Retorna a instância única, criando apenas se não existir
+❌ INCORRETO: Não tem método de acesso ou permite múltiplos objetos
+
+### 3. CONSTRUTOR PRIVADO/PROTEGIDO (Obrigatório)
+✅ CORRETO: Construtor inacessível externamente
+   - Construtor privado (Java/C++) ou método __new__ controlado (Python)
+   - Impossível criar instâncias via new/() diretamente
+❌ INCORRETO: Construtor público permite instanciação direta
+
+### 4. EXECUÇÃO CORRETA (Obrigatório)
+✅ CORRETO: Código executa sem erros de sintaxe
+   - Sintaxe válida na linguagem utilizada
+   - Lógica coerente e funcional
+❌ INCORRETO: Erros de compilação/execução ou lógica inválida
+
+## SISTEMA DE PONTUAÇÃO (Escala: 0 a 25 pontos)
+
+- **25 pontos**: TODOS os 4 critérios corretos (implementação perfeita)
+- **20 pontos**: 3 critérios corretos, 1 incorreto (quase perfeito)  
+- **15 pontos**: 2 critérios corretos, 2 incorretos (implementação parcial)
+- **10 pontos**: 1 critério correto, 3 incorretos (tentativa mínima)
+- **5 pontos**: Tentativa de implementação, mas todos os critérios falham
+- **0 pontos**: Ausente, vazio ou completamente incorreto
+
+## FORMATO OBRIGATÓRIO DA RESPOSTA
+
+Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: XX pontos (máx: 25)
+==================================================
+
+Onde XX é a nota de 0 a 25 baseada nos critérios acima.
+
+## INSTRUÇÕES ESPECÍFICAS
+- Analise APENAS o padrão Singleton, ignore outros aspectos
+- Seja rigoroso com os 4 critérios obrigatórios  
+- Forneça feedback construtivo explicando erros encontrados
+- Use a linguagem do código submetido em seus exemplos

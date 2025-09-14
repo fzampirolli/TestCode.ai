@@ -1,0 +1,47 @@
+# Assessment Configuration
+assessment:
+  name: "OOP Assessment - P1"
+  date: "2025-09-12"
+  course: "Object-Oriented Programming"
+  llm_attempts: 1 # selects the best response among attempts
+  # Available options: "highest", "average", "lowest"
+  # - "highest": Selects the attempt with the highest grade (previous behavior).
+  # - "average": Calculates the average grade. Feedback and prompt will be based on the attempt closest to the average.
+  # - "lowest": Selects the attempt with the lowest grade.
+  selection_criteria: "highest"
+  # Controls the depth of feedback
+  # - true: Asks the LLM to analyze the rubric in detail, providing examples and suggestions.
+  # - false: Requests a more direct and concise feedback (previous behavior).
+  detailed_feedback: true
+
+# Questions Configuration
+questions:
+  - id: "Q1"
+    name: "Singleton Pattern"
+    max_points: 25
+    rubric_file: "rubrics/Test1Q1.txt"
+    accepted_extensions: [".py", ".java", ".cpp"]
+    
+  - id: "Q2"
+    name: "Inheritance and Composition"
+    max_points: 75
+    rubric_file: "rubrics/Test1Q2.txt"
+    accepted_extensions: [".py", ".java", ".cpp"]
+
+# API Configuration
+api:
+  provider: "groq"
+  url: "https://api.groq.com/openai/v1/chat/completions"
+  models:
+    - "llama-3.1-8b-instant"
+    - "meta-llama/llama-4-maverick-17b-128e-instruct"
+    - "meta-llama/llama-4-scout-17b-16e-instruct"
+    - "moonshotai/kimi-k2-instruct"
+  max_tokens: 4000
+  temperature: 0.1
+  timeout: 120
+
+# Processing Configuration
+processing:
+  parallel_threads: 5
+  automatic_backup: true

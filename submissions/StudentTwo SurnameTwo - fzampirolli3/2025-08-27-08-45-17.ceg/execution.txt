@@ -1,0 +1,272 @@
+<|--
+
+--|>
+
+
+<|--
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 90.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Mensagem recebida
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>90
+
+
+<|--
+-Question 2:
+
+Avaliação: 0.600/3 (20.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.py
+>Habilidades: 
+
+Avaliação: 20.00%
+--|>
+
+Testing 1/10 : test_1
+Testing 2/10 : test_2
+Testing 3/10 : test_3
+Testing 4/10 : test_4
+Testing 5/10 : test_5
+Testing 6/10 : test_6
+Testing 7/10 : test_7
+Testing 8/10 : test_8
+Testing 9/10 : test_9
+Testing 10/10 : test_10
+
+<|--
+-Failed tests
+Test 1: test_1
+Test 2: test_2
+Test 3: test_3
+Test 5: test_5
+Test 6: test_6
+Test 7: test_7
+Test 9: test_9
+Test 10: test_10
+--|>
+
+<|--
+-Test 1: test_1 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 3; graduacao
+>Estatística
+
+ --- Program output ---
+>Graduação criada
+>Carga horária: 600
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Estatística
+
+-Test 2: test_2 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 3; graduacao
+>Estatística; Química; Ética
+
+ --- Program output ---
+>Graduação criada
+>Carga horária: 600
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Estatística; Química; Ética
+
+-Test 3: test_3 (-10.000)
+Incorrect program output
+ --- Input ---
+>Matemática; 9; pos
+>Química; Estatística
+
+ --- Program output ---
+>Pós-graduação criada
+>Carga horária: 1206
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1206
+>Disciplinas: Química; Estatística
+
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 8; pos
+>Cálculo; Ética; Inglês
+
+ --- Program output ---
+>Pós-graduação criada
+>Carga horária: 1072
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1072
+>Disciplinas: Cálculo; Ética; Inglês
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Psicologia; 8; pos
+>Química; Metodologia; Ética
+
+ --- Program output ---
+>Pós-graduação criada
+>Carga horária: 1072
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1072
+>Disciplinas: Química; Metodologia; Ética
+
+-Test 7: test_7 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 9; graduacao
+>Cálculo
+
+ --- Program output ---
+>Graduação criada
+>Carga horária: 1800
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 1800
+>Disciplinas: Cálculo
+
+-Test 9: test_9 (-10.000)
+Incorrect program output
+ --- Input ---
+>Administração; 10; pos
+>Estatística
+
+ --- Program output ---
+>Pós-graduação criada
+>Carga horária: 1340
+
+ --- Expected output (text)---
+>Pós-graduação criada
+>Carga horária: 1340
+>Disciplinas: Estatística
+
+-Test 10: test_10 (-10.000)
+Incorrect program output
+ --- Input ---
+>Computação; 3; graduacao
+>Química; Estatística
+
+ --- Program output ---
+>Graduação criada
+>Carga horária: 600
+
+ --- Expected output (text)---
+>Graduação criada
+>Carga horária: 600
+>Disciplinas: Química; Estatística
+
+--|>
+
+<|--
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 2 tests passed |
+>+------------------------------+
+
+--|>
+
+PartialGrade :=>>20
+
+
+<|--
+-Nota: 37.50
+--|>
+Grade :=>> 37.500
+<|--
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: meta-llama/llama-4-maverick-17b-128e-instruct] ===
+
+ 1. Q1.py
+2. A classe CentralNotificacoes está implementada corretamente como um Singleton.
+3. O método adicionar está funcionando conforme o esperado.
+4. O método listar está funcionando conforme o esperado.
+5. O comando "listar" está adicionando a mensagem antes de listar as notificações, o que pode não ser o comportamento desejado.
+6. Sugestão: Verificar se a mensagem deve ser adicionada quando o comando é "listar".
+
+1. Q2.py
+2. A classe Disciplina está bem definida.
+3. A classe Curso está bem definida como uma classe abstrata.
+4. A validação da duração do curso está correta, lançando um ValueError para durações inválidas.
+5. As classes Graduacao e PosGraduacao estão bem definidas e implementam o método abstrato calcular_carga_horaria.
+6. O método adicionar_disciplina da classe PosGraduacao está faltando o parâmetro self.
+7. Sugestão: Corrigir o método adicionar_disciplina da classe PosGraduacao adicionando o parâmetro self.
+8. As disciplinas adicionadas não estão sendo utilizadas em lugar algum do código.
+9. Sugestão: Verificar se as disciplinas adicionadas devem ser utilizadas para algum propósito.
+10. O programa não está chamando o método adicionar_disciplina para adicionar disciplinas ao curso.
+11. Sugestão: Adicionar chamadas ao método adicionar_disciplina para adicionar disciplinas ao curso.
+12. O programa não está tratando o caso em que o tipo de curso é inválido.
+13. Sugestão: Adicionar um tratamento para o caso em que o tipo de curso é inválido.
+
+=== FIM [⏰  2025-08-27 08:45:23] ===
+--|>

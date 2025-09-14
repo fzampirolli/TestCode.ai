@@ -1,0 +1,88 @@
+
+-Question 1:
+
+Avaliação: 0.800/1 (80.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 80.00%
+-Failed tests
+Test 5: test_5
+Test 6: test_6
+-Test 5: test_5 (-10.000)
+Incorrect program output
+ --- Input ---
+>Atualização disponível
+>nova_instancia
+
+ --- Program output ---
+>Central iniciada
+
+ --- Expected output (text)---
+>Central iniciada
+>Central já ativa
+
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Mensagem recebida
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 8 tests passed |
+>+------------------------------+
+
+-Question 2:
+
+>Erro: Arquivo esperado não encontrado
+>Arquivo para questão não encontrado.
+Avaliação: 0.000/3 (0.00%)
+
+>Arquivo: Q2
+>Escolhido: 
+>Habilidades: 
+
+Avaliação: 0.00%
+-Nota: 20.00
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: meta-llama/llama-4-maverick-17b-128e-instruct] ===
+
+ 1. Q1.py
+2. A classe CentralNotificacoes está implementada como um Singleton, o que parece correto para o contexto apresentado.
+3. O método __new__ está corretamente implementado para garantir que apenas uma instância da classe seja criada.
+4. O método adicionar está correto e adiciona a mensagem à lista de notificações.
+5. O método listar está correto e imprime todas as notificações.
+6. O problema está no bloco de comandos após a criação da instância app. 
+7. Quando o comando é "listar", o código adiciona a mensagem à lista de notificações antes de listá-las, o que pode não ser o comportamento desejado se a intenção era apenas listar as notificações existentes.
+8. Sugestão: remover a linha app.adicionar(msg) quando o comando for "listar".
+9. Além disso, quando o comando é "nova_instancia", o código não faz nada, mas provavelmente deveria criar uma nova instância ou verificar se uma nova instância é criada.
+10. Sugestão: adicionar um teste para verificar se uma nova instância é criada quando o comando for "nova_instancia".
+
+=== FIM [⏰  2025-08-27 08:17:40] ===

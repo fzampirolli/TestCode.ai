@@ -1,0 +1,78 @@
+
+-Question 1:
+
+Avaliação: 0.900/1 (90.00%)
+
+>Arquivo: Q1
+>Escolhido: Q1.py
+>Habilidades: 
+
+Avaliação: 90.00%
+-Test 6: test_6 (-10.000)
+Incorrect program output
+ --- Input ---
+>Nova conexão
+>listar
+
+ --- Program output ---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova Conexão
+>Mensagem recebida
+>Nova conexão
+
+ --- Expected output (text)---
+>Central iniciada
+>Nova notificação: Nova conexão
+>Notificações:
+>Nova conexão
+>Mensagem recebida
+>Atualização disponível
+>Nova conexão
+>Nova conexão
+
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/ 9 tests passed |
+>+------------------------------+
+
+-Question 2:
+
+Avaliação: 3.000/3 (100.00%)
+
+>Arquivo: Q2
+>Escolhido: Q2.py
+>Habilidades: 
+
+Avaliação: 100.00%
+-Summary of tests
+>+------------------------------+
+>| 10 tests run/10 tests passed |
+>+------------------------------+
+
+-Nota: 97.50
+
+-🚀 Feedback automático gerado por IA ⚠️ Revise com cuidado, pode conter erros!
+
+✨ Vocé está quase lá!
+
+🧭 Confira as dicas a seguir para ajustar seu(s) código(s):
+
+=== INÍCIO [🤖 modelo: meta-llama/llama-4-maverick-17b-128e-instruct] ===
+
+ 1. Q1.py
+2. A classe CentralNotificacoes está implementada corretamente como um Singleton.
+3. No entanto, quando o comando é "listar", o código adiciona a mensagem antes de listar as notificações. Isso pode não ser o comportamento desejado.
+4. Sugestão: Remover a linha app.adicionar(msg) quando o comando é "listar".
+
+5. Q2.py
+6. A classe Disciplina está bem definida.
+7. A classe Curso é uma classe abstrata bem definida com o método abstrato calcular_carga_horaria.
+8. As classes Graduacao e PosGraduacao herdam corretamente de Curso e implementam o método calcular_carga_horaria.
+9. No entanto, a validação da duração está sendo feita no construtor da classe Curso, o que é correto, mas a mensagem de erro não é impressa quando a duração é inválida. Em vez disso, uma exceção ValueError é lançada.
+10. Sugestão: Tratar a exceção ValueError ao criar instâncias de Graduacao ou PosGraduacao.
+11. Além disso, a lista de disciplinas está armazenando apenas o nome da disciplina, e não a disciplina em si.
+12. Sugestão: Alterar a lista disciplinas para armazenar objetos Disciplina em vez de apenas seus nomes.
+
+=== FIM [⏰  2025-08-27 08:51:51] ===
