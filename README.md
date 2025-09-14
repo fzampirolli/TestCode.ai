@@ -2,7 +2,7 @@
 
 Welcome to **TestCode.ai**, a free and open-source system designed to support exam preparation and automated grading with the aid of **Large Language Models (LLMs)**.
 
-Its main feature is the ability to handle **parametric programming questions** (via LaTeX and Python), allowing for multiple variations of the same problem. Additionally, the system integrates anonymization of submissions, automatic AI-based evaluation, and feedback delivery by email.
+Its main feature is its high flexibility through a central configuration file (config.yaml). This allows the user to define detailed evaluation rubrics and customize the prompts sent to a Large Language Model (LLM). Additionally, the system integrates the anonymization of submissions, automatic AI-based evaluation, and feedback delivery by email.
 
 ---
 
