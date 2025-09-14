@@ -1,6 +1,5 @@
-
-# AVALIAÇÃO AUTOMATIZADA DETALHADA - OOP Assessment - P1
-Data: 2025-09-13 21:08:27
+# AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
+Data: 2025-09-13 22:05:26
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -20,7 +19,6 @@ PARA CADA ITEM X DA RUBRICA, explique se foi atendido ou não, e por quê:
 
 FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
 - QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
-
 
 ---
 ## Singleton Pattern (Q1) - Máximo: 25 pontos
@@ -79,14 +77,9 @@ Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
 
 Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
-## INSTRUÇÕES ESPECÍFICAS
-- Analise APENAS o padrão Singleton, ignore outros aspectos
-- Seja rigoroso com os 4 critérios obrigatórios  
-- Forneça feedback construtivo explicando erros encontrados
-- Use a linguagem do código submetido em seus exemplos
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-class CentralNotificacoes:
+```class CentralNotificacoes:
     _instancia = None
     
     def __new__(cls):
@@ -123,16 +116,16 @@ elif comando == "listar":
     
 elif comando == "nova_instancia":
     app = CentralNotificacoes()
+```
 
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
-
 
 ---
 ## Inheritance and Composition (Q2) - Máximo: 75 pontos
 
 ### RUBRICA DE AVALIAÇÃO:
 ########################################################################
-# RUBRICA DE CORREÇÃO - QUESTÃO 2: HERANÇA, COMPOSIÇÃO E EXCEÇÕES     #
+# RUBRICA DE CORREÇÃO - QUESTÃO 2: HERANÇA, COMPOSIÇÃO E EXCEÇÕES      #
 ########################################################################
 
 ## CONTEXTO DA QUESTÃO
@@ -191,23 +184,9 @@ Avalie se o código implementa corretamente:
    - Lógica coerente e executável
 ❌ INCORRETO: Erros de compilação/execução
 
-> Observação: os pontos por critério foram ajustados para que a soma máxima seja 75 pontos (critério 1–6 = 10 pontos cada; critério 7 = 15 pontos).
-
 ## SISTEMA DE PONTUAÇÃO (Escala: 0 a 75 pontos)
 
-Método de cálculo (preferível e preciso): some os pontos de cada critério conforme atribuído acima.
-(Ex.: se faltarem validações de exceção e houver erro de execução, pontuação = 75 − 10 − 15 = 50.)
-
-Para referência rápida (escala proporcional baseada no sistema anterior — arredondada):
-
-- 75 pontos: TODOS os 7 critérios corretos (implementação completa)
-- 63 pontos: 6 critérios corretos, 1 incorreto (quase completo — proporcional ao anterior)
-- 52 pontos: 5 critérios corretos, 2 incorretos (bom desenvolvimento)
-- 40 pontos: 4 critérios corretos, 3 incorretos (desenvolvimento parcial)
-- 29 pontos: 3 critérios corretos, 4 incorretos (tentativa limitada)
-- 17 pontos: 1–2 critérios corretos (tentativa mínima)
-- 5 pontos: Tentativa presente mas critérios essenciais falham
-- 0 pontos: Ausente, vazio ou completamente incorreto
+Some os pontos de cada critério conforme atribuído acima.
 
 ## FORMATO OBRIGATÓRIO DA RESPOSTA
 
@@ -219,15 +198,9 @@ Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
 
 Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
-## INSTRUÇÕES ESPECÍFICAS
-- Analise rigorosamente cada um dos 7 critérios
-- Forneça exemplos de correção quando possível
-- Explique claramente quais critérios falharam e por quê
-- Seja construtivo no feedback para auxiliar aprendizado
-
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-from abc import ABC, abstractmethod
+```from abc import ABC, abstractmethod
 
 class Disciplina:
     def __init__(self, nome):
@@ -285,5 +258,6 @@ entradas_d = input()
 disc = Disciplina(entradas_d)
 curso.adicionar_disciplina(disc)
 print(f"Disciplinas: {curso.disciplinas}")
+```
 
 Lembre-se de incluir a linha: QUESTAO_Q2: [NOTA]/75 - [comentário]

@@ -373,72 +373,58 @@ class GerenciadorAvaliacao:
         return None, prompt
 
     def _montar_prompt(self, submissao: SubmissaoAluno) -> str:
+        """
+        Monta o prompt para a LLM de forma dinâmica, lendo todos os templates
+        e rubricas do arquivo de configuração YAML.
+        """
         prompt_parts = []
-        # CORRIGIDO: Usa as chaves corretas do YAML
-        assessment_name = self.config['assessment']['name']
         
+        # 1. Pega os templates do objeto de configuração carregado
+        templates = self.config.get('prompt_templates', {})
+        assessment_config = self.config.get('assessment', {})
+        
+        # 2. Seleciona o cabeçalho apropriado (detalhado ou conciso)
         if self.detailed_feedback:
-            prompt_parts.append(f"""
-# AVALIAÇÃO AUTOMATIZADA DETALHADA - {assessment_name}
-Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-## INSTRUÇÕES GERAIS
-Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
-Forneça um feedback DETALHADO!
-
-Para cada questão, CONSIDERANDO RIGOROSAMENTE A RUBRICA FORNECIDA:
-1.  Forneça um feedback construtivo e aprofundado.
-2.  Destaque os pontos positivos e onde o aluno acertou.
-3.  Aponte os erros ou áreas de melhoria de forma clara.
-4.  Ofereça sugestões práticas e exemplos de como o código poderia ser melhorado ou corrigido.
-5.  No final da análise de cada questão, forneça a nota formatada.
-
-PARA CADA ITEM X DA RUBRICA, explique se foi atendido ou não, e por quê:
-   - ✅ CORRETO: item X atendido
-   - ❌ INCORRETO: item X não atendido
-   - ⚠️ PARCIALMENTE CORRETO: item X atendido parcialmente
-
-FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
-- QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
-""")
+            header_template = templates.get('header_detailed', "ERRO: Template de cabeçalho detalhado não encontrado.")
         else:
-            prompt_parts.append(f"""
-# AVALIAÇÃO AUTOMATIZADA - {assessment_name}
-Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-## INSTRUÇÕES GERAIS
-Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
-Forneça um feedback CONCISO!
-
-FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
-- QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
-""")
+            header_template = templates.get('header_concise', "ERRO: Template de cabeçalho conciso não encontrado.")
+            
+        # Formata o cabeçalho com dados dinâmicos
+        formatted_header = header_template.format(
+            assessment_name=assessment_config.get('name', 'Avaliação'),
+            current_date=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        )
+        prompt_parts.append(formatted_header)
         
-        # CORRIGIDO: Usa as chaves corretas ('questions', 'rubric_file', 'max_points')
-        for questao in self.config['questions']:
-            questao_id = questao['id']
-            if questao_id in submissao.arquivos:
+        # 3. Pega o template para o bloco de cada questão
+        question_template = templates.get('question_block', "ERRO: Template de questão não encontrado.")
+
+        # 4. Itera sobre cada questão configurada no YAML
+        for questao in self.config.get('questions', []):
+            questao_id = questao.get('id')
+            
+            # Processa a questão apenas se o aluno enviou o arquivo correspondente
+            if questao_id and questao_id in submissao.arquivos:
                 try:
-                    with open(questao['rubric_file'], 'r', encoding='utf-8') as f:
-                        rubrica = f.read()
+                    # Lê o código do aluno do arquivo
                     with open(submissao.arquivos[questao_id], 'r', encoding='utf-8', errors='ignore') as f:
                         codigo = f.read()
+
+                    # Pega a rubrica DIRETAMENTE do objeto de configuração (não mais de um arquivo)
+                    rubrica = questao.get('rubric', f"Rubrica para {questao_id} não encontrada no config.yaml")
                     
-                    max_points = questao['max_points']
-                    prompt_parts.append(f"""
----
-## {questao['name']} ({questao_id}) - Máximo: {max_points} pontos
-
-### RUBRICA DE AVALIAÇÃO:
-{rubrica}
-
-### CÓDIGO SUBMETIDO PELO ALUNO:
-{codigo}
-
-Lembre-se de incluir a linha: QUESTAO_{questao_id}: [NOTA]/{max_points} - [comentário]
-""")
+                    # Formata o bloco da questão com todos os dados
+                    formatted_question = question_template.format(
+                        question_name=questao.get('name', ''),
+                        question_id=questao_id,
+                        max_points=questao.get('max_points', 0),
+                        rubric=rubrica,
+                        code=codigo
+                    )
+                    prompt_parts.append(formatted_question)
+                    
                 except Exception as e:
-                    self.logger.warning(f"Erro ao ler arquivos para {questao_id}: {e}")
+                    self.logger.warning(f"Erro ao processar arquivos para a questão {questao_id}: {e}")
         
         return '\n'.join(prompt_parts)
 

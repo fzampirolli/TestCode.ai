@@ -1,32 +1,207 @@
 # Assessment Configuration
 assessment:
-  name: "OOP Assessment - P1"
+  name: "Prova 1 - POO"
   date: "2025-09-12"
-  course: "Object-Oriented Programming"
-  llm_attempts: 1 # selects the best response among attempts
-  # Available options: "highest", "average", "lowest"
-  # - "highest": Selects the attempt with the highest grade (previous behavior).
-  # - "average": Calculates the average grade. Feedback and prompt will be based on the attempt closest to the average.
-  # - "lowest": Selects the attempt with the lowest grade.
+  course: "Programação Orientada a Objetos"
+  llm_attempts: 3 # Number of attempts to call the LLM API in case of failure
+  # "highest" to keep the highest score among attempts
+  # "lowest" to keep the lowest score among attempts
+  # "average" to keep the average score among attempts
   selection_criteria: "highest"
-  # Controls the depth of feedback
-  # - true: Asks the LLM to analyze the rubric in detail, providing examples and suggestions.
-  # - false: Requests a more direct and concise feedback (previous behavior).
   detailed_feedback: true
 
 # Questions Configuration
 questions:
   - id: "Q1"
-    name: "Singleton Pattern"
+    name: "Padrão Singleton"
     max_points: 25
-    rubric_file: "rubrics/Test1Q1.txt"
     accepted_extensions: [".py", ".java", ".cpp"]
+    rubric: |
+      ########################################################################
+      # RUBRICA DE CORREÇÃO - QUESTÃO 1: PADRÃO SINGLETON                    #
+      ########################################################################
+
+      ## CONTEXTO DA QUESTÃO
+      Avalie exclusivamente se o código implementa corretamente o padrão 
+      Singleton conforme especificado no enunciado da prova.
+
+      ## CRITÉRIOS DE AVALIAÇÃO (Todos devem estar presentes)
+
+      ### 1. INSTÂNCIA ÚNICA (Obrigatório)
+      ✅ CORRETO: Existe mecanismo para garantir apenas uma instância
+         - Atributo estático/privado para armazenar a instância
+         - Verificação se instância já existe antes de criar nova
+      ❌ INCORRETO: Permite múltiplas instâncias ou não tem controle
+
+      ### 2. MÉTODO DE ACESSO (Obrigatório)  
+      ✅ CORRETO: Método público que retorna sempre a mesma instância
+         - Método estático (ex: getInstance(), get_instance())
+         - Retorna a instância única, criando apenas se não existir
+      ❌ INCORRETO: Não tem método de acesso ou permite múltiplos objetos
+
+      ### 3. CONSTRUTOR PRIVADO/PROTEGIDO (Obrigatório)
+      ✅ CORRETO: Construtor inacessível externamente
+         - Construtor privado (Java/C++) ou método __new__ controlado (Python)
+         - Impossível criar instâncias via new/() diretamente
+      ❌ INCORRETO: Construtor público permite instanciação direta
+
+      ### 4. EXECUÇÃO CORRETA (Obrigatório)
+      ✅ CORRETO: Código executa sem erros de sintaxe
+         - Sintaxe válida na linguagem utilizada
+         - Lógica coerente e funcional
+      ❌ INCORRETO: Erros de compilação/execução ou lógica inválida
+
+      ## SISTEMA DE PONTUAÇÃO (Escala: 0 a 25 pontos)
+
+      - **25 pontos**: TODOS os 4 critérios corretos (implementação perfeita)
+      - **20 pontos**: 3 critérios corretos, 1 incorreto (quase perfeito)  
+      - **15 pontos**: 2 critérios corretos, 2 incorretos (implementação parcial)
+      - **10 pontos**: 1 critério correto, 3 incorretos (tentativa mínima)
+      - **5 pontos**: Tentativa de implementação, mas todos os critérios falham
+      - **0 pontos**: Ausente, vazio ou completamente incorreto
+
+      ## FORMATO OBRIGATÓRIO DA RESPOSTA
+
+      Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
+
+      ==================================================
+      📊 CORREÇÃO AUTOMÁTICA — Q1: XX pontos (máx: 25)
+      ==================================================
+
+      Onde XX é a nota de 0 a 25 baseada nos critérios acima.
     
   - id: "Q2"
-    name: "Inheritance and Composition"
+    name: "Herança, Composição e Exceções"
     max_points: 75
-    rubric_file: "rubrics/Test1Q2.txt"
     accepted_extensions: [".py", ".java", ".cpp"]
+    rubric: |
+      ########################################################################
+      # RUBRICA DE CORREÇÃO - QUESTÃO 2: HERANÇA, COMPOSIÇÃO E EXCEÇÕES      #
+      ########################################################################
+
+      ## CONTEXTO DA QUESTÃO
+      Avalie se o código implementa corretamente:
+      - Herança com classe abstrata e métodos abstratos
+      - Composição/Agregação com classe auxiliar
+      - Tratamento de exceções em construtores
+
+      ## CRITÉRIOS DE AVALIAÇÃO (Todos devem estar presentes)
+
+      ### 1. CLASSE ABSTRATA BASE (Obrigatório — 10 pontos)
+      ✅ CORRETO: Classe base abstrata bem definida
+         - Classe marcada como abstrata (abstract class, ABC, virtual)
+         - Contém atributos básicos especificados no enunciado
+         - Estrutura coerente para herança
+      ❌ INCORRETO: Não é abstrata ou faltam atributos essenciais
+
+      ### 2. MÉTODO ABSTRATO (Obrigatório — 10 pontos)
+      ✅ CORRETO: Método abstrato implementado corretamente
+         - Definido na classe base como abstrato
+         - Sobrescrito em TODAS as subclasses filhas
+         - Lógica específica por subclasse (ex.: cálculo de preço, desconto)
+      ❌ INCORRETO: Não é abstrato ou não foi sobrescrito corretamente
+
+      ### 3. HERANÇA CORRETA (Obrigatório — 10 pontos)
+      ✅ CORRETO: Subclasses herdam da classe abstrata
+         - Sintaxe de herança correta na linguagem
+         - Implementam todos os métodos abstratos obrigatórios
+         - Adicionam funcionalidades específicas quando necessário
+      ❌ INCORRETO: Não herdam ou herança mal implementada
+
+      ### 4. CLASSE AUXILIAR (Obrigatório — 10 pontos)
+      ✅ CORRETO: Classe auxiliar bem definida
+         - Classe separada com pelo menos um atributo
+         - Representa conceito coerente (ex.: Autor, Equipamento, Disciplina)
+         - Estrutura adequada para composição/agregação
+      ❌ INCORRETO: Ausente ou inadequada para composição
+
+      ### 5. COMPOSIÇÃO/AGREGAÇÃO (Obrigatório — 10 pontos)
+      ✅ CORRETO: Relacionamento implementado funcionalmente
+         - Classe principal contém lista/coleção de objetos auxiliares
+         - Método para adicionar objetos à coleção
+         - Relacionamento coerente e funcional
+      ❌ INCORRETO: Não implementa relacionamento ou mal funcional
+
+      ### 6. TRATAMENTO DE EXCEÇÕES (Obrigatório — 10 pontos)
+      ✅ CORRETO: Exceções tratadas no construtor
+         - Validação de parâmetros (ex.: valores negativos, nulos)
+         - Lança exceção apropriada (ValueError, IllegalArgumentException, etc.)
+         - Try/catch ou validação prévia adequada
+      ❌ INCORRETO: Não trata exceções ou tratamento inadequado
+
+      ### 7. EXECUÇÃO CORRETA (Obrigatório — 15 pontos)
+      ✅ CORRETO: Código funciona sem erros
+         - Sintaxe correta na linguagem utilizada
+         - Lógica coerente e executável
+      ❌ INCORRETO: Erros de compilação/execução
+
+      ## SISTEMA DE PONTUAÇÃO (Escala: 0 a 75 pontos)
+      
+      Some os pontos de cada critério conforme atribuído acima.
+
+      ## FORMATO OBRIGATÓRIO DA RESPOSTA
+
+      Sua análise deve OBRIGATORIAMENTE terminar com este formato exato:
+
+      ==================================================
+      📊 CORREÇÃO AUTOMÁTICA — Q2: XX pontos (máx: 75)
+      ==================================================
+
+      Onde XX é a nota de 0 a 75 baseada nos critérios acima.
+
+
+prompt_templates:
+  # Cabeçalho usado quando assessment.detailed_feedback é true
+  header_detailed: |
+    # AVALIAÇÃO AUTOMATIZADA DETALHADA - {assessment_name}
+    Data: {current_date}
+
+    ## INSTRUÇÕES GERAIS
+    Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
+    Forneça um feedback DETALHADO!
+
+    Para cada questão, CONSIDERANDO RIGOROSAMENTE A RUBRICA FORNECIDA:
+    1.  Forneça um feedback construtivo e aprofundado.
+    2.  Destaque os pontos positivos e onde o aluno acertou.
+    3.  Aponte os erros ou áreas de melhoria de forma clara.
+    4.  Ofereça sugestões práticas e exemplos de como o código poderia ser melhorado ou corrigido.
+    5.  No final da análise de cada questão, forneça a nota formatada.
+
+    PARA CADA ITEM X DA RUBRICA, explique se foi atendido ou não, e por quê:
+       - ✅ CORRETO: item X atendido
+       - ❌ INCORRETO: item X não atendido
+       - ⚠️ PARCIALMENTE CORRETO: item X atendido parcialmente
+
+    FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
+    - QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
+
+  # Cabeçalho usado quando assessment.detailed_feedback é false
+  header_concise: |
+    # AVALIAÇÃO AUTOMATIZADA - {assessment_name}
+    Data: {current_date}
+
+    ## INSTRUÇÕES GERAIS
+    Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
+    Forneça um feedback CONCISO!
+
+    FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
+    - QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
+
+  # Template para a seção de cada questão no prompt
+  question_block: |
+    ---
+    ## {question_name} ({question_id}) - Máximo: {max_points} pontos
+
+    ### RUBRICA DE AVALIAÇÃO:
+    {rubric}
+
+    ### CÓDIGO SUBMETIDO PELO ALUNO:
+    ```
+    {code}
+    ```
+
+    Lembre-se de incluir a linha: QUESTAO_{question_id}: [NOTA]/{max_points} - [comentário]
+
 
 # API Configuration
 api:
@@ -35,8 +210,6 @@ api:
   models:
     - "llama-3.1-8b-instant"
     - "meta-llama/llama-4-maverick-17b-128e-instruct"
-    - "meta-llama/llama-4-scout-17b-16e-instruct"
-    - "moonshotai/kimi-k2-instruct"
   max_tokens: 4000
   temperature: 0.1
   timeout: 120
@@ -45,3 +218,20 @@ api:
 processing:
   parallel_threads: 5
   automatic_backup: true
+
+# Email Configuration
+email:
+  subject: "Feedback e Correção IA - {assessment_name} - {nome_aluno}"
+  body: |
+    Prezado(a) {nome_aluno},
+
+    A sua nota da avaliação "{assessment_name}" da disciplina Programação Orientada a Objetos já está disponível no Moodle.
+
+    Em anexo, envio também dois arquivos:
+    1. _feedback.txt – Correção detalhada gerada automaticamente por Inteligência Artificial.
+    2. _prompt.txt – Texto exato enviado à IA para gerar a correção, que você pode testar em outras ferramentas, se desejar.
+
+    Ressalto que essa correção pode conter imprecisões ou erros. Utilize-a como apoio ao seu processo de aprendizagem na disciplina.
+
+    Atenciosamente,
+    Prof. Francisco Zampirolli

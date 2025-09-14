@@ -3,8 +3,8 @@
 
 echo "🚀 Setting up the assessment environment..."
 
-# Create directory structure
-mkdir -p {submissions, rubrics, output, logs, config}
+# Create directory structure (CORRECTED LINE)
+mkdir -p {submissions,rubrics,output,logs,config}
 
 # Function to check dependencies
 check_dependency() {

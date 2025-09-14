@@ -1,189 +1,114 @@
 
-FEEDBACK DA AVALIAÇÃO - OOP Assessment - P1
+FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentTwo SurnameTwo (fzampirolli3)
-Data: 2025-09-13 21:08:31
-Nota Final (de 1 tentativa): 98.00 pontos
+Data: 2025-09-13 22:05:28
+Nota Final (de 1 tentativa): 95.00 pontos
 Total de Chamadas à API: 1
 
 ## Análise da Questão 1 - Singleton Pattern
 
-### Código Submetido:
-```python
-class CentralNotificacoes:
-    _instancia = None
+### Avaliação do Código
 
-    def __new__(cls):
-        if cls._instancia == None:
-            cls._instancia = super().__new__(cls)
-            cls._instancia.msg = ["Nova Conexão", "Mensagem recebida"]
-            print("Central iniciada")
-        else:
-            print("Central já ativa")
-        return cls._instancia
+O código submetido pelo aluno implementa uma classe `CentralNotificacoes` que segue o padrão
+Singleton. Vamos avaliar se ele atende aos critérios da rubrica fornecida.
 
-    def adicionar(self, msg):
-        self.msg.append(msg)
-        print(f"Nova notificação: {msg}")
+#### 1. INSTÂNCIA ÚNICA
+- ✅ CORRETO: O código utiliza o método `__new__` para controlar a criação de instâncias, garantindo
+que apenas uma instância seja criada. O atributo `_instancia` é usado para armazenar a instância
+única.
 
-    def listar(self):
-        print("Notificações:")
-        for msg in self.msg:
-            print(f"{msg}")
+#### 2. MÉTODO DE ACESSO
+- ✅ CORRETO: Embora não seja um método estático explícito como `getInstance()`, o código utiliza
+`__new__` para retornar a instância única, o que é uma forma válida em Python de implementar o
+padrão Singleton.
 
-msg = input()
-comando = input()
+#### 3. CONSTRUTOR PRIVADO/PROTEGIDO
+- ✅ CORRETO: O construtor (`__new__`) é controlado de forma que não permite a criação direta de
+múltiplas instâncias. A lógica dentro de `__new__` impede a criação de uma nova instância se ela já
+existir.
 
-app = CentralNotificacoes()
+#### 4. EXECUÇÃO CORRETA
+- ✅ CORRETO: O código executa sem erros de sintaxe. A lógica parece coerente e funcional, imprimindo
+mensagens apropriadas conforme o estado da instância.
 
-if comando == "adicionar":
-    app.adicionar(msg)
-elif comando == "listar":
-    app.adicionar(msg)
-    app.listar()
-elif comando == "nova_instancia":
-    app = CentralNotificacoes()
-```
+### Pontos Positivos e Áreas de Melhoria
+- **Pontos Positivos**: Implementação correta do padrão Singleton usando `__new__`, garantindo
+instância única e controle de acesso.
+- **Áreas de Melhoria**:
+  - O método `__new__` não é thread-safe. Em um ambiente multithreading, isso poderia levar à
+criação de múltiplas instâncias.
+  - Poderia ser útil adicionar um método estático para obter a instância, além de `__new__`, para
+seguir mais de perto o padrão Singleton tradicional.
 
-### Avaliação Conforme Rubrica:
-
-1. **Instância Única**:
-   - ✅ CORRETO: O código utiliza um atributo estático `_instancia` para armazenar a instância única
-e verifica se ela já existe antes de criar uma nova.
-
-2. **Método de Acesso**:
-   - ✅ CORRETO: O método `__new__` atua como um método de acesso estático que retorna a instância
-única, criando-a apenas se não existir.
-
-3. **Construtor Privado/Protegido**:
-   - ✅ CORRETO: O construtor (`__new__`) é controlado e impede a criação de múltiplas instâncias
-diretamente.
-
-4. **Execução Correta**:
-   - ✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
-
-### Pontuação:
-- Todos os critérios obrigatórios foram atendidos corretamente.
-- Nota: 25/25
-
-### Feedback:
-O código implementa corretamente o padrão Singleton. A classe `CentralNotificacoes` garante que
-apenas uma instância seja criada, e o método `__new__` controla essa criação. A execução do código
-também ocorre sem erros de sintaxe. O único ponto a considerar é que, embora o código funcione
-corretamente em um ambiente single-threaded, em um ambiente multi-threaded, ele poderia falhar
-devido à falta de sincronização. Para melhorar, poderia ser implementada uma trava (lock) para
-garantir a segurança em ambientes concorrentes.
+### Nota
+O código atende a todos os critérios obrigatórios, mas falta thread safety. Considerando o contexto
+da prova e o que foi pedido, o código está correto.
 
 ==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 25/25
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
 ==================================================
-QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.
+QUESTAO_Q1: 25/25 - Implementação correta do padrão Singleton.
+
+---
 
 ## Análise da Questão 2 - Inheritance and Composition
 
-### Código Submetido:
-```python
-from abc import ABC, abstractmethod
+### Avaliação do Código
 
-class Disciplina:
-    def __init__(self, nome):
-        self.nome = nome
+O código submetido implementa classes relacionadas a cursos, utilizando herança e composição. Vamos
+avaliar se ele atende aos critérios da rubrica.
 
-class Curso(ABC):
-    def __init__(self, nome, duracao: int):
-        self.nome = nome
-        self.duracao = duracao
-        self.disciplinas = []
+#### 1. CLASSE ABSTRATA BASE (10 pontos)
+- ✅ CORRETO: A classe `Curso` é abstrata, definida com `ABC` e contém atributos básicos (`nome`,
+`duracao`, `disciplinas`).
 
-        if self.duracao < 0:
-            raise ValueError("Duração inválida")
+#### 2. MÉTODO ABSTRATO (10 pontos)
+- ✅ CORRETO: O método `calcular_carga_horaria` é abstrato e definido corretamente em `Curso`. É
+implementado em ambas as subclasses `Graduacao` e `PosGraduacao`.
 
-    @abstractmethod
-    def calcular_carga_horaria(self):
-        pass
+#### 3. HERANÇA CORRETA (10 pontos)
+- ✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam de `Curso`, implementam o método
+abstrato e adicionam funcionalidades específicas.
 
-class Graduacao(Curso):
-    def __init__(self, nome, duracao: int):
-        super().__init__(nome, duracao)
+#### 4. CLASSE AUXILIAR (10 pontos)
+- ✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida, representando um conceito
+coerente.
 
-    def calcular_carga_horaria(self):
-        carga = self.duracao * 200
-        print(f"Carga horária: {carga}")
+#### 5. COMPOSIÇÃO/AGREGAÇÃO (10 pontos)
+- ⚠️ PARCIALMENTE CORRETO: A classe `Curso` contém uma lista de disciplinas. No entanto, a lista
+armazena apenas os nomes das disciplinas (`disciplina.nome`), e não objetos `Disciplina`. Isso reduz
+a utilidade da composição.
 
-    def adicionar_disciplina(self, disciplina: Disciplina):
-        self.disciplinas.append(disciplina.nome)
+#### 6. TRATAMENTO DE EXCEÇÕES (10 pontos)
+- ✅ CORRETO: O construtor de `Curso` verifica se `duracao` é negativo e lança um `ValueError` se
+verdadeiro.
 
-class PosGraduacao(Curso):
-    def __init__(self, nome, duracao: int):
-        super().__init__(nome, duracao)
+#### 7. EXECUÇÃO CORRETA (15 pontos)
+- ✅ CORRETO: O código funciona sem erros de sintaxe e a lógica parece coerente.
 
-    def calcular_carga_horaria(self):
-        carga = self.duracao * 134
-        print(f"Carga horária: {carga}")
+### Pontos Positivos e Áreas de Melhoria
+- **Pontos Positivos**: Implementação correta de classe abstrata, método abstrato, e tratamento de
+exceções.
+- **Áreas de Melhoria**:
+  - A composição poderia ser melhorada armazenando objetos `Disciplina` em vez de apenas seus nomes.
+  - Poderia haver mais validação nos construtores (por exemplo, verificar se `nome` não é vazio).
 
-    def adicionar_disciplina(self, disciplina: Disciplina):
-        self.disciplinas.append(disciplina.nome)
+### Pontuação
+- Classe Abstrata: 10/10
+- Método Abstrato: 10/10
+- Herança: 10/10
+- Classe Auxiliar: 10/10
+- Composição/Agregação: 5/10 (parcialmente correto)
+- Tratamento de Exceções: 10/10
+- Execução Correta: 15/15
 
-nome, duracao, tipo = input().split("; ")
-duracao_int = int(duracao)
-
-if tipo == "graduacao":
-    curso = Graduacao(nome, duracao_int)
-    print("Graduação criada")
-elif tipo == "pos":
-    curso = PosGraduacao(nome, duracao_int)
-    print("Pós-graduação criada")
-
-curso.calcular_carga_horaria()
-
-entradas_d = input()
-disc = Disciplina(entradas_d)
-curso.adicionar_disciplina(disc)
-print(f"Disciplinas: {curso.disciplinas}")
-```
-
-### Avaliação Conforme Rubrica:
-
-1. **Classe Abstrata Base**:
-   - ✅ CORRETO: A classe `Curso` é abstrata e contém atributos básicos como `nome` e `duracao`.
-
-2. **Método Abstrato**:
-   - ✅ CORRETO: O método `calcular_carga_horaria` é abstrato e foi implementado corretamente nas
-subclasses.
-
-3. **Herança Correta**:
-   - ✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam de `Curso` e implementam o método
-abstrato.
-
-4. **Classe Auxiliar**:
-   - ✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida com um atributo `nome`.
-
-5. **Composição/Agregação**:
-   - ⚠️ PARCIALMENTE CORRETO: A classe `Curso` contém uma lista de disciplinas, mas armazena apenas
-o nome da disciplina, não o objeto `Disciplina` completo.
-
-6. **Tratamento de Exceções**:
-   - ✅ CORRETO: O construtor de `Curso` verifica se `duracao` é negativo e lança um `ValueError`
-apropriado.
-
-7. **Execução Correta**:
-   - ✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
-
-### Pontuação:
-- Total: 73/75
-  - Falta apenas na composição/agregação, pois armazena apenas o nome da disciplina.
-
-### Feedback:
-O código implementa corretamente a maioria dos critérios exigidos. A classe abstrata `Curso` e suas
-subclasses estão bem estruturadas, e o tratamento de exceções é adequado. No entanto, a
-composição/agregação poderia ser melhorada armazenando o objeto `Disciplina` completo em vez de
-apenas seu nome. Isso permitiria uma representação mais rica e flexível das disciplinas associadas a
-um curso.
+Total: 70/75
 
 ==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 73/75
+📊 CORREÇÃO AUTOMÁTICA — Q2: 70 pontos (máx:75)
 ==================================================
-QUESTAO_Q2: 73/75 - Excelente implementação, com pequena falha na composição/agregação.
+QUESTAO_Q2: 70/75 - Implementação quase perfeita, com pequena falha na composição.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

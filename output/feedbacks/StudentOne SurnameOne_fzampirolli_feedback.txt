@@ -1,94 +1,68 @@
 
-FEEDBACK DA AVALIAÇÃO - OOP Assessment - P1
+FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentOne SurnameOne (fzampirolli)
-Data: 2025-09-13 21:08:31
-Nota Final (de 1 tentativa): 85.00 pontos
+Data: 2025-09-13 22:05:28
+Nota Final (de 1 tentativa): 78.00 pontos
 Total de Chamadas à API: 1
 
-### Questão 1: Padrão Singleton
+### Questão 1: Singleton Pattern
 
-#### Análise do Código
+#### Análise
 
-O código submetido implementa uma classe `CentralNotificacoes` dentro de uma classe `Q1`. A classe
-`CentralNotificacoes` parece seguir o padrão Singleton, com um atributo estático privado `instance`
-para armazenar a instância única, um construtor privado para evitar instanciação direta e um método
-estático `getInstance()` para acessar a instância.
+O código implementa o padrão Singleton com sucesso. Aqui estão os pontos positivos e negativos:
 
-#### Critérios de Avaliação
+*   **Pontos positivos:**
+    *   O código cria uma instância única da classe `CentralNotificacoes` usando o método
+`getInstance()`.
+    *   A instância é criada apenas quando não existe e é armazenada em um atributo estático.
+    *   O método `getInstance()` verifica se a instância já existe antes de criar uma nova.
+*   **Pontos negativos:**
+    *   O código não implementa o construtor privado, o que é um requisito do padrão Singleton.
+    *   O método `getInstance()` não é estático, o que pode causar problemas se o código for chamado
+de diferentes threads.
 
-1. **Instância Única**: ✅ CORRETO - Existe um mecanismo para garantir apenas uma instância.
-   - Atributo estático/privado `instance` para armazenar a instância.
-   - Verificação se instância já existe antes de criar nova em `getInstance()`.
+#### Sugestões de melhoria
 
-2. **Método de Acesso**: ✅ CORRETO - Método público que retorna sempre a mesma instância.
-   - Método estático `getInstance()` que retorna a instância única.
-
-3. **Construtor Privado/Protegido**: ✅ CORRETO - Construtor inacessível externamente.
-   - Construtor privado `private CentralNotificacoes()`.
-
-4. **Execução Correta**: ⚠️ PARCIALMENTE CORRETO - Código executa sem erros de sintaxe, mas...
-   - A lógica é coerente, mas o código não foi testado com entradas variadas.
-
-#### Feedback
-
-- O código implementa corretamente o padrão Singleton.
-- Sugestão: Adicionar comentários para explicar a lógica e considerar thread-safety para acesso
-concorrente à instância.
+*   Adicione um construtor privado à classe `CentralNotificacoes` para evitar a criação de
+instâncias diretas.
+*   Faça o método `getInstance()` estático para garantir que a instância seja criada apenas uma vez.
 
 #### Nota
 
-QUESTAO_Q1: 20/25 - Implementação quase perfeita do padrão Singleton, faltando apenas considerações
-de thread-safety.
+QUESTAO_Q1: 18/25 - O código implementa o padrão Singleton, mas falta o construtor privado e o
+método getInstance() não é estático.
 
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 20 pontos (máx:25)
-==================================================
+### Questão 2: Inheritance and Composition
 
-### Questão 2: Herança, Composição e Exceções
+#### Análise
 
-#### Análise do Código
+O código implementa herança e composição com sucesso. Aqui estão os pontos positivos e negativos:
 
-O código define uma classe abstrata `Curso` com subclasses `Graduacao` e `PosGraduacao`, além de uma
-classe `Disciplina`. Há um tratamento de exceção para duração inválida.
+*   **Pontos positivos:**
+    *   A classe `Curso` é uma classe abstrata com métodos abstratos `calcularCargaHoraria()`.
+    *   As subclasses `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os métodos
+abstratos.
+    *   A classe `Disciplina` é uma classe auxiliar que representa uma disciplina.
+    *   A classe `ValueError` é uma classe de exceção que é lançada quando a duração é inválida.
+*   **Pontos negativos:**
+    *   A classe `Curso` não tem um método para adicionar disciplinas.
+    *   A classe `Graduacao` e `PosGraduacao` não têm um método para calcular a carga horária
+baseada na duração.
+    *   A classe `Disciplina` não tem um método para calcular a carga horária.
 
-#### Critérios de Avaliação
+#### Sugestões de melhoria
 
-1. **Classe Abstrata Base**: ✅ CORRETO - Classe base abstrata bem definida.
-   - Classe `Curso` marcada como abstrata.
-
-2. **Método Abstrato**: ✅ CORRETO - Método abstrato implementado corretamente.
-   - Método `calcularCargaHoraria()` definido como abstrato e implementado nas subclasses.
-
-3. **Herança Correta**: ✅ CORRETO - Subclasses herdam da classe abstrata.
-   - Subclasses `Graduacao` e `PosGraduacao` herdam de `Curso`.
-
-4. **Classe Auxiliar**: ✅ CORRETO - Classe auxiliar bem definida.
-   - Classe `Disciplina` representa um conceito coerente.
-
-5. **Composição/Agregação**: ✅ CORRETO - Relacionamento implementado funcionalmente.
-   - Classe `Curso` contém lista de `Disciplina`.
-
-6. **Tratamento de Exceções**: ⚠️ PARCIALMENTE CORRETO - Exceções tratadas no construtor.
-   - Lança exceção `ValueError` para duração inválida, mas `ValueError` deve ser
-`IllegalArgumentException` em Java.
-
-7. **Execução Correta**: ⚠️ PARCIALMENTE CORRETO - Código funciona sem erros de compilação, mas...
-   - Pode haver erros de execução se as entradas forem inválidas.
-
-#### Feedback
-
-- O código implementa corretamente herança, composição e tratamento de exceções.
-- Sugestão: Corrigir o tipo de exceção para `IllegalArgumentException` e considerar mais casos de
-teste.
+*   Adicione um método `adicionarDisciplina()` à classe `Curso` para permitir a adição de
+disciplinas.
+*   Adicione um método `calcularCargaHorariaBaseadaNaDuracao()` às subclasses `Graduacao` e
+`PosGraduacao` para calcular a carga horária baseada na duração.
+*   Adicione um método `calcularCargaHoraria()` à classe `Disciplina` para calcular a carga horária.
 
 #### Nota
 
-QUESTAO_Q2: 65/75 - Implementação boa, mas com pequenos ajustes necessários para perfeição.
-
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 65 pontos (máx:75)
-==================================================
+QUESTAO_Q2: 60/75 - O código implementa herança e composição, mas falta alguns métodos para calcular
+a carga horária e adicionar disciplinas.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode
