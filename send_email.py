@@ -87,12 +87,12 @@ def gerar_texto_email(nome_aluno):
 A sua nota da Prova 1 da disciplina Programação Orientada a Objetos já está disponível no Moodle.
 
 Em anexo, envio também dois arquivos:
-1. `_feedback.txt`: Uma correção detalhada gerada automaticamente por Inteligência Artificial.
-2. `_prompt.txt`: O texto exato que foi enviado à IA para gerar a sua correção. Teste em outras IAs, se desejar.
+1. _feedback.txt – Correção detalhada gerada automaticamente por Inteligência Artificial.
+2. _prompt.txt – Texto exato enviado à IA para gerar a correção, que você pode testar em outras ferramentas, se desejar.
 
-Ressalto que essa correção pode conter imprecisões ou erros, mas pode ser útil como apoio ao seu processo de aprendizagem na disciplina.
+Ressalto que essa correção pode conter imprecisões ou erros. Utilize-a como apoio ao seu processo de aprendizagem na disciplina.
 
-Atenciosamente,  
+Atenciosamente,
 Prof. Francisco Zampirolli
 """
     return texto
