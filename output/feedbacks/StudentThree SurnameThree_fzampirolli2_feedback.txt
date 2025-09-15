@@ -2,76 +2,83 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentThree SurnameThree (fzampirolli2)
-Data: 2025-09-14 21:27:34
-Nota Final (de 1 tentativa): 60.00 pontos
+Data: 2025-09-15 07:23:56
+Nota Final (de 1 tentativa): 45.00 pontos
 Total de Chamadas à API: 1
 
-## Análise da Prova - Avaliação Automatizada Detalhada
+## Análise da Questão 1 - Padrão Singleton
 
-**QUESTAO_Q1: 15/25 - Implementação do padrão Singleton com algumas falhas.**
+### Avaliação do Código
 
-**Feedback:**
+O código implementa uma classe `SomSistema` que segue o padrão Singleton. Vamos avaliar se ele
+atende aos critérios da rubrica.
 
-O código demonstra um esforço para implementar o padrão Singleton, mas apresenta algumas falhas que
-impedem a obtenção da nota máxima.
+#### 1. INSTÂNCIA ÚNICA
+✅ CORRETO: O código utiliza o método `__new__` para controlar a criação de instâncias, garantindo
+que apenas uma instância seja criada.
 
-**Pontos Positivos:**
+#### 2. MÉTODO DE ACESSO
+✅ CORRETO: Embora não seja explicitamente um método chamado `getInstance()`, o próprio `__new__`
+atua como um método de acesso controlado à instância única.
 
-* **Instância Única:** O código utiliza um atributo estático `_instancia` para armazenar a única
-instância da classe `SomSistema`.
-* **Verificação de Instância:** Existe uma verificação se a instância já existe antes de criar uma
-nova.
+#### 3. CONSTRUTOR PRIVADO/PROTEGIDO
+✅ CORRETO: O construtor (`__new__`) é controlado e impede a criação direta de múltiplas instâncias.
 
-**Pontos a Melhorar:**
+#### 4. EXECUÇÃO CORRETA
+✅ CORRETO: O código executa sem erros de sintaxe aparentes e a lógica parece coerente.
 
-* **Método de Acesso:** O método `__new__` é utilizado para controlar a criação da instância, mas
-não há um método público estático (como `getInstance()`) para acessar a instância única.
-* **Construtor Privado:** O construtor `__new__` é privado, mas não há um construtor público que
-seja bloqueado para evitar a criação direta de instâncias.
+### Pontuação
+Todos os critérios obrigatórios foram atendidos corretamente. Portanto, a implementação está
+perfeita.
 
-**Sugestões:**
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
+==================================================
+QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.
 
-1.  Adicione um método público estático `getInstance()` que retorne a instância única.
-2.  Mantenha o construtor `__new__` privado para impedir a criação direta de instâncias.
+## Análise da Questão 2 - Herança, Composição e Exceções
 
-**QUESTAO_Q2: 45/75 - Herança e Composição implementadas, mas com falhas em outras áreas.**
+### Avaliação do Código
 
-**Feedback:**
+O código tenta implementar herança, composição e exceções. Vamos avaliar se ele atende aos critérios
+da rubrica.
 
-O código demonstra compreensão de herança e composição, mas apresenta problemas em relação ao
-tratamento de exceções, à implementação de métodos abstratos e à consistência de nomes.
+#### 1. CLASSE ABSTRATA BASE
+❌ INCORRETO: A classe `Funcionario` não é abstrata apesar de ter um método abstrato. Falta a
+declaração explícita como abstrata.
 
-**Pontos Positivos:**
+#### 2. MÉTODO ABSTRATO
+⚠️ PARCIALMENTE CORRETO: O método `calcular_bonus` é abstrato, mas como a classe `Funcionario` não é
+declarada como abstrata, isso causa um problema.
 
-* **Herança:** A classe `Desenvolvedor` e `Gerente` herdam da classe abstrata `Funcionario`.
-* **Composição:** A classe `Funcionario` possui uma lista de projetos (`listaprojetos`),
-demonstrando composição.
+#### 3. HERANÇA CORRETA
+⚠️ PARCIALMENTE CORRETO: As subclasses `Desenvolvedor` e `Gerente` herdam de `Funcionario`, mas há
+um erro de sintaxe na definição da classe `Gerente` (`funcionario` deve ser `Funcionario`).
 
-**Pontos a Melhorar:**
+#### 4. CLASSE AUXILIAR
+✅ CORRETO: A classe `Projeto` é uma classe auxiliar bem definida.
 
-* **Classe Abstrata:** A classe `Funcionario` não é declarada como abstrata, apesar de conter o
-método abstrato `calcular_bonus`.
-* **Método Abstrato:** O método `calcular_bonus` não é implementado na classe base `Funcionario`,
-mas sim nas subclasses `Desenvolvedor` e `Gerente`.
-* **Tratamento de Exceções:** O tratamento de exceções no construtor de `Funcionario` é incompleto,
-apenas verificando se o salário é negativo.
-* **Nomes:** A classe `Gerente` está escrita com letra minúscula, enquanto a classe `Desenvolvedor`
-está com letra maiúscula, o que não é consistente.
+#### 5. COMPOSIÇÃO/AGREGAÇÃO
+⚠️ PARCIALMENTE CORRETO: A classe `Funcionario` contém uma lista de projetos (`listaprojetos`), mas
+falta o método para adicionar projetos corretamente implementado.
 
-**Sugestões:**
+#### 6. TRATAMENTO DE EXCEÇÕES
+✅ CORRETO: O construtor de `Funcionario` verifica se o salário é negativo e lança uma exceção
+`ValueError` apropriada.
 
-1.  Declarar a classe `Funcionario` como abstrata.
-2.  Implementar o método `calcular_bonus` na classe `Funcionario` como um método abstrato.
-3.  Melhorar o tratamento de exceções no construtor de `Funcionario`, verificando outros parâmetros
-e lançando exceções mais específicas.
-4.  Manter a consistência na escrita de nomes de classes (maiúscula ou minúscula).
+#### 7. EXECUÇÃO CORRETA
+❌ INCORRETO: O código contém vários erros de sintaxe (ex.: `tipo = entrada[2].strip().lower` deve
+ser `tipo = entrada[2].strip().lower()`, `class Gerente(funcionario)` deve ser `class
+Gerente(Funcionario)`, etc.) e não executa corretamente.
 
+### Pontuação
+Considerando os critérios atendidos e os erros presentes, a pontuação é baixa devido aos vários
+problemas de sintaxe e lógica.
 
-
-**==================================================**
-📊 CORREÇÃO AUTOMÁTICA — Q1: 15 pontos (máx: 25)
-📊 CORREÇÃO AUTOMÁTICA — Q2: 45 pontos (máx: 75)
-**==================================================**
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: 20 pontos (máx:75)
+==================================================
+QUESTAO_Q2: 20/75 - Implementação parcial com vários erros de sintaxe e lógica.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

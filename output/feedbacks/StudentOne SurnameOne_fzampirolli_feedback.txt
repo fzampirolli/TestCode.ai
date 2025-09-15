@@ -2,47 +2,93 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentOne SurnameOne (fzampirolli)
-Data: 2025-09-14 21:27:34
-Nota Final (de 1 tentativa): 80.00 pontos
+Data: 2025-09-15 07:23:56
+Nota Final (de 1 tentativa): 100.00 pontos
 Total de Chamadas à API: 1
 
-QUESTAO_Q1: 20/25 - O aluno implementou corretamente o padrão Singleton, com uma instância única e
-um método de acesso estático. No entanto, o construtor privado não é implementado corretamente, pois
-não é possível criar instâncias via new/() diretamente. Além disso, o código não segue a estrutura
-de classes e métodos sugerida no enunciado.
+## Análise da Questão 1 - Padrão Singleton
 
-QUESTAO_Q2: 60/75 - O aluno implementou corretamente a herança com classe abstrata e métodos
-abstratos, bem como a composição/agregação com classe auxiliar. No entanto, o tratamento de exceções
-em construtores não é implementado corretamente, pois não há validação de parâmetros e lançamento de
-exceção apropriada. Além disso, o código não segue a estrutura de classes e métodos sugerida no
-enunciado.
+O código submetido pelo aluno implementa o padrão Singleton para a classe `CentralNotificacoes`.
+Vamos analisar os critérios de avaliação:
 
-Aqui estão os feedbacks detalhados para cada questão:
+### 1. INSTÂNCIA ÚNICA
 
-**QUESTAO_Q1**
+✅ CORRETO: O código utiliza um atributo estático `instance` para armazenar a instância única da
+classe `CentralNotificacoes`. Além disso, o método `getInstance()` verifica se a instância já existe
+antes de criar uma nova.
 
-* O aluno implementou corretamente o padrão Singleton, com uma instância única e um método de acesso
-estático. (✅ CORRETO)
-* O construtor privado não é implementado corretamente, pois não é possível criar instâncias via
-new/() diretamente. (❌ INCORRETO)
-* O código não segue a estrutura de classes e métodos sugerida no enunciado. (❌ INCORRETO)
+### 2. MÉTODO DE ACESSO
 
-**QUESTAO_Q2**
+✅ CORRETO: O método `getInstance()` é estático e retorna a instância única da classe
+`CentralNotificacoes`. Se a instância não existir, ele a cria e a armazena no atributo `instance`.
 
-* O aluno implementou corretamente a herança com classe abstrata e métodos abstratos. (✅ CORRETO)
-* O aluno implementou corretamente a composição/agregação com classe auxiliar. (✅ CORRETO)
-* O tratamento de exceções em construtores não é implementado corretamente, pois não há validação de
-parâmetros e lançamento de exceção apropriada. (❌ INCORRETO)
-* O código não segue a estrutura de classes e métodos sugerida no enunciado. (❌ INCORRETO)
+### 3. CONSTRUTOR PRIVADO/PROTEGIDO
 
-Para melhorar o código, o aluno pode seguir as seguintes sugestões:
+✅ CORRETO: O construtor da classe `CentralNotificacoes` é privado, o que impede a criação de
+instâncias diretas da classe.
 
-* Implementar corretamente o construtor privado para evitar a criação de instâncias via new/()
-diretamente.
-* Implementar corretamente o tratamento de exceções em construtores, com validação de parâmetros e
-lançamento de exceção apropriada.
-* Seguir a estrutura de classes e métodos sugerida no enunciado para melhorar a legibilidade e a
-manutenibilidade do código.
+### 4. EXECUÇÃO CORRETA
+
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
+
+Com base nos critérios de avaliação, o código atende a todos os requisitos do padrão Singleton.
+
+**Nota:** 25/25
+
+QUESTAO_Q1: 25/25 - O código implementa corretamente o padrão Singleton.
+
+---
+
+## Análise da Questão 2 - Herança, Composição e Exceções
+
+O código submetido pelo aluno implementa herança, composição e exceções para as classes `Curso`,
+`Graduacao`, `PosGraduacao` e `Disciplina`. Vamos analisar os critérios de avaliação:
+
+### 1. CLASSE ABSTRATA BASE
+
+✅ CORRETO: A classe `Curso` é abstrata e contém atributos básicos como `nome` e `duracao`.
+
+### 2. MÉTODO ABSTRATO
+
+✅ CORRETO: O método `calcularCargaHoraria()` é abstrato e é sobrescrito nas subclasses `Graduacao` e
+`PosGraduacao`.
+
+### 3. HERANÇA CORRETA
+
+✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os
+métodos abstratos.
+
+### 4. CLASSE AUXILIAR
+
+✅ CORRETO: A classe `Disciplina` é uma classe auxiliar que representa um conceito coerente.
+
+### 5. COMPOSIÇÃO/AGREGAÇÃO
+
+✅ CORRETO: A classe `Curso` contém uma lista de objetos `Disciplina`, o que representa uma
+composição/agregação.
+
+### 6. TRATAMENTO DE EXCEÇÕES
+
+✅ CORRETO: O código trata exceções no construtor da classe `Curso` e lança uma exceção `ValueError`
+quando a duração é inválida.
+
+### 7. EXECUÇÃO CORRETA
+
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
+
+Com base nos critérios de avaliação, o código atende a todos os requisitos.
+
+**Nota:** 75/75
+
+QUESTAO_Q2: 75/75 - O código implementa corretamente herança, composição e exceções.
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx: 25)
+==================================================
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: 75 pontos (máx: 75)
+==================================================
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

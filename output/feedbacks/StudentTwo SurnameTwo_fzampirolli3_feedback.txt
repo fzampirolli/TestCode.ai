@@ -2,54 +2,58 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentTwo SurnameTwo (fzampirolli3)
-Data: 2025-09-14 21:27:34
-Nota Final (de 1 tentativa): 75.00 pontos
+Data: 2025-09-15 07:23:56
+Nota Final (de 1 tentativa): 60.00 pontos
 Total de Chamadas à API: 1
 
-## Análise do Código do Aluno
+**QUESTAO_Q1: 20/25 - Implementação parcial do padrão Singleton**
 
-**QUESTAO_Q1: 20/25 -** O código implementa o padrão Singleton, mas com algumas falhas.
+O código implementa corretamente os critérios de instância única, método de acesso e construtor
+privado. No entanto, não atende ao critério de execução correta, pois apresenta erros de sintaxe e
+lógica inválida.
 
-* ✅ **INSTÂNCIA ÚNICA:** O atributo `_instancia` estático e a verificação na criação de instâncias
-garantem apenas uma instância.
-* ✅ **MÉTODO DE ACESSO:** O método `__new__` atua como um método de acesso, retornando sempre a
-mesma instância.
-* ⚠️ **CONSTRUTOR PRIVADO/PROTEGIDO:** O construtor não é explicitamente privado, mas a
-implementação do `__new__` impede a criação direta de instâncias.
-* ✅ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe.
+**Pontuação:**
 
-**Sugestões de Melhoria:**
+- **25 pontos**: TODOS os 4 critérios corretos (implementação perfeita)
+- **20 pontos**: 3 critérios corretos, 1 incorreto (quase perfeito)
+- **15 pontos**: 2 critérios corretos, 2 incorretos (implementação parcial)
+- **10 pontos**: 1 critério correto, 3 incorretos (tentativa mínima)
+- **5 pontos**: Tentativa de implementação, mas todos os critérios falham
+- **0 pontos**: Ausente, vazio ou completamente incorreto
 
-* Para maior clareza, o construtor poderia ser privado (`__init__`) e o método `__new__` poderia ser
-mais explícito na verificação da instância.
+**QUESTAO_Q1: 20/25 - Implementação parcial do padrão Singleton**
 
-**QUESTAO_Q2: 55/75 -** O código demonstra compreensão dos conceitos de herança, composição e
-exceções, mas com algumas falhas.
+**QUESTAO_Q2: 40/75 - Implementação parcial de Herança, Composição e Exceções**
 
-* ✅ **CLASSE ABSTRATA BASE:** A classe `Curso` é abstrata e possui os atributos básicos.
-* ✅ **MÉTODO ABSTRATO:** O método `calcular_carga_horaria` é abstrato e deve ser implementado pelas
-subclasses.
-* ✅ **HERANÇA CORRETA:** As classes `Graduacao` e `PosGraduacao` herdam de `Curso` e implementam o
-método abstrato.
-* ✅ **CLASSE AUXILIAR:** A classe `Disciplina` é uma classe auxiliar bem definida.
-* ⚠️ **COMPOSIÇÃO/AGREGAÇÃO:** A composição/agregação não é implementada de forma ideal. A classe
-`Curso` possui uma lista de nomes de disciplinas (`self.disciplinas`), mas não objetos `Disciplina`.
-* ✅ **TRATAMENTO DE EXCEÇÕES:** O construtor de `Curso` trata a exceção de `duracao` negativa.
-* ✅ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe.
+O código implementa corretamente os critérios de classe abstrata base, método abstrato, herança
+correta e classe auxiliar. No entanto, não atende aos critérios de composição/agregação, tratamento
+de exceções e execução correta.
 
-**Sugestões de Melhoria:**
+**Pontuação:**
 
-* Implementar a composição/agregação de forma mais consistente, armazenando objetos `Disciplina` na
-lista `self.disciplinas` em vez de apenas nomes.
-* Adicionar mais testes para verificar a funcionalidade do código.
+- **75 pontos**: TODOS os 7 critérios corretos (implementação perfeita)
+- **60 pontos**: 6 critérios corretos, 1 incorreto (quase perfeito)
+- **45 pontos**: 5 critérios corretos, 2 incorretos (implementação parcial)
+- **30 pontos**: 4 critérios corretos, 3 incorretos (tentativa mínima)
+- **15 pontos**: 3 critérios corretos, 4 incorretos (implementação parcial)
+- **0 pontos**: Ausente, vazio ou completamente incorreto
 
+**QUESTAO_Q2: 40/75 - Implementação parcial de Herança, Composição e Exceções**
 
+**Observações:**
 
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 20 pontos (máx: 25)
-📊 CORREÇÃO AUTOMÁTICA — Q2: 55 pontos (máx: 75)
-==================================================
+- O código do aluno apresenta erros de sintaxe e lógica inválida, o que afeta a execução correta do
+código.
+- A implementação do padrão Singleton não é perfeita, pois não atende ao critério de execução
+correta.
+- A implementação de Herança, Composição e Exceções não é perfeita, pois não atende aos critérios de
+composição/agregação, tratamento de exceções e execução correta.
 
+**Sugestões:**
+
+- Verifique a sintaxe e a lógica do código para garantir a execução correta.
+- Implemente o padrão Singleton de forma perfeita, atendendo a todos os critérios.
+- Implemente a Herança, Composição e Exceções de forma perfeita, atendendo a todos os critérios.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode
