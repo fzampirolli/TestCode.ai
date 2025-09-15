@@ -82,7 +82,7 @@ TestCode.ai/
 ├── setup.sh             # Environment setup script
 ├── eval.py              # AI evaluation logic
 ├── send_email.py        # Email feedback sender
-├── rename_folders.sh    # (Optional) folder renaming helper
+├── config/              # Folder with .env and .yaml
 ├── submissions/         # Student submissions (after prepare)
 ├── output/              # Generated feedback and mapping
 └── logs/                # Execution logs
