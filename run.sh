@@ -16,10 +16,11 @@ show_help() {
     echo ""
     echo "Main Commands:"
     echo "  setup                - Sets up the initial environment (run once)"
-    echo "  prepare <zip_file>   - Unzips and anonymizes submissions"
+    echo "  prepare <zip_file>   - Unzips and renames submissions"
     echo "  eval <folder>        - Runs the AI evaluation on the submissions folder"
     echo "  email                - Sends the feedback via email"
     echo "  check                - Checks if the required scripts exist"
+    echo "  clean                - Removes submissions, output and logs folders"
     echo ""
     echo "Options:"
     echo "  -h, --help     Shows this help message"
@@ -34,8 +35,7 @@ show_help() {
 # Checks for essential scripts
 check_scripts() {
     local missing_scripts=()
-    # List of scripts this wrapper depends on
-    local required_scripts=("setup.sh" "eval.py" "send_email.py" "rename_folders.sh")
+    local required_scripts=("setup.sh" "eval.py" "send_email.py")
 
     for script in "${required_scripts[@]}"; do
         if [ ! -f "./$script" ]; then
@@ -70,15 +70,17 @@ case "$1" in
 
         echo -e "${BLUE}🚀 Preparing submissions...${NC}"
         SUBMISSIONS_DIR="submissions"
+
+        # Limpa pasta para evitar duplicação ao rodar mais de uma vez
+        rm -rf "$SUBMISSIONS_DIR"
         mkdir -p "$SUBMISSIONS_DIR"
 
         echo -e "${YELLOW}📦 Unpacking '$2'...${NC}"
-        # The -o flag forces overwrite without prompting
-        if ! unzip -o -q "$2" -d "$SUBMISSIONS_DIR/"; then
+        if ! unzip -q "$2" -d "$SUBMISSIONS_DIR/"; then
             echo -e "${RED}❌ Failed to unpack the file.${NC}" && exit 1
         fi
         
-        # Logic to move files from subfolders (common with Moodle zips)
+        # Caso Moodle crie subpasta com o nome do zip
         BASENAME=$(basename "$2" .zip)
         SOURCE_DIR="$SUBMISSIONS_DIR/$BASENAME"
         if [ -d "$SOURCE_DIR" ]; then
@@ -86,27 +88,45 @@ case "$1" in
             mv "$SOURCE_DIR"/* "$SUBMISSIONS_DIR/" && rmdir "$SOURCE_DIR"
         fi
 
-        # --- RENAMING LOGIC IS NOW INTEGRATED DIRECTLY HERE ---
-        echo -e "${YELLOW}🏷️  Anonymizing folders...${NC}"
+        echo -e "${YELLOW}🏷️  Renaming folders...${NC}"
         MAP_FILE="output/mapping.txt"
-        mkdir -p output # Ensure the output directory exists
-        > "$MAP_FILE"   # Clear the old mapping file
+        mkdir -p output
+        > "$MAP_FILE"
 
-        letters=("A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")
         index=0
-        
-        # Using 'find' is safer for names with spaces or special characters
         find "$SUBMISSIONS_DIR" -mindepth 1 -maxdepth 1 -type d | while read -r dir_path; do
             original_name=$(basename "$dir_path")
-            # Skip folders that have already been anonymized
-            if [[ "$original_name" == "Student_"* ]]; then continue; fi
 
-            new_name="Student_${letters[$index]}"
-            mv "$dir_path" "$SUBMISSIONS_DIR/$new_name"
-            echo "'$original_name' -> '$new_name'" >> "$MAP_FILE"
+            # Se já estiver no formato "Nome Sobrenome - user", pula
+            if [[ "$original_name" == *" - "* ]]; then
+                echo "Skipping already renamed: $original_name"
+                continue
+            fi
+
+            IFS=' ' read -ra partes <<< "$original_name"
+            num_partes=${#partes[@]}
+            if (( num_partes < 4 )); then
+                echo "Skipping invalid folder: $original_name"
+                continue
+            fi
+
+            usuario="${partes[$((num_partes-1))]}"
+            ra="${partes[$((num_partes-2))]}"
+            primeiro_nome="${partes[$((num_partes-3))]}"
+
+            restante_nome=""
+            for ((i=0; i<num_partes-3; i++)); do
+                restante_nome+="${partes[$i]} "
+            done
+            restante_nome=$(echo "$restante_nome" | sed 's/ *$//')
+
+            novo_nome="${primeiro_nome} ${restante_nome} - ${usuario}"
+
+            mv "$dir_path" "$SUBMISSIONS_DIR/$novo_nome"
+            echo "'$original_name' -> '$novo_nome'" >> "$MAP_FILE"
             ((index++))
         done
-        echo -e "${GREEN}✅ Folders anonymized. See '$MAP_FILE' for reference.${NC}"
+        echo -e "${GREEN}✅ Folders renamed. See '$MAP_FILE' for reference.${NC}"
         ;;
 
     "eval")
@@ -125,6 +145,12 @@ case "$1" in
     "check")
         echo -e "${BLUE}🔍 Checking scripts...${NC}"
         check_scripts
+        ;;
+
+    "clean")
+        echo -e "${BLUE}🧹 Cleaning environment...${NC}"
+        rm -rf submissions output logs
+        echo -e "${GREEN}✅ Environment cleaned (submissions, output, logs).${NC}"
         ;;
 
     "-h"|"--help"|"help"|"")

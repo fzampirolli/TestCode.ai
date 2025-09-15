@@ -2,82 +2,76 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentThree SurnameThree (fzampirolli2)
-Data: 2025-09-13 22:05:28
-Nota Final (de 1 tentativa): 55.00 pontos
+Data: 2025-09-14 21:27:34
+Nota Final (de 1 tentativa): 60.00 pontos
 Total de Chamadas à API: 1
 
-### Questão 1: Singleton Pattern
+## Análise da Prova - Avaliação Automatizada Detalhada
 
-#### Análise Detalhada
+**QUESTAO_Q1: 15/25 - Implementação do padrão Singleton com algumas falhas.**
 
-O código implementado pelo aluno para o padrão Singleton é parcialmente correto. Aqui estão os
-pontos positivos e negativos:
+**Feedback:**
 
-**Pontos Positivos:**
-
-1.  O aluno implementou o padrão Singleton, garantindo que apenas uma instância seja criada.
-2.  O método `__new__` é utilizado para controlar a criação da instância, o que é uma boa prática.
-3.  O aluno também implementou o método de acesso `getInstance` para retornar a instância única.
-
-**Pontos Negativos:**
-
-1.  O aluno não implementou o construtor privado, o que é um requisito importante para o padrão
-Singleton.
-2.  O método `getInstance` não é estático, o que pode causar problemas se o método for chamado em
-diferentes threads.
-3.  O aluno não implementou a verificação se a instância já existe antes de criar uma nova, o que
-pode causar problemas se o método for chamado em diferentes threads.
-
-**Sugestões de Melhoria:**
-
-1.  Implemente o construtor privado para garantir que a instância seja criada apenas uma vez.
-2.  Faça o método `getInstance` estático para garantir que a instância seja retornada corretamente
-em diferentes threads.
-3.  Verifique se a instância já existe antes de criar uma nova para garantir que a instância seja
-criada apenas uma vez.
-
-**Nota:**
-
-QUESTAO_Q1: 15/25 - O aluno implementou o padrão Singleton, mas com alguns erros e omissões.
-
-### Questão 2: Inheritance and Composition
-
-#### Análise Detalhada
-
-O código implementado pelo aluno para a herança e composição é parcialmente correto. Aqui estão os
-pontos positivos e negativos:
+O código demonstra um esforço para implementar o padrão Singleton, mas apresenta algumas falhas que
+impedem a obtenção da nota máxima.
 
 **Pontos Positivos:**
 
-1.  O aluno implementou a herança correta, com a classe `Funcionario` sendo a classe base e as
-classes `Desenvolvedor` e `Gerente` sendo as subclasses.
-2.  O aluno implementou a composição correta, com a classe `Projeto` sendo uma classe auxiliar e a
-classe `Funcionario` contendo uma lista de projetos.
-3.  O aluno tratou as exceções corretamente, com o método `__init__` da classe `Funcionario`
-lançando uma exceção se o salário for inválido.
+* **Instância Única:** O código utiliza um atributo estático `_instancia` para armazenar a única
+instância da classe `SomSistema`.
+* **Verificação de Instância:** Existe uma verificação se a instância já existe antes de criar uma
+nova.
 
-**Pontos Negativos:**
+**Pontos a Melhorar:**
 
-1.  O aluno não implementou a classe base `Funcionario` como abstrata, o que é um requisito
-importante para a herança.
-2.  O aluno não implementou o método abstrato `calcular_bonus` na classe base `Funcionario`, o que é
-um requisito importante para a herança.
-3.  O aluno não implementou a verificação se o projeto já existe antes de adicionar um novo projeto
-à lista, o que pode causar problemas se o método for chamado em diferentes threads.
+* **Método de Acesso:** O método `__new__` é utilizado para controlar a criação da instância, mas
+não há um método público estático (como `getInstance()`) para acessar a instância única.
+* **Construtor Privado:** O construtor `__new__` é privado, mas não há um construtor público que
+seja bloqueado para evitar a criação direta de instâncias.
 
-**Sugestões de Melhoria:**
+**Sugestões:**
 
-1.  Faça a classe base `Funcionario` abstrata para garantir que as subclasses implementem o método
-abstrato `calcular_bonus`.
-2.  Implemente o método abstrato `calcular_bonus` na classe base `Funcionario` para garantir que as
-subclasses implementem o método.
-3.  Verifique se o projeto já existe antes de adicionar um novo projeto à lista para garantir que a
-lista seja atualizada corretamente.
+1.  Adicione um método público estático `getInstance()` que retorne a instância única.
+2.  Mantenha o construtor `__new__` privado para impedir a criação direta de instâncias.
 
-**Nota:**
+**QUESTAO_Q2: 45/75 - Herança e Composição implementadas, mas com falhas em outras áreas.**
 
-QUESTAO_Q2: 40/75 - O aluno implementou a herança e composição corretamente, mas com alguns erros e
-omissões.
+**Feedback:**
+
+O código demonstra compreensão de herança e composição, mas apresenta problemas em relação ao
+tratamento de exceções, à implementação de métodos abstratos e à consistência de nomes.
+
+**Pontos Positivos:**
+
+* **Herança:** A classe `Desenvolvedor` e `Gerente` herdam da classe abstrata `Funcionario`.
+* **Composição:** A classe `Funcionario` possui uma lista de projetos (`listaprojetos`),
+demonstrando composição.
+
+**Pontos a Melhorar:**
+
+* **Classe Abstrata:** A classe `Funcionario` não é declarada como abstrata, apesar de conter o
+método abstrato `calcular_bonus`.
+* **Método Abstrato:** O método `calcular_bonus` não é implementado na classe base `Funcionario`,
+mas sim nas subclasses `Desenvolvedor` e `Gerente`.
+* **Tratamento de Exceções:** O tratamento de exceções no construtor de `Funcionario` é incompleto,
+apenas verificando se o salário é negativo.
+* **Nomes:** A classe `Gerente` está escrita com letra minúscula, enquanto a classe `Desenvolvedor`
+está com letra maiúscula, o que não é consistente.
+
+**Sugestões:**
+
+1.  Declarar a classe `Funcionario` como abstrata.
+2.  Implementar o método `calcular_bonus` na classe `Funcionario` como um método abstrato.
+3.  Melhorar o tratamento de exceções no construtor de `Funcionario`, verificando outros parâmetros
+e lançando exceções mais específicas.
+4.  Manter a consistência na escrita de nomes de classes (maiúscula ou minúscula).
+
+
+
+**==================================================**
+📊 CORREÇÃO AUTOMÁTICA — Q1: 15 pontos (máx: 25)
+📊 CORREÇÃO AUTOMÁTICA — Q2: 45 pontos (máx: 75)
+**==================================================**
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

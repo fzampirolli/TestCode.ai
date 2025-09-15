@@ -2,67 +2,47 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentOne SurnameOne (fzampirolli)
-Data: 2025-09-13 22:05:28
-Nota Final (de 1 tentativa): 78.00 pontos
+Data: 2025-09-14 21:27:34
+Nota Final (de 1 tentativa): 80.00 pontos
 Total de Chamadas à API: 1
 
-### Questão 1: Singleton Pattern
+QUESTAO_Q1: 20/25 - O aluno implementou corretamente o padrão Singleton, com uma instância única e
+um método de acesso estático. No entanto, o construtor privado não é implementado corretamente, pois
+não é possível criar instâncias via new/() diretamente. Além disso, o código não segue a estrutura
+de classes e métodos sugerida no enunciado.
 
-#### Análise
+QUESTAO_Q2: 60/75 - O aluno implementou corretamente a herança com classe abstrata e métodos
+abstratos, bem como a composição/agregação com classe auxiliar. No entanto, o tratamento de exceções
+em construtores não é implementado corretamente, pois não há validação de parâmetros e lançamento de
+exceção apropriada. Além disso, o código não segue a estrutura de classes e métodos sugerida no
+enunciado.
 
-O código implementa o padrão Singleton com sucesso. Aqui estão os pontos positivos e negativos:
+Aqui estão os feedbacks detalhados para cada questão:
 
-*   **Pontos positivos:**
-    *   O código cria uma instância única da classe `CentralNotificacoes` usando o método
-`getInstance()`.
-    *   A instância é criada apenas quando não existe e é armazenada em um atributo estático.
-    *   O método `getInstance()` verifica se a instância já existe antes de criar uma nova.
-*   **Pontos negativos:**
-    *   O código não implementa o construtor privado, o que é um requisito do padrão Singleton.
-    *   O método `getInstance()` não é estático, o que pode causar problemas se o código for chamado
-de diferentes threads.
+**QUESTAO_Q1**
 
-#### Sugestões de melhoria
+* O aluno implementou corretamente o padrão Singleton, com uma instância única e um método de acesso
+estático. (✅ CORRETO)
+* O construtor privado não é implementado corretamente, pois não é possível criar instâncias via
+new/() diretamente. (❌ INCORRETO)
+* O código não segue a estrutura de classes e métodos sugerida no enunciado. (❌ INCORRETO)
 
-*   Adicione um construtor privado à classe `CentralNotificacoes` para evitar a criação de
-instâncias diretas.
-*   Faça o método `getInstance()` estático para garantir que a instância seja criada apenas uma vez.
+**QUESTAO_Q2**
 
-#### Nota
+* O aluno implementou corretamente a herança com classe abstrata e métodos abstratos. (✅ CORRETO)
+* O aluno implementou corretamente a composição/agregação com classe auxiliar. (✅ CORRETO)
+* O tratamento de exceções em construtores não é implementado corretamente, pois não há validação de
+parâmetros e lançamento de exceção apropriada. (❌ INCORRETO)
+* O código não segue a estrutura de classes e métodos sugerida no enunciado. (❌ INCORRETO)
 
-QUESTAO_Q1: 18/25 - O código implementa o padrão Singleton, mas falta o construtor privado e o
-método getInstance() não é estático.
+Para melhorar o código, o aluno pode seguir as seguintes sugestões:
 
-### Questão 2: Inheritance and Composition
-
-#### Análise
-
-O código implementa herança e composição com sucesso. Aqui estão os pontos positivos e negativos:
-
-*   **Pontos positivos:**
-    *   A classe `Curso` é uma classe abstrata com métodos abstratos `calcularCargaHoraria()`.
-    *   As subclasses `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os métodos
-abstratos.
-    *   A classe `Disciplina` é uma classe auxiliar que representa uma disciplina.
-    *   A classe `ValueError` é uma classe de exceção que é lançada quando a duração é inválida.
-*   **Pontos negativos:**
-    *   A classe `Curso` não tem um método para adicionar disciplinas.
-    *   A classe `Graduacao` e `PosGraduacao` não têm um método para calcular a carga horária
-baseada na duração.
-    *   A classe `Disciplina` não tem um método para calcular a carga horária.
-
-#### Sugestões de melhoria
-
-*   Adicione um método `adicionarDisciplina()` à classe `Curso` para permitir a adição de
-disciplinas.
-*   Adicione um método `calcularCargaHorariaBaseadaNaDuracao()` às subclasses `Graduacao` e
-`PosGraduacao` para calcular a carga horária baseada na duração.
-*   Adicione um método `calcularCargaHoraria()` à classe `Disciplina` para calcular a carga horária.
-
-#### Nota
-
-QUESTAO_Q2: 60/75 - O código implementa herança e composição, mas falta alguns métodos para calcular
-a carga horária e adicionar disciplinas.
+* Implementar corretamente o construtor privado para evitar a criação de instâncias via new/()
+diretamente.
+* Implementar corretamente o tratamento de exceções em construtores, com validação de parâmetros e
+lançamento de exceção apropriada.
+* Seguir a estrutura de classes e métodos sugerida no enunciado para melhorar a legibilidade e a
+manutenibilidade do código.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

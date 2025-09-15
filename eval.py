@@ -7,6 +7,9 @@ from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
 import pandas as pd
 import textwrap
+from scipy import stats
+from scipy.stats import ttest_rel, wilcoxon, shapiro, mannwhitneyu
+import warnings
 
 @dataclass
 class SubmissaoAluno:
@@ -227,6 +230,7 @@ class GerenciadorAvaliacao:
 
     def _consolidar_resultados_finais(self):
         # CORRIGIDO: Usa as variáveis e critérios corretos ('llm_attempts', 'selection_criteria')
+        print("-"*80)
         if self.llm_attempts > 1:
             self.logger.info(f"Consolidando resultados finais usando o critério: '{self.selection_criteria}'")
         else:
@@ -620,7 +624,8 @@ necessitar de revisão pelo professor.
                 linha.update({f"{q_id}_IA_Pontos": ia_p, f"{q_id}_Moodle_Pontos": moodle_p,
                               f"{q_id}_Moodle_Percent": sub.notas_moodle_percent.get(q_id, 0.0),
                               f"{q_id}_Diferenca": round(ia_p - moodle_p, 2)})
-            total_moodle = sum(sub.notas_moodle_pontos.values())
+            #total_moodle = sum(sub.notas_moodle_pontos.values())
+            total_moodle = sum(v for k, v in sub.notas_moodle_pontos.items() if k != 'Final')
             linha.update({'Nota_Final_Moodle': total_moodle, 'Diferenca_Total': round(sub.nota_final - total_moodle, 2)})
             dados.append(linha)
         if not dados: return self.logger.warning("Nenhum dado para gerar relatório.")
@@ -661,9 +666,9 @@ necessitar de revisão pelo professor.
         with pd.ExcelWriter(arquivo_excel, engine='openpyxl') as writer:
             df_reordenado.to_excel(writer, sheet_name='Comparação Completa', index=False)
             
-            stats_rows = [['=== GERAL ===', '']]
+            stats_rows = [['--- GERAL ---', '']]
             stats_rows.extend([[k.replace('_', ' ').title(), f"{v:.2f}" if isinstance(v, float) else str(v)] for k, v in stats.get('geral', {}).items()])
-            stats_rows.extend([['', ''], ['=== POR QUESTÃO ===', '']])
+            stats_rows.extend([['', ''], ['--- POR QUESTAO ---', '']])
             for q_id, q_stats in stats.get('questoes', {}).items():
                 stats_rows.append([f'--- {q_id} (peso: {q_stats.get("peso", "N/A")}) ---', ''])
                 stats_rows.extend([[f'  {k.replace("_", " ").title()}', f"{v:.2f}" if isinstance(v, float) else str(v)] for k,v in q_stats.items() if k != 'peso'])
@@ -671,28 +676,189 @@ necessitar de revisão pelo professor.
 
         self.logger.info(f"Relatório completo salvo em: {arquivo_excel}")
 
+    # def _exibir_relatorio_console(self, stats: Dict, questoes_config: Dict):
+    #     print("\n" + "="*80 + "\nRELATÓRIO COMPARATIVO CONSOLE: IA vs MOODLE\n" + "="*80)
+    #     geral = stats.get('geral')
+    #     if not geral or geral.get('total_alunos', 0) == 0:
+    #         return print("Nenhuma estatística para exibir.\n" + "="*80)
+    #     print("ESTATÍSTICAS GERAIS:")
+    #     print(f"   Alunos: {geral['total_alunos']} | Processados c/ Sucesso: {geral['processados']}")
+    #     print(f"   Média Geral IA: {geral['media_ia']:.2f} (DP: {geral['desvio_ia']:.2f})")
+    #     print(f"   Média Geral Moodle: {geral['media_moodle']:.2f} (DP: {geral['desvio_moodle']:.2f})")
+    #     print(f"   Correlação Geral (IA vs Moodle): {geral['correlacao_total']:.3f}")
+    #     print(f"   Diferença Média (IA - Moodle): {geral['diferenca_media']:.2f} pontos")
+    #     if stats.get('questoes'):
+    #         print(f"\nANÁLISE POR QUESTÃO:")
+    #         for q_id, q_stats in stats['questoes'].items():
+    #             nome = questoes_config.get(q_id, {}).get('name', '')[:30]
+    #             print(f"\n   -> {q_id} - {nome} (peso: {q_stats.get('peso', 'N/A')} pts):")
+    #             print(f"      Média IA: {q_stats['media_ia']:.2f} pts (DP: {q_stats['desvio_ia']:.2f})")
+    #             print(f"      Média Moodle: {q_stats['media_moodle']:.2f} pts ({q_stats['media_percent']:.1f}% de acerto em média)")
+    #             print(f"      Correlação: {q_stats['correlacao']:.3f}")
+    #             print(f"      Concordância (diferença <= 1.0 pt): {q_stats['concordancia']:.1f}% dos alunos")
+    #     print("\n" + "="*80)
+
+
     def _exibir_relatorio_console(self, stats: Dict, questoes_config: Dict):
-        print("\n" + "="*80 + "\nRELATÓRIO COMPARATIVO CONSOLE: IA vs MOODLE\n" + "="*80)
+        """
+        Exibe relatório comparativo detalhado com estatísticas avançadas
+        """
+        print("\n" + "="*90 + "\nRELATÓRIO COMPARATIVO AVANÇADO: IA vs MOODLE\n" + "="*90)
+        
         geral = stats.get('geral')
         if not geral or geral.get('total_alunos', 0) == 0:
-            return print("Nenhuma estatística para exibir.\n" + "="*80)
-        print("ESTATÍSTICAS GERAIS:")
-        print(f"   Alunos: {geral['total_alunos']} | Processados c/ Sucesso: {geral['processados']}")
-        print(f"   Média Geral IA: {geral['media_ia']:.2f} (DP: {geral['desvio_ia']:.2f})")
-        print(f"   Média Geral Moodle: {geral['media_moodle']:.2f} (DP: {geral['desvio_moodle']:.2f})")
-        print(f"   Correlação Geral (IA vs Moodle): {geral['correlacao_total']:.3f}")
-        print(f"   Diferença Média (IA - Moodle): {geral['diferenca_media']:.2f} pontos")
+            return print("Nenhuma estatística para exibir.\n" + "="*90)
+        
+        # ESTATÍSTICAS GERAIS
+        print("📊 ESTATÍSTICAS GERAIS:")
+        print(f" Alunos: {geral['total_alunos']} | Processados c/ Sucesso: {geral['processados']}")
+        print(f" Média Geral IA: {geral['media_ia']:.2f} (DP: {geral['desvio_ia']:.2f})")
+        print(f" Média Geral Moodle: {geral['media_moodle']:.2f} (DP: {geral['desvio_moodle']:.2f})")
+        print(f" Diferença Média (IA - Moodle): {geral['diferenca_media']:.2f} pontos")
+        
+        # TESTES ESTATÍSTICOS GERAIS
+        if 'notas_ia' in geral and 'notas_moodle' in geral:
+            self._exibir_testes_estatisticos_gerais(geral)
+        
+        print(f" Correlação Geral (Pearson): {geral['correlacao_total']:.3f}")
+        
+        # ESTATÍSTICAS ADICIONAIS
+        if 'notas_ia' in geral and 'notas_moodle' in geral:
+            self._exibir_estatisticas_adicionais_gerais(geral)
+        
+        # ANÁLISE POR QUESTÃO
         if stats.get('questoes'):
-            print(f"\nANÁLISE POR QUESTÃO:")
+            print(f"\n🔍 ANÁLISE DETALHADA POR QUESTÃO:")
+            print("-" * 90)
+            
             for q_id, q_stats in stats['questoes'].items():
-                nome = questoes_config.get(q_id, {}).get('name', '')[:30]
-                print(f"\n   -> {q_id} - {nome} (peso: {q_stats.get('peso', 'N/A')} pts):")
-                print(f"      Média IA: {q_stats['media_ia']:.2f} pts (DP: {q_stats['desvio_ia']:.2f})")
-                print(f"      Média Moodle: {q_stats['media_moodle']:.2f} pts ({q_stats['media_percent']:.1f}% de acerto em média)")
-                print(f"      Correlação: {q_stats['correlacao']:.3f}")
-                print(f"      Concordância (diferença <= 1.0 pt): {q_stats['concordancia']:.1f}% dos alunos")
-        print("\n" + "="*80)
+                nome = questoes_config.get(q_id, {}).get('name', '')[:35]
+                print(f"\n📝 {q_id} - {nome}")
+                print(f"   Peso: {q_stats.get('peso', 'N/A')} pts")
+                
+                # Estatísticas básicas
+                print(f"\n   📈 Estatísticas Descritivas:")
+                print(f"   ├─ Média IA: {q_stats['media_ia']:.2f} pts (DP: {q_stats['desvio_ia']:.2f})")
+                print(f"   ├─ Média Moodle: {q_stats['media_moodle']:.2f} pts ({q_stats['media_percent']:.1f}% de acerto)")
+                print(f"   └─ Diferença Média: {q_stats['media_ia'] - q_stats['media_moodle']:.2f} pts")
+                
+                # Testes estatísticos para questão específica
+                if 'notas_ia_questao' in q_stats and 'notas_moodle_questao' in q_stats:
+                    self._exibir_testes_questao(q_stats)
+                
+                # Correlação e concordância
+                print(f"\n   🔗 Associação e Concordância:")
+                print(f"   ├─ Correlação (Pearson): {q_stats['correlacao']:.3f}")
+                print(f"   └─ Concordância (≤1.0 pt): {q_stats['concordancia']:.1f}% dos alunos")
+                
+                print("   " + "-" * 60)
+        
+        print("\n" + "="*90)
+        self._exibir_legenda_interpretacao()
 
+    def _exibir_testes_estatisticos_gerais(self, geral: Dict):
+        """Exibe testes estatísticos para as notas gerais"""
+        notas_ia = np.array(geral['notas_ia'])
+        notas_moodle = np.array(geral['notas_moodle'])
+        diferencas = notas_ia - notas_moodle
+        
+        print(f"\n🧪 TESTES ESTATÍSTICOS GERAIS:")
+        
+        # Teste de normalidade das diferenças
+        try:
+            shapiro_stat, shapiro_p = shapiro(diferencas)
+            print(f" Normalidade das diferenças (Shapiro-Wilk): W={shapiro_stat:.3f}, p={shapiro_p:.4f}")
+            
+            # Escolha do teste baseada na normalidade
+            if shapiro_p > 0.05:
+                # Teste t pareado (paramétrico)
+                t_stat, t_p = ttest_rel(notas_ia, notas_moodle)
+                print(f" Teste t pareado: t={t_stat:.3f}, p={t_p:.4f} {'***' if t_p < 0.001 else '**' if t_p < 0.01 else '*' if t_p < 0.05 else 'ns'}")
+            else:
+                print(f" [Diferenças não seguem distribuição normal - usando teste não-paramétrico]")
+            
+            # Teste de Wilcoxon (não-paramétrico) - sempre executar
+            wilcox_stat, wilcox_p = wilcoxon(notas_ia, notas_moodle, alternative='two-sided')
+            print(f" Teste Wilcoxon (pareado): W={wilcox_stat:.1f}, p={wilcox_p:.4f} {'***' if wilcox_p < 0.001 else '**' if wilcox_p < 0.01 else '*' if wilcox_p < 0.05 else 'ns'}")
+            
+        except Exception as e:
+            print(f" [Erro nos testes estatísticos: {str(e)}]")
+
+    def _exibir_estatisticas_adicionais_gerais(self, geral: Dict):
+        """Exibe estatísticas adicionais para análise geral"""
+        notas_ia = np.array(geral['notas_ia'])
+        notas_moodle = np.array(geral['notas_moodle'])
+        diferencas = notas_ia - notas_moodle
+        
+        print(f"\n📊 ESTATÍSTICAS ADICIONAIS:")
+        
+        # Quartis e percentis
+        q1_ia, med_ia, q3_ia = np.percentile(notas_ia, [25, 50, 75])
+        q1_moodle, med_moodle, q3_moodle = np.percentile(notas_moodle, [25, 50, 75])
+        
+        print(f" Quartis IA (Q1|Med|Q3): {q1_ia:.1f} | {med_ia:.1f} | {q3_ia:.1f}")
+        print(f" Quartis Moodle (Q1|Med|Q3): {q1_moodle:.1f} | {med_moodle:.1f} | {q3_moodle:.1f}")
+        
+        # Análise das diferenças
+        print(f" Diferenças - Média: {np.mean(diferencas):.2f}, Mediana: {np.median(diferencas):.2f}")
+        print(f" Diferenças - Min: {np.min(diferencas):.2f}, Max: {np.max(diferencas):.2f}")
+        
+        # Porcentagem de casos onde IA > Moodle
+        ia_maior = np.sum(notas_ia > notas_moodle)
+        pct_ia_maior = (ia_maior / len(notas_ia)) * 100
+        print(f" IA superior ao Moodle: {ia_maior}/{len(notas_ia)} casos ({pct_ia_maior:.1f}%)")
+        
+        # Correlação de Spearman (não-paramétrica)
+        try:
+            spearman_corr, spearman_p = stats.spearmanr(notas_ia, notas_moodle)
+            print(f" Correlação Spearman: ρ={spearman_corr:.3f}, p={spearman_p:.4f}")
+        except Exception:
+            pass
+
+    def _exibir_testes_questao(self, q_stats: Dict):
+        """Exibe testes estatísticos para uma questão específica"""
+        notas_ia = np.array(q_stats['notas_ia_questao'])
+        notas_moodle = np.array(q_stats['notas_moodle_questao'])
+        
+        print(f"   🧪 Testes Estatísticos:")
+        
+        try:
+            # Remover pares com valores ausentes
+            mask = ~(np.isnan(notas_ia) | np.isnan(notas_moodle))
+            ia_clean = notas_ia[mask]
+            moodle_clean = notas_moodle[mask]
+            
+            if len(ia_clean) < 3:
+                print(f"   └─ [Dados insuficientes para testes estatísticos]")
+                return
+            
+            # Teste de Wilcoxon para questões individuais
+            if len(set(ia_clean - moodle_clean)) > 1:  # Verificar se há variação
+                wilcox_stat, wilcox_p = wilcoxon(ia_clean, moodle_clean, alternative='two-sided')
+                significancia = '***' if wilcox_p < 0.001 else '**' if wilcox_p < 0.01 else '*' if wilcox_p < 0.05 else 'ns'
+                print(f"   ├─ Wilcoxon: W={wilcox_stat:.1f}, p={wilcox_p:.4f} {significancia}")
+            else:
+                print(f"   ├─ [Sem variação nas diferenças - teste não aplicável]")
+            
+            # Correlação de Spearman
+            if len(set(ia_clean)) > 1 and len(set(moodle_clean)) > 1:
+                spearman_corr, spearman_p = stats.spearmanr(ia_clean, moodle_clean)
+                print(f"   └─ Correlação Spearman: ρ={spearman_corr:.3f}, p={spearman_p:.4f}")
+            
+        except Exception as e:
+            print(f"   └─ [Erro nos testes: {str(e)[:50]}...]")
+
+    def _exibir_legenda_interpretacao(self):
+        """Exibe legenda para interpretação dos resultados"""
+        print("\n📋 LEGENDA E INTERPRETAÇÃO:")
+        print("─" * 90)
+        print("Significância estatística: *** p<0.001, ** p<0.01, * p<0.05, ns = não significativo")
+        print("Correlação: |r| < 0.3 (fraca), 0.3-0.7 (moderada), > 0.7 (forte)")
+        print("Shapiro-Wilk: p>0.05 indica normalidade dos dados")
+        print("Teste t pareado: compara médias (dados normais)")
+        print("Wilcoxon: compara medianas (dados não-normais ou ordinais)")
+        print("─" * 90)
+        
 async def main():
     import argparse
     

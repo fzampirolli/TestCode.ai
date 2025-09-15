@@ -1,5 +1,5 @@
 # AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
-Data: 2025-09-13 22:05:26
+Data: 2025-09-14 21:27:32
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -21,7 +21,7 @@ FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
 - QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
 
 ---
-## Singleton Pattern (Q1) - Máximo: 25 pontos
+## Padrão Singleton (Q1) - Máximo: 25 pontos
 
 ### RUBRICA DE AVALIAÇÃO:
 ########################################################################
@@ -79,7 +79,8 @@ Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-```import java.io.*;
+```
+import java.io.*;
 import java.util.*;
 
 public class Q1{
@@ -87,7 +88,7 @@ public class Q1{
     public static class CentralNotificacoes{
         
         // o teste 4 me parece estar com as saidas erradas, ele pede 'alerta de bateria'
-        // mas o usuario nunca da input de alerta de bateria neste teste (ele da em outros)
+        // mas o usuario nunca da input de alerta de bateria
         
         static CentralNotificacoes instance = null;
         
@@ -138,7 +139,7 @@ public class Q1{
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
 
 ---
-## Inheritance and Composition (Q2) - Máximo: 75 pontos
+## Herança, Composição e Exceções (Q2) - Máximo: 75 pontos
 
 ### RUBRICA DE AVALIAÇÃO:
 ########################################################################
@@ -217,7 +218,8 @@ Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-```import java.io.*;
+```
+import java.io.*;
 import java.util.*;
 
 public class Q2 {

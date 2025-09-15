@@ -3,9 +3,9 @@ assessment:
   name: "Prova 1 - POO"
   date: "2025-09-12"
   course: "Programação Orientada a Objetos"
-  llm_attempts: 3 # Number of attempts to call the LLM API in case of failure
+  llm_attempts: 1 # Number of attempts to call the LLM API in case of failure
   # "highest" to keep the highest score among attempts
-  # "lowest" to keep the lowest score among attempts
+  # "lowest"  to keep the lowest score among attempts
   # "average" to keep the average score among attempts
   selection_criteria: "highest"
   detailed_feedback: true
@@ -208,8 +208,11 @@ api:
   provider: "groq"
   url: "https://api.groq.com/openai/v1/chat/completions"
   models:
+    - "gemma2-9b-it"
     - "llama-3.1-8b-instant"
+    - "llama-3.3-70b-versatile"
     - "meta-llama/llama-4-maverick-17b-128e-instruct"
+    - "meta-llama/llama-4-scout-17b-16e-instruct"  
   max_tokens: 4000
   temperature: 0.1
   timeout: 120

@@ -1,5 +1,5 @@
 # AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
-Data: 2025-09-13 22:05:26
+Data: 2025-09-14 21:27:32
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -21,7 +21,7 @@ FORMATO DE SAÍDA OBRIGATÓRIO DA NOTA DE CADA QUESTÃO:
 - QUESTAO_[ID]: [NOTA]/[MAXIMO] - [comentário breve]
 
 ---
-## Singleton Pattern (Q1) - Máximo: 25 pontos
+## Padrão Singleton (Q1) - Máximo: 25 pontos
 
 ### RUBRICA DE AVALIAÇÃO:
 ########################################################################
@@ -79,7 +79,8 @@ Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-```import sys
+```
+import sys
 class SomSistema:
     
     _instancia = None
@@ -112,7 +113,6 @@ comando= input().strip()
 if comando == "tocar_som":
     sistema.tocar_som(entrada)
 elif comando == "som_atual":
-    sistema.tocar_som(entrada)
     sistema.som_atual()
 elif comando == "nova_instancia":
     sistema = SomSistema()
@@ -127,7 +127,7 @@ else:
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
 
 ---
-## Inheritance and Composition (Q2) - Máximo: 75 pontos
+## Herança, Composição e Exceções (Q2) - Máximo: 75 pontos
 
 ### RUBRICA DE AVALIAÇÃO:
 ########################################################################
@@ -206,73 +206,60 @@ Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
-```import sys
+```
+import sys
 from abc import ABC, abstractmethod
 
-class Funcionario(ABC):
+class Funcionario:
     
-    def __init__ (self, nome, salario):
+    def __init__(self, nome, salario):
         
         self.nome = nome
-        self.salario = float(salario)
+        self.salario = salario
         self.listaprojetos = []
         
-        if salario < 0:
+        if salario<0:
             raise ValueError("Salário inválido")
         
     @abstractmethod
     def calcular_bonus(self):
         pass
     
-    def adicionar_projeto(self, projeto):
-        self.listaprojetos.append(projeto.nome)
-        
+    def adicionar_projeto(self, projeto)
+    
     
 class Desenvolvedor(Funcionario):
     
     def calcular_bonus(self):
         return self.salario*0.11
     
-class Gerente(Funcionario):
+class Gerente(funcionario):
     
     def calcular_bonus(self):
         return self.salario*0.21
         
 class Projeto:
     
-    def __init__ (self, nome):
+    def __init__(self):
         self.nome = nome
         
-try: 
-    entrada = input().split("; ")
-    nome = entrada[0].strip()
-    salario = entrada[1].strip()
-    tipo = entrada[2].strip().lower()
+entrada = input().split("; ")
+nome = entrada[0].strip()
+salario = entrada[1].strip()
+tipo = entrada[2].strip().lower
 
-    if tipo == "Gerente":
-        funcionario = Gerente(nome,salario)
-    elif tipo == "Desenvolvedor":
-        funcionario = Desenvolvedor(nome, salario)
-    else:
-        print(f"Funcionario não encontrado")
+if tipo == "Gerente":
+    funcionario = Gerente(nome,salario)
+elif tipo == "Desenvolvedor":
+    funcionario = Desenvolvedor(nome, salario)
 
-    linha_projetos = input()
-    if linha_projetos:
-        nomes = linha_projetos.split("; ")
-        for nomes_eq in nomes:
-            projeto = Projeto(nomes_eq.strip())
-            funcionario.adicionar_projeto(projeto)
+linha_projetos = input().strip()
+if linha_projetos:
+    nomes = linha_projetos.split("; ")
+    for nomes_eq in nomes:
+        projeto = Projeto(nomes_eq.strip())
         
-    print(f"{tipo} criado")
-    print(f"Bonus: {funcionario.calcular_bonus()}")
-
-    if funcionario.listaprojetos:
-        print(f"Projetos: {'; '.join(funcionario.listaprojetos)}")
-        
-except ValueError as e:
-    print(e)
-except Exception as e:
-    print(f"Erro: {e}")
+    
         
     
     

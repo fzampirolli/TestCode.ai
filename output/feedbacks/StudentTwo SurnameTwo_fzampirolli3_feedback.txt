@@ -2,113 +2,54 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentTwo SurnameTwo (fzampirolli3)
-Data: 2025-09-13 22:05:28
-Nota Final (de 1 tentativa): 95.00 pontos
+Data: 2025-09-14 21:27:34
+Nota Final (de 1 tentativa): 75.00 pontos
 Total de Chamadas à API: 1
 
-## Análise da Questão 1 - Singleton Pattern
+## Análise do Código do Aluno
 
-### Avaliação do Código
+**QUESTAO_Q1: 20/25 -** O código implementa o padrão Singleton, mas com algumas falhas.
 
-O código submetido pelo aluno implementa uma classe `CentralNotificacoes` que segue o padrão
-Singleton. Vamos avaliar se ele atende aos critérios da rubrica fornecida.
+* ✅ **INSTÂNCIA ÚNICA:** O atributo `_instancia` estático e a verificação na criação de instâncias
+garantem apenas uma instância.
+* ✅ **MÉTODO DE ACESSO:** O método `__new__` atua como um método de acesso, retornando sempre a
+mesma instância.
+* ⚠️ **CONSTRUTOR PRIVADO/PROTEGIDO:** O construtor não é explicitamente privado, mas a
+implementação do `__new__` impede a criação direta de instâncias.
+* ✅ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe.
 
-#### 1. INSTÂNCIA ÚNICA
-- ✅ CORRETO: O código utiliza o método `__new__` para controlar a criação de instâncias, garantindo
-que apenas uma instância seja criada. O atributo `_instancia` é usado para armazenar a instância
-única.
+**Sugestões de Melhoria:**
 
-#### 2. MÉTODO DE ACESSO
-- ✅ CORRETO: Embora não seja um método estático explícito como `getInstance()`, o código utiliza
-`__new__` para retornar a instância única, o que é uma forma válida em Python de implementar o
-padrão Singleton.
+* Para maior clareza, o construtor poderia ser privado (`__init__`) e o método `__new__` poderia ser
+mais explícito na verificação da instância.
 
-#### 3. CONSTRUTOR PRIVADO/PROTEGIDO
-- ✅ CORRETO: O construtor (`__new__`) é controlado de forma que não permite a criação direta de
-múltiplas instâncias. A lógica dentro de `__new__` impede a criação de uma nova instância se ela já
-existir.
+**QUESTAO_Q2: 55/75 -** O código demonstra compreensão dos conceitos de herança, composição e
+exceções, mas com algumas falhas.
 
-#### 4. EXECUÇÃO CORRETA
-- ✅ CORRETO: O código executa sem erros de sintaxe. A lógica parece coerente e funcional, imprimindo
-mensagens apropriadas conforme o estado da instância.
+* ✅ **CLASSE ABSTRATA BASE:** A classe `Curso` é abstrata e possui os atributos básicos.
+* ✅ **MÉTODO ABSTRATO:** O método `calcular_carga_horaria` é abstrato e deve ser implementado pelas
+subclasses.
+* ✅ **HERANÇA CORRETA:** As classes `Graduacao` e `PosGraduacao` herdam de `Curso` e implementam o
+método abstrato.
+* ✅ **CLASSE AUXILIAR:** A classe `Disciplina` é uma classe auxiliar bem definida.
+* ⚠️ **COMPOSIÇÃO/AGREGAÇÃO:** A composição/agregação não é implementada de forma ideal. A classe
+`Curso` possui uma lista de nomes de disciplinas (`self.disciplinas`), mas não objetos `Disciplina`.
+* ✅ **TRATAMENTO DE EXCEÇÕES:** O construtor de `Curso` trata a exceção de `duracao` negativa.
+* ✅ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe.
 
-### Pontos Positivos e Áreas de Melhoria
-- **Pontos Positivos**: Implementação correta do padrão Singleton usando `__new__`, garantindo
-instância única e controle de acesso.
-- **Áreas de Melhoria**:
-  - O método `__new__` não é thread-safe. Em um ambiente multithreading, isso poderia levar à
-criação de múltiplas instâncias.
-  - Poderia ser útil adicionar um método estático para obter a instância, além de `__new__`, para
-seguir mais de perto o padrão Singleton tradicional.
+**Sugestões de Melhoria:**
 
-### Nota
-O código atende a todos os critérios obrigatórios, mas falta thread safety. Considerando o contexto
-da prova e o que foi pedido, o código está correto.
+* Implementar a composição/agregação de forma mais consistente, armazenando objetos `Disciplina` na
+lista `self.disciplinas` em vez de apenas nomes.
+* Adicionar mais testes para verificar a funcionalidade do código.
 
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
-==================================================
-QUESTAO_Q1: 25/25 - Implementação correta do padrão Singleton.
 
----
-
-## Análise da Questão 2 - Inheritance and Composition
-
-### Avaliação do Código
-
-O código submetido implementa classes relacionadas a cursos, utilizando herança e composição. Vamos
-avaliar se ele atende aos critérios da rubrica.
-
-#### 1. CLASSE ABSTRATA BASE (10 pontos)
-- ✅ CORRETO: A classe `Curso` é abstrata, definida com `ABC` e contém atributos básicos (`nome`,
-`duracao`, `disciplinas`).
-
-#### 2. MÉTODO ABSTRATO (10 pontos)
-- ✅ CORRETO: O método `calcular_carga_horaria` é abstrato e definido corretamente em `Curso`. É
-implementado em ambas as subclasses `Graduacao` e `PosGraduacao`.
-
-#### 3. HERANÇA CORRETA (10 pontos)
-- ✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam de `Curso`, implementam o método
-abstrato e adicionam funcionalidades específicas.
-
-#### 4. CLASSE AUXILIAR (10 pontos)
-- ✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida, representando um conceito
-coerente.
-
-#### 5. COMPOSIÇÃO/AGREGAÇÃO (10 pontos)
-- ⚠️ PARCIALMENTE CORRETO: A classe `Curso` contém uma lista de disciplinas. No entanto, a lista
-armazena apenas os nomes das disciplinas (`disciplina.nome`), e não objetos `Disciplina`. Isso reduz
-a utilidade da composição.
-
-#### 6. TRATAMENTO DE EXCEÇÕES (10 pontos)
-- ✅ CORRETO: O construtor de `Curso` verifica se `duracao` é negativo e lança um `ValueError` se
-verdadeiro.
-
-#### 7. EXECUÇÃO CORRETA (15 pontos)
-- ✅ CORRETO: O código funciona sem erros de sintaxe e a lógica parece coerente.
-
-### Pontos Positivos e Áreas de Melhoria
-- **Pontos Positivos**: Implementação correta de classe abstrata, método abstrato, e tratamento de
-exceções.
-- **Áreas de Melhoria**:
-  - A composição poderia ser melhorada armazenando objetos `Disciplina` em vez de apenas seus nomes.
-  - Poderia haver mais validação nos construtores (por exemplo, verificar se `nome` não é vazio).
-
-### Pontuação
-- Classe Abstrata: 10/10
-- Método Abstrato: 10/10
-- Herança: 10/10
-- Classe Auxiliar: 10/10
-- Composição/Agregação: 5/10 (parcialmente correto)
-- Tratamento de Exceções: 10/10
-- Execução Correta: 15/15
-
-Total: 70/75
 
 ==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 70 pontos (máx:75)
+📊 CORREÇÃO AUTOMÁTICA — Q1: 20 pontos (máx: 25)
+📊 CORREÇÃO AUTOMÁTICA — Q2: 55 pontos (máx: 75)
 ==================================================
-QUESTAO_Q2: 70/75 - Implementação quase perfeita, com pequena falha na composição.
+
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode
