@@ -27,7 +27,7 @@ import textwrap
 import warnings
 
 @dataclass
-class SubmissaoAluno:
+class SubmissaoEstudante:
     nome: str
     login: str
     pasta: Path
@@ -46,7 +46,7 @@ class GerenciadorAvaliacao:
     def __init__(self, config_path: str = "config/config.yaml"):
         self.config = self._carregar_config(config_path)
         self._configurar_logging()
-        self.submissoes: List[SubmissaoAluno] = []
+        self.submissoes: List[SubmissaoEstudante] = []
         self.state_file = Path("output/processamento_state.pkl")
         self.retry_queue_file = Path("output/retry_queue.json")
         
@@ -151,24 +151,24 @@ class GerenciadorAvaliacao:
                 self.logger.warning(f"Erro ao carregar estado: {e}")
         return False
     
-    def descobrir_submissoes(self, pasta_base: str) -> List[SubmissaoAluno]:
+    def descobrir_submissoes(self, pasta_base: str) -> List[SubmissaoEstudante]:
         self.logger.info(f"Descobrindo submissões em {pasta_base}")
         
         pasta_base = Path(pasta_base)
         submissoes = []
 
-        for pasta_aluno in sorted(pasta_base.iterdir(), key=lambda x: x.name.lower()):
-            if not pasta_aluno.is_dir():
+        for pasta_estudante in sorted(pasta_base.iterdir(), key=lambda x: x.name.lower()):
+            if not pasta_estudante.is_dir():
                 continue
                 
-            nome_completo = pasta_aluno.name
+            nome_completo = pasta_estudante.name
             if " - " not in nome_completo:
                 self.logger.warning(f"Pasta ignorada (formato inválido): {nome_completo}")
                 continue
             
             nome, login = nome_completo.rsplit(" - ", 1)
             
-            submissao_dir = self._encontrar_submissao_recente(pasta_aluno)
+            submissao_dir = self._encontrar_submissao_recente(pasta_estudante)
             if not submissao_dir:
                 self.logger.warning(f"Nenhuma submissão encontrada para {nome}")
                 continue
@@ -177,10 +177,10 @@ class GerenciadorAvaliacao:
             if not arquivos:
                 self.logger.warning(f"Arquivos de questão não encontrados para {nome}")
                 continue
-            
-            percentuais, pontos = self.extrair_notas_moodle(pasta_aluno)
-            
-            submissao = SubmissaoAluno(
+
+            percentuais, pontos = self.extrair_notas_moodle(pasta_estudante)
+
+            submissao = SubmissaoEstudante(
                 nome=nome,
                 login=login,
                 pasta=submissao_dir,
@@ -194,8 +194,8 @@ class GerenciadorAvaliacao:
         self.submissoes = submissoes
         return submissoes
 
-    def _encontrar_submissao_recente(self, pasta_aluno: Path) -> Optional[Path]:
-        submissoes = [d for d in pasta_aluno.iterdir()
+    def _encontrar_submissao_recente(self, pasta_estudante: Path) -> Optional[Path]:
+        submissoes = [d for d in pasta_estudante.iterdir()
                      if d.is_dir() and not d.name.endswith('.ceg')]
         if not submissoes:
             return None
@@ -222,7 +222,7 @@ class GerenciadorAvaliacao:
 
     async def processar_submissoes(self):
         # CORRIGIDO: Usa a variável self.llm_attempts
-        self.logger.info(f"Iniciando processamento. Serão feitas {self.llm_attempts} tentativa(s) de avaliação por aluno.")
+        self.logger.info(f"Iniciando processamento. Serão feitas {self.llm_attempts} tentativa(s) de avaliação por estudante.")
 
         for i in range(self.llm_attempts):
             tentativa_num = i + 1
@@ -288,7 +288,7 @@ class GerenciadorAvaliacao:
             log_detalhe = f"(critério: {self.selection_criteria})" if self.llm_attempts > 1 else f"(de 1 tentativa)"
             self.logger.info(f"Nota final para {submissao.nome}: {submissao.nota_final:.2f} {log_detalhe}")
 
-    async def _processar_rodada_adaptativa(self, submissoes_da_rodada: List[SubmissaoAluno], rodada: int):
+    async def _processar_rodada_adaptativa(self, submissoes_da_rodada: List[SubmissaoEstudante], rodada: int):
         threads = self.config.get('processing', {}).get('parallel_threads', 4)
         delay_base = 2
         
@@ -302,7 +302,7 @@ class GerenciadorAvaliacao:
 
     async def _processar_submissao_com_delay(self, session: aiohttp.ClientSession,
                                            semaforo: asyncio.Semaphore,
-                                           submissao: SubmissaoAluno,
+                                           submissao: SubmissaoEstudante,
                                            delay: int, rodada: int):
         if delay > 0:
             await asyncio.sleep(delay)
@@ -391,7 +391,7 @@ class GerenciadorAvaliacao:
         
         return None, prompt
 
-    def _montar_prompt(self, submissao: SubmissaoAluno) -> str:
+    def _montar_prompt(self, submissao: SubmissaoEstudante) -> str:
         """
         Monta o prompt para a LLM de forma dinâmica, lendo todos os templates
         e rubricas do arquivo de configuração YAML.
@@ -422,10 +422,10 @@ class GerenciadorAvaliacao:
         for questao in self.config.get('questions', []):
             questao_id = questao.get('id')
             
-            # Processa a questão apenas se o aluno enviou o arquivo correspondente
+            # Processa a questão apenas se o estudante enviou o arquivo correspondente
             if questao_id and questao_id in submissao.arquivos:
                 try:
-                    # Lê o código do aluno do arquivo
+                    # Lê o código do estudante do arquivo
                     with open(submissao.arquivos[questao_id], 'r', encoding='utf-8', errors='ignore') as f:
                         codigo = f.read()
 
@@ -447,7 +447,7 @@ class GerenciadorAvaliacao:
         
         return '\n'.join(prompt_parts)
 
-    def _extrair_notas_questoes(self, feedback: str, submissao: SubmissaoAluno) -> Dict[str, float]:
+    def _extrair_notas_questoes(self, feedback: str, submissao: SubmissaoEstudante) -> Dict[str, float]:
         notas = {}
         padrao_questao = r'QUESTAO_(\w+):\s*(\d+(?:\.\d+)?)/(\d+(?:\.\d+)?)'
         matches = re.findall(padrao_questao, feedback, re.IGNORECASE | re.MULTILINE)
@@ -462,8 +462,8 @@ class GerenciadorAvaliacao:
                 self.logger.warning(f"Erro ao converter nota {questao_id}: {e}")
         return notas
     
-    def extrair_notas_moodle(self, pasta_aluno: Path) -> Tuple[Dict[str, float], Dict[str, float]]:
-        arquivo_execution = self._encontrar_arquivo_execution(pasta_aluno)
+    def extrair_notas_moodle(self, pasta_estudante: Path) -> Tuple[Dict[str, float], Dict[str, float]]:
+        arquivo_execution = self._encontrar_arquivo_execution(pasta_estudante)
         if not arquivo_execution or not arquivo_execution.exists():
             return {}, {}
 
@@ -604,7 +604,7 @@ class GerenciadorAvaliacao:
                 f.write(f"""
 FEEDBACK DA AVALIAÇÃO - {self.config['assessment']['name']}
 ═══════════════════════════════════════════════════════════
-Aluno: {submissao.nome} ({submissao.login})
+Estudante: {submissao.nome} ({submissao.login})
 Data: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 {titulo_nota}
 Total de Chamadas à API: {submissao.tentativas_api}
@@ -651,7 +651,7 @@ necessitar de revisão pelo professor.
 
     def _calcular_estatisticas_detalhadas(self, df: pd.DataFrame, questoes_config: Dict) -> Dict:
         df.fillna(0, inplace=True)
-        stats = {'geral': {'total_alunos': len(df), 'processados': len(df[df['Status'] == 'concluido']),
+        stats = {'geral': {'total_estudantes': len(df), 'processados': len(df[df['Status'] == 'concluido']),
                  'media_ia': df['Nota_Final_IA'].mean(), 'media_moodle': df['Nota_Final_Moodle'].mean(),
                  'desvio_ia': df['Nota_Final_IA'].std(), 'desvio_moodle': df['Nota_Final_Moodle'].std(),
                  'correlacao_total': df['Nota_Final_IA'].corr(df['Nota_Final_Moodle']) if len(df) > 1 else 0.0,
@@ -691,29 +691,6 @@ necessitar de revisão pelo professor.
 
         self.logger.info(f"Relatório completo salvo em: {arquivo_excel}")
 
-    # def _exibir_relatorio_console(self, stats: Dict, questoes_config: Dict):
-    #     print("\n" + "="*80 + "\nRELATÓRIO COMPARATIVO CONSOLE: IA vs MOODLE\n" + "="*80)
-    #     geral = stats.get('geral')
-    #     if not geral or geral.get('total_alunos', 0) == 0:
-    #         return print("Nenhuma estatística para exibir.\n" + "="*80)
-    #     print("ESTATÍSTICAS GERAIS:")
-    #     print(f"   Alunos: {geral['total_alunos']} | Processados c/ Sucesso: {geral['processados']}")
-    #     print(f"   Média Geral IA: {geral['media_ia']:.2f} (DP: {geral['desvio_ia']:.2f})")
-    #     print(f"   Média Geral Moodle: {geral['media_moodle']:.2f} (DP: {geral['desvio_moodle']:.2f})")
-    #     print(f"   Correlação Geral (IA vs Moodle): {geral['correlacao_total']:.3f}")
-    #     print(f"   Diferença Média (IA - Moodle): {geral['diferenca_media']:.2f} pontos")
-    #     if stats.get('questoes'):
-    #         print(f"\nANÁLISE POR QUESTÃO:")
-    #         for q_id, q_stats in stats['questoes'].items():
-    #             nome = questoes_config.get(q_id, {}).get('name', '')[:30]
-    #             print(f"\n   -> {q_id} - {nome} (peso: {q_stats.get('peso', 'N/A')} pts):")
-    #             print(f"      Média IA: {q_stats['media_ia']:.2f} pts (DP: {q_stats['desvio_ia']:.2f})")
-    #             print(f"      Média Moodle: {q_stats['media_moodle']:.2f} pts ({q_stats['media_percent']:.1f}% de acerto em média)")
-    #             print(f"      Correlação: {q_stats['correlacao']:.3f}")
-    #             print(f"      Concordância (diferença <= 1.0 pt): {q_stats['concordancia']:.1f}% dos alunos")
-    #     print("\n" + "="*80)
-
-
     def _exibir_relatorio_console(self, stats: Dict, questoes_config: Dict):
         """
         Exibe relatório comparativo detalhado com estatísticas avançadas
@@ -721,12 +698,12 @@ necessitar de revisão pelo professor.
         print("\n" + "="*90 + "\nRELATÓRIO COMPARATIVO AVANÇADO: IA vs MOODLE\n" + "="*90)
         
         geral = stats.get('geral')
-        if not geral or geral.get('total_alunos', 0) == 0:
+        if not geral or geral.get('total_estudantes', 0) == 0:
             return print("Nenhuma estatística para exibir.\n" + "="*90)
         
         # ESTATÍSTICAS GERAIS
         print("📊 ESTATÍSTICAS GERAIS:")
-        print(f" Alunos: {geral['total_alunos']} | Processados c/ Sucesso: {geral['processados']}")
+        print(f" Estudantes: {geral['total_estudantes']} | Processados c/ Sucesso: {geral['processados']}")
         print(f" Média Geral IA: {geral['media_ia']:.2f} (DP: {geral['desvio_ia']:.2f})")
         print(f" Média Geral Moodle: {geral['media_moodle']:.2f} (DP: {geral['desvio_moodle']:.2f})")
         print(f" Diferença Média (IA - Moodle): {geral['diferenca_media']:.2f} pontos")
@@ -764,7 +741,7 @@ necessitar de revisão pelo professor.
                 # Correlação e concordância
                 print(f"\n   🔗 Associação e Concordância:")
                 print(f"   ├─ Correlação (Pearson): {q_stats['correlacao']:.3f}")
-                print(f"   └─ Concordância (≤1.0 pt): {q_stats['concordancia']:.1f}% dos alunos")
+                print(f"   └─ Concordância (≤1.0 pt): {q_stats['concordancia']:.1f}% dos estudantes")
                 
                 print("   " + "-" * 60)
         

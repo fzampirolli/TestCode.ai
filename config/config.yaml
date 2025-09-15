@@ -3,7 +3,7 @@ assessment:
   name: "Prova 1 - POO"
   date: "2025-09-12"
   course: "Programação Orientada a Objetos"
-  llm_attempts: 1 # Number of attempts to call the LLM API in case of failure
+  llm_attempts: 3 # Number of attempts to call the LLM API in case of failure
   # "highest" to keep the highest score among attempts
   # "lowest"  to keep the lowest score among attempts
   # "average" to keep the average score among attempts

@@ -1,79 +1,97 @@
 
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
-Aluno: StudentThree SurnameThree (fzampirolli2)
-Data: 2025-09-15 07:35:52
-Nota Final (de 1 tentativa): 63.00 pontos
-Total de Chamadas à API: 1
+Estudante: StudentThree SurnameThree (fzampirolli2)
+Data: 2025-09-15 08:49:42
+Nota Final (HIGHEST de 3 tentativas): 60.00 pontos
+Total de Chamadas à API: 3
 
-## Análise do Código do Aluno
+Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
+detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
 
-**QUESTAO_Q1: 18/25 -** O código implementa o padrão Singleton, mas com algumas falhas.
+### Questão 1: Padrão Singleton
 
-**Pontos Positivos:**
+#### Análise do Código:
 
-* **Instância Única:** O código utiliza um atributo estático `_instancia` para armazenar a única
-instância da classe `SomSistema`.
-* **Método de Acesso:** O método `__new__` é utilizado para garantir que apenas uma instância seja
-criada e para retornar a instância existente.
+O código submetido implementa uma classe `SomSistema` que parece seguir o padrão Singleton. Aqui
+está a análise detalhada com base nos critérios fornecidos:
 
-**Pontos a Melhorar:**
+1. **Instância Única**:
+   - ✅ CORRETO: A classe utiliza um atributo estático/privado `_instancia` para armazenar a
+instância única.
+   - ✅ CORRETO: Verifica se a instância já existe antes de criar uma nova no método `__new__`.
 
-* **Construtor Privado:** O construtor da classe `SomSistema` não é privado.
-* **Execução Correta:** O código apresenta um erro de sintaxe na linha `elif comando ==
-"nova_instancia":` que deveria ser `elif comando == "nova_instancia":`.
+2. **Método de Acesso**:
+   - ✅ CORRETO: O método `__new__` atua como um método de acesso que retorna sempre a mesma
+instância, criando-a apenas se não existir.
 
-**Sugestões de Melhoria:**
+3. **Construtor Privado/Protegido**:
+   - ✅ CORRETO: O método `__new__` é utilizado de forma controlada, o que equivale a um construtor
+protegido, impedindo a instanciação direta via `new`.
 
-1.  **Tornar o construtor privado:**  Para garantir que a instância seja criada apenas através do
-método `__new__`, o construtor da classe `SomSistema` deve ser privado.
+4. **Execução Correta**:
+   - ⚠️ PARCIALMENTE CORRETO: O código apresenta sintaxe válida em Python e a lógica parece
+coerente. No entanto, não foram testadas todas as possíveis condições de execução.
 
-2.  **Corrigir o erro de sintaxe:**  A linha `elif comando == "nova_instancia":` deve ser corrigida
-para `elif comando == "nova_instancia":`.
+#### Nota:
+- O aluno implementou corretamente os principais aspectos do padrão Singleton.
+- A nota é **20 pontos** porque, embora a implementação esteja quase perfeita, falta uma avaliação
+completa de todas as condições de execução.
 
-**QUESTAO_Q2: 45/75 -** O código demonstra compreensão dos conceitos de herança, composição e
-exceções, mas apresenta algumas falhas na implementação.
+#### Formato de Saída:
+```
+QUESTAO_Q1: 20/25 - Implementação quase perfeita do padrão Singleton, mas necessita de testes mais
+abrangentes.
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 20 pontos (máx:25)
+==================================================
+```
 
-**Pontos Positivos:**
+### Questão 2: Herança, Composição e Exceções
 
-* **Classe Abstrata:** A classe `Funcionario` é definida como abstrata e possui um método abstrato
-`calcular_bonus`.
-* **Herança:** As classes `Desenvolvedor` e `Gerente` herdam da classe `Funcionario` e implementam o
-método `calcular_bonus`.
-* **Classe Auxiliar:** A classe `Projeto` é definida como uma classe auxiliar.
-* **Tratamento de Exceções:** O construtor da classe `Funcionario` valida o salário e lança uma
-exceção `ValueError` caso seja inválido.
+#### Análise do Código:
 
-**Pontos a Melhorar:**
+O código submetido tenta implementar herança com uma classe abstrata, composição com uma classe
+auxiliar e tratamento de exceções. Aqui está a análise:
 
-* **Método Abstrato:** O método `adicionar_projeto` na classe `Funcionario` não é abstrato, apesar
-de ser um método que deveria ser implementado pelas subclasses.
-* **Composição/Agregação:** A composição/agregação entre a classe `Funcionario` e a classe `Projeto`
-não é implementada de forma funcional. A classe `Funcionario` não possui uma lista de projetos.
-* **Execução Correta:** O código apresenta alguns erros de sintaxe e lógica.
+1. **Classe Abstrata Base**:
+   - ✅ CORRETO: A classe `Funcionario` é definida como uma classe base com atributos.
 
-**Sugestões de Melhoria:**
+2. **Método Abstrato**:
+   - ✅ CORRETO: O método `calcular_bonus` é declarado como abstrato e parece ser implementado
+corretamente nas subclasses.
 
-1.  **Tornar `adicionar_projeto` abstrato:**  O método `adicionar_projeto` deve ser declarado como
-abstrato na classe `Funcionario`.
-2.  **Implementar composição/agregação:** A classe `Funcionario` deve possuir uma lista de projetos,
-e o método `adicionar_projeto` deve ser implementado para adicionar projetos a essa lista.
-3.  **Corrigir erros de sintaxe e lógica:**  O código precisa ser corrigido para evitar erros de
-sintaxe e lógica.
+3. **Herança Correta**:
+   - ✅ CORRETO: As classes `Desenvolvedor` e `Gerente` herdam de `Funcionario`.
+   - ⚠️ PARCIALMENTE CORRETO: A classe `Gerente` apresenta um pequeno erro de sintaxe (`funcionario`
+deve ser `Funcionario`).
 
+4. **Classe Auxiliar**:
+   - ⚠️ PARCIALMENTE CORRETO: A classe `Projeto` existe, mas seu construtor apresenta um erro
+(`nome` não é definido).
 
-**Observações:**
+5. **Composição/Agregação**:
+   - ⚠️ PARCIALMENTE CORRETO: A classe `Funcionario` tem uma lista de projetos, mas a implementação
+da composição está incompleta.
 
-* O código apresentado pelo aluno demonstra um bom entendimento dos conceitos de POO, mas precisa
-ser aprimorado em termos de implementação e correção de erros.
-* É importante que o aluno revise a sintaxe e a lógica do código para garantir que ele seja
-executado corretamente.
-* O aluno deve prestar atenção aos detalhes da implementação, como a utilização de métodos abstratos
-e a composição/agregação de objetos.
+6. **Tratamento de Exceções**:
+   - ✅ CORRETO: O tratamento de exceção no construtor de `Funcionario` para salário inválido é
+adequado.
 
+7. **Execução Correta**:
+   - ⚠️ PARCIALMENTE CORRETO: O código apresenta erros de sintaxe e lógica.
 
+#### Nota:
+- O aluno implementou parcialmente os conceitos solicitados.
+- A nota é **40 pontos** devido às várias falhas na implementação.
 
-
+#### Formato de Saída:
+```
+QUESTAO_Q2: 40/75 - Implementação parcial com vários erros de sintaxe e lógica.
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: 40 pontos (máx:75)
+==================================================
+```
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

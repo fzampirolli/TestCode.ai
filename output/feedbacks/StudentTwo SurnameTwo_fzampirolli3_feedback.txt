@@ -1,97 +1,96 @@
 
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
-Aluno: StudentTwo SurnameTwo (fzampirolli3)
-Data: 2025-09-15 07:35:52
-Nota Final (de 1 tentativa): 95.00 pontos
-Total de Chamadas à API: 1
+Estudante: StudentTwo SurnameTwo (fzampirolli3)
+Data: 2025-09-15 08:49:42
+Nota Final (HIGHEST de 3 tentativas): 95.00 pontos
+Total de Chamadas à API: 3
 
-### Questão 1: Padrão Singleton
+Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
+detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
 
-#### Análise do Código:
+## Análise da Questão 1: Padrão Singleton
 
-O código submetido implementa uma classe `CentralNotificacoes` que parece seguir o padrão Singleton.
-Aqui está a análise detalhada com base nos critérios fornecidos:
+O código submetido pelo aluno implementa o padrão Singleton, que é um padrão de projeto de software
+que garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global a essa
+instância.
 
-1. **Instância Única**:
-   - ✅ CORRETO: A classe utiliza um atributo estático/privado `_instancia` para armazenar a
-instância única.
-   - ✅ CORRETO: Verifica se a instância já existe antes de criar uma nova no método `__new__`.
+### 1. INSTÂNCIA ÚNICA
 
-2. **Método de Acesso**:
-   - ✅ CORRETO: O método `__new__` atua como um método de acesso que retorna sempre a mesma
-instância, criando-a apenas se não existir.
+✅ CORRETO: O código tem um mecanismo para garantir que apenas uma instância da classe
+`CentralNotificacoes` seja criada. Isso é feito através do uso de um atributo estático `_instancia`
+que é inicializado como `None` e é verificado antes de criar uma nova instância.
 
-3. **Construtor Privado/Protegido**:
-   - ✅ CORRETO: O método `__new__` é utilizado de forma controlada, o que equivale a um construtor
-protegido, impedindo a criação direta de instâncias.
+### 2. MÉTODO DE ACESSO
 
-4. **Execução Correta**:
-   - ✅ CORRETO: O código executa sem erros de sintaxe aparentes.
+✅ CORRETO: O código tem um método estático `__new__` que retorna a instância única da classe
+`CentralNotificacoes`. Esse método é chamado quando uma nova instância da classe é solicitada.
 
-#### Pontuação:
-- **25 pontos**: Todos os critérios estão corretos.
+### 3. CONSTRUTOR PRIVADO/PROTEGIDO
 
-#### Feedback:
-O código implementa corretamente o padrão Singleton. No entanto, para uma melhoria, considere
-adicionar métodos de acesso mais tradicionais como `get_instance()` para facilitar o uso e
-entendimento.
+✅ CORRETO: O código não tem um construtor público explícito, e o método `__new__` é usado para criar
+a instância, o que é uma forma de garantir que a instância seja criada de forma controlada.
 
-#### Formato de Saída Obrigatório:
-```
-QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
-==================================================
-```
+### 4. EXECUÇÃO CORRETA
 
-### Questão 2: Herança, Composição e Exceções
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica parece coerente.
 
-#### Análise do Código:
+### Nota
 
-O código submetido implementa classes relacionadas à `Curso` com herança, composição e tratamento de
-exceções. Aqui está a análise detalhada:
+Considerando os critérios acima, o código submetido pelo aluno atende a todos os requisitos do
+padrão Singleton. No entanto, é importante notar que o código pode ser melhorado em termos de
+organização e legibilidade.
 
-1. **Classe Abstrata Base**:
-   - ✅ CORRETO: A classe `Curso` é abstrata e bem definida, contendo atributos básicos.
+QUESTAO_Q1: 25/25 - O código implementa corretamente o padrão Singleton.
 
-2. **Método Abstrato**:
-   - ✅ CORRETO: O método `calcular_carga_horaria` é abstrato e implementado corretamente nas
-subclasses.
+---
 
-3. **Herança Correta**:
-   - ✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam corretamente da classe `Curso`.
+## Análise da Questão 2: Herança, Composição e Exceções
 
-4. **Classe Auxiliar**:
-   - ✅ CORRETO: A classe `Disciplina` atua como uma classe auxiliar, representando um conceito
+O código submetido pelo aluno implementa conceitos de herança, composição e tratamento de exceções.
+
+### 1. CLASSE ABSTRATA BASE
+
+✅ CORRETO: A classe `Curso` é definida como abstrata e contém atributos básicos como `nome` e
+`duracao`.
+
+### 2. MÉTODO ABSTRATO
+
+✅ CORRETO: A classe `Curso` tem um método abstrato `calcular_carga_horaria` que é sobrescrito pelas
+subclasses `Graduacao` e `PosGraduacao`.
+
+### 3. HERANÇA CORRETA
+
+✅ CORRETO: As classes `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os métodos
+abstratos obrigatórios.
+
+### 4. CLASSE AUXILIAR
+
+✅ CORRETO: A classe `Disciplina` é definida como uma classe auxiliar que representa um conceito
 coerente.
 
-5. **Composição/Agregação**:
-   - ✅ CORRETO: A classe `Curso` contém uma lista de disciplinas, implementando um relacionamento de
-composição.
+### 5. COMPOSIÇÃO/AGREGAÇÃO
 
-6. **Tratamento de Exceções**:
-   - ✅ CORRETO: Exceções são tratadas no construtor de `Curso` para duração inválida.
+✅ CORRETO: A classe `Curso` tem uma lista de disciplinas, e os métodos `adicionar_disciplina`
+permitem adicionar disciplinas à lista.
 
-7. **Execução Correta**:
-   - ⚠️ PARCIALMENTE CORRETO: O código parece executar sem erros de sintaxe, mas falta uma validação
-completa em tempo de execução.
+### 6. TRATAMENTO DE EXCEÇÕES
 
-#### Pontuação:
-- **70 pontos**: Seis critérios corretos, um parcialmente correto.
+✅ CORRETO: O construtor da classe `Curso` lança uma exceção `ValueError` se a duração for inválida.
 
-#### Feedback:
-O código implementa bem os conceitos de herança, composição e tratamento de exceções. No entanto,
-considere adicionar mais testes ou validações para garantir a execução correta em diferentes
-cenários.
+### 7. EXECUÇÃO CORRETA
 
-#### Formato de Saída Obrigatório:
-```
-QUESTAO_Q2: 70/75 - Implementação quase perfeita, com pequenos ajustes necessários.
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 70 pontos (máx:75)
-==================================================
-```
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica parece coerente.
+
+### Nota
+
+Considerando os critérios acima, o código submetido pelo aluno atende a todos os requisitos. No
+entanto, é importante notar que o código pode ser melhorado em termos de organização e legibilidade.
+Além disso, o método `adicionar_disciplina` da classe `PosGraduacao` está faltando o parâmetro
+`self`.
+
+QUESTAO_Q2: 70/75 - O código implementa corretamente conceitos de herança, composição e tratamento
+de exceções, mas pode ser melhorado em termos de organização e legibilidade.
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode

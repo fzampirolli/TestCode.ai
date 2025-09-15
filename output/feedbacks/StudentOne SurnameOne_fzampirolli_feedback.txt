@@ -1,74 +1,88 @@
 
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
-Aluno: StudentOne SurnameOne (fzampirolli)
-Data: 2025-09-15 07:35:52
-Nota Final (de 1 tentativa): 100.00 pontos
-Total de Chamadas à API: 1
+Estudante: StudentOne SurnameOne (fzampirolli)
+Data: 2025-09-15 08:49:42
+Nota Final (HIGHEST de 3 tentativas): 100.00 pontos
+Total de Chamadas à API: 3
 
-## Análise da Questão 1: Padrão Singleton
+Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
+detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
+
+## Análise da Questão 1 - Padrão Singleton
 
 O código submetido pelo aluno implementa o padrão Singleton para a classe `CentralNotificacoes`.
-Vamos avaliar cada item da rubrica:
+Vamos avaliar cada critério da rubrica:
 
-### 1. Instância Única
+### 1. INSTÂNCIA ÚNICA
+
 ✅ CORRETO: O código utiliza um atributo estático `instance` para armazenar a instância única da
 classe `CentralNotificacoes`. Além disso, o método `getInstance()` verifica se a instância já existe
 antes de criar uma nova.
 
-### 2. Método de Acesso
+### 2. MÉTODO DE ACESSO
+
 ✅ CORRETO: O método `getInstance()` é estático e retorna sempre a mesma instância da classe
 `CentralNotificacoes`. Se a instância não existir, ele a cria e a armazena no atributo `instance`.
 
-### 3. Construtor Privado/Protegido
+### 3. CONSTRUTOR PRIVADO/PROTEGIDO
+
 ✅ CORRETO: O construtor da classe `CentralNotificacoes` é privado, o que impede a criação de
 instâncias diretas da classe. A criação de instâncias é controlada pelo método `getInstance()`.
 
-### 4. Execução Correta
-✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente. O método `getInstance()` é
-chamado corretamente no `main()` e a instância única é criada e utilizada.
+### 4. EXECUÇÃO CORRETA
 
-Com base na análise, o código atende a todos os critérios da rubrica. Portanto, a nota é:
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente. O padrão Singleton é
+implementado corretamente.
+
+Com base na análise, o aluno atendeu a todos os critérios da rubrica. Portanto, a nota para a
+Questão 1 é:
 
 QUESTAO_Q1: 25/25 - Implementação correta do padrão Singleton.
 
-## Análise da Questão 2: Herança, Composição e Exceções
+## Análise da Questão 2 - Herança, Composição e Exceções
 
-O código submetido pelo aluno implementa herança, composição e exceções para as classes `Curso`,
-`Graduacao`, `PosGraduacao` e `Disciplina`. Vamos avaliar cada item da rubrica:
+O código submetido pelo aluno implementa herança, composição e tratamento de exceções. Vamos avaliar
+cada critério da rubrica:
 
-### 1. Classe Abstrata Base
-✅ CORRETO: A classe `Curso` é abstrata e bem definida, com atributos básicos como `nome` e
-`duracao`. Além disso, ela contém um método abstrato `calcularCargaHoraria()`.
+### 1. CLASSE ABSTRATA BASE
 
-### 2. Método Abstrato
-✅ CORRETO: O método `calcularCargaHoraria()` é abstrato e é implementado corretamente nas subclasses
+✅ CORRETO: A classe `Curso` é abstrata e bem definida, contendo atributos básicos como `nome` e
+`duracao`.
+
+### 2. MÉTODO ABSTRATO
+
+✅ CORRETO: O método `calcularCargaHoraria()` é abstrato e implementado corretamente nas subclasses
 `Graduacao` e `PosGraduacao`.
 
-### 3. Herança Correta
+### 3. HERANÇA CORRETA
+
 ✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os
-métodos abstratos obrigatórios. Além disso, elas adicionam funcionalidades específicas.
+métodos abstratos obrigatórios.
 
-### 4. Classe Auxiliar
-✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida, com um atributo `nome`. Ela
-representa um conceito coerente e é utilizada na composição com a classe `Curso`.
+### 4. CLASSE AUXILIAR
 
-### 5. Composição/Agregação
-✅ CORRETO: A classe `Curso` contém uma lista de objetos `Disciplina`, o que implementa a
-composição/agregação. Além disso, o método `adicionarDisciplina()` permite adicionar objetos
-`Disciplina` à lista.
+✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida, representando um conceito
+coerente.
 
-### 6. Tratamento de Exceções
-✅ CORRETO: O código trata exceções no construtor da classe `Curso`, validando o parâmetro `duracao`
-e lançando uma exceção `ValueError` se o valor for inválido.
+### 5. COMPOSIÇÃO/AGREGAÇÃO
 
-### 7. Execução Correta
-✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente. As classes são instanciadas
-e utilizadas corretamente no `main()`.
+✅ CORRETO: A classe `Curso` contém uma lista de objetos `Disciplina`, implementando um
+relacionamento de composição.
 
-Com base na análise, o código atende a todos os critérios da rubrica. Portanto, a nota é:
+### 6. TRATAMENTO DE EXCEÇÕES
 
-QUESTAO_Q2: 75/75 - Implementação correta de herança, composição e exceções.
+✅ CORRETO: O código trata exceções no construtor da classe `Curso`, lançando uma exceção
+`ValueError` se a duração for inválida.
+
+### 7. EXECUÇÃO CORRETA
+
+✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
+
+Com base na análise, o aluno atendeu a todos os critéririos da rubrica. Portanto, a nota para a
+Questão 2 é:
+
+QUESTAO_Q2: 75/75 - Implementação correta de herança, composição e tratamento de exceções.
 
 ==================================================
 📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx: 25)
