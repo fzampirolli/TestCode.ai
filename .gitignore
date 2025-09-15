@@ -4,9 +4,11 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual environment
+# Virtual environments
 .venv/
+.venv*/
 .env
+.env*/
 
 # VS Code settings
 .vscode/
@@ -22,4 +24,6 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.egg-info/
+
+# Config files
 config/config.env
