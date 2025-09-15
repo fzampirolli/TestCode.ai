@@ -2,83 +2,78 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Aluno: StudentThree SurnameThree (fzampirolli2)
-Data: 2025-09-15 07:23:56
-Nota Final (de 1 tentativa): 45.00 pontos
+Data: 2025-09-15 07:35:52
+Nota Final (de 1 tentativa): 63.00 pontos
 Total de Chamadas à API: 1
 
-## Análise da Questão 1 - Padrão Singleton
+## Análise do Código do Aluno
 
-### Avaliação do Código
+**QUESTAO_Q1: 18/25 -** O código implementa o padrão Singleton, mas com algumas falhas.
 
-O código implementa uma classe `SomSistema` que segue o padrão Singleton. Vamos avaliar se ele
-atende aos critérios da rubrica.
+**Pontos Positivos:**
 
-#### 1. INSTÂNCIA ÚNICA
-✅ CORRETO: O código utiliza o método `__new__` para controlar a criação de instâncias, garantindo
-que apenas uma instância seja criada.
+* **Instância Única:** O código utiliza um atributo estático `_instancia` para armazenar a única
+instância da classe `SomSistema`.
+* **Método de Acesso:** O método `__new__` é utilizado para garantir que apenas uma instância seja
+criada e para retornar a instância existente.
 
-#### 2. MÉTODO DE ACESSO
-✅ CORRETO: Embora não seja explicitamente um método chamado `getInstance()`, o próprio `__new__`
-atua como um método de acesso controlado à instância única.
+**Pontos a Melhorar:**
 
-#### 3. CONSTRUTOR PRIVADO/PROTEGIDO
-✅ CORRETO: O construtor (`__new__`) é controlado e impede a criação direta de múltiplas instâncias.
+* **Construtor Privado:** O construtor da classe `SomSistema` não é privado.
+* **Execução Correta:** O código apresenta um erro de sintaxe na linha `elif comando ==
+"nova_instancia":` que deveria ser `elif comando == "nova_instancia":`.
 
-#### 4. EXECUÇÃO CORRETA
-✅ CORRETO: O código executa sem erros de sintaxe aparentes e a lógica parece coerente.
+**Sugestões de Melhoria:**
 
-### Pontuação
-Todos os critérios obrigatórios foram atendidos corretamente. Portanto, a implementação está
-perfeita.
+1.  **Tornar o construtor privado:**  Para garantir que a instância seja criada apenas através do
+método `__new__`, o construtor da classe `SomSistema` deve ser privado.
 
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
-==================================================
-QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.
+2.  **Corrigir o erro de sintaxe:**  A linha `elif comando == "nova_instancia":` deve ser corrigida
+para `elif comando == "nova_instancia":`.
 
-## Análise da Questão 2 - Herança, Composição e Exceções
+**QUESTAO_Q2: 45/75 -** O código demonstra compreensão dos conceitos de herança, composição e
+exceções, mas apresenta algumas falhas na implementação.
 
-### Avaliação do Código
+**Pontos Positivos:**
 
-O código tenta implementar herança, composição e exceções. Vamos avaliar se ele atende aos critérios
-da rubrica.
+* **Classe Abstrata:** A classe `Funcionario` é definida como abstrata e possui um método abstrato
+`calcular_bonus`.
+* **Herança:** As classes `Desenvolvedor` e `Gerente` herdam da classe `Funcionario` e implementam o
+método `calcular_bonus`.
+* **Classe Auxiliar:** A classe `Projeto` é definida como uma classe auxiliar.
+* **Tratamento de Exceções:** O construtor da classe `Funcionario` valida o salário e lança uma
+exceção `ValueError` caso seja inválido.
 
-#### 1. CLASSE ABSTRATA BASE
-❌ INCORRETO: A classe `Funcionario` não é abstrata apesar de ter um método abstrato. Falta a
-declaração explícita como abstrata.
+**Pontos a Melhorar:**
 
-#### 2. MÉTODO ABSTRATO
-⚠️ PARCIALMENTE CORRETO: O método `calcular_bonus` é abstrato, mas como a classe `Funcionario` não é
-declarada como abstrata, isso causa um problema.
+* **Método Abstrato:** O método `adicionar_projeto` na classe `Funcionario` não é abstrato, apesar
+de ser um método que deveria ser implementado pelas subclasses.
+* **Composição/Agregação:** A composição/agregação entre a classe `Funcionario` e a classe `Projeto`
+não é implementada de forma funcional. A classe `Funcionario` não possui uma lista de projetos.
+* **Execução Correta:** O código apresenta alguns erros de sintaxe e lógica.
 
-#### 3. HERANÇA CORRETA
-⚠️ PARCIALMENTE CORRETO: As subclasses `Desenvolvedor` e `Gerente` herdam de `Funcionario`, mas há
-um erro de sintaxe na definição da classe `Gerente` (`funcionario` deve ser `Funcionario`).
+**Sugestões de Melhoria:**
 
-#### 4. CLASSE AUXILIAR
-✅ CORRETO: A classe `Projeto` é uma classe auxiliar bem definida.
+1.  **Tornar `adicionar_projeto` abstrato:**  O método `adicionar_projeto` deve ser declarado como
+abstrato na classe `Funcionario`.
+2.  **Implementar composição/agregação:** A classe `Funcionario` deve possuir uma lista de projetos,
+e o método `adicionar_projeto` deve ser implementado para adicionar projetos a essa lista.
+3.  **Corrigir erros de sintaxe e lógica:**  O código precisa ser corrigido para evitar erros de
+sintaxe e lógica.
 
-#### 5. COMPOSIÇÃO/AGREGAÇÃO
-⚠️ PARCIALMENTE CORRETO: A classe `Funcionario` contém uma lista de projetos (`listaprojetos`), mas
-falta o método para adicionar projetos corretamente implementado.
 
-#### 6. TRATAMENTO DE EXCEÇÕES
-✅ CORRETO: O construtor de `Funcionario` verifica se o salário é negativo e lança uma exceção
-`ValueError` apropriada.
+**Observações:**
 
-#### 7. EXECUÇÃO CORRETA
-❌ INCORRETO: O código contém vários erros de sintaxe (ex.: `tipo = entrada[2].strip().lower` deve
-ser `tipo = entrada[2].strip().lower()`, `class Gerente(funcionario)` deve ser `class
-Gerente(Funcionario)`, etc.) e não executa corretamente.
+* O código apresentado pelo aluno demonstra um bom entendimento dos conceitos de POO, mas precisa
+ser aprimorado em termos de implementação e correção de erros.
+* É importante que o aluno revise a sintaxe e a lógica do código para garantir que ele seja
+executado corretamente.
+* O aluno deve prestar atenção aos detalhes da implementação, como a utilização de métodos abstratos
+e a composição/agregação de objetos.
 
-### Pontuação
-Considerando os critérios atendidos e os erros presentes, a pontuação é baixa devido aos vários
-problemas de sintaxe e lógica.
 
-==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 20 pontos (máx:75)
-==================================================
-QUESTAO_Q2: 20/75 - Implementação parcial com vários erros de sintaxe e lógica.
+
+
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode
