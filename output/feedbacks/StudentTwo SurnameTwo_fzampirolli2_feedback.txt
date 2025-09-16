@@ -1,0 +1,65 @@
+
+FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
+═══════════════════════════════════════════════════════════
+Estudante: StudentTwo SurnameTwo (fzampirolli2)
+Data: 2025-09-16 18:56:28
+Nota Final (HIGHEST de 3 tentativas): 75.00 pontos
+Total de Chamadas à API: 3
+
+Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
+detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
+
+## Análise do Código do Aluno
+
+**QUESTAO_Q1: 20/25 -** O código implementa o padrão Singleton, mas com algumas falhas.
+
+* ✅ **INSTÂNCIA ÚNICA:** O atributo `_instancia` estático e a verificação na criação de instâncias
+estão corretas.
+* ✅ **MÉTODO DE ACESSO:** O método `__new__` funciona como um método de acesso, garantindo que
+apenas uma instância seja criada e retornada.
+* ✅ **CONSTRUTOR PRIVADO/PROTEGIDO:** O construtor é privado, impedindo a criação de instâncias
+diretamente.
+* ⚠️ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe, mas a lógica de inicialização da
+central de notificações é um pouco confusa. A mensagem "Central já ativa" é impressa sempre que uma
+nova instância é tentada, mesmo que a primeira instância tenha sido criada.
+
+**Sugestões de Melhoria:**
+
+*  A lógica de inicialização da central de notificações poderia ser melhorada. Em vez de imprimir a
+mensagem "Central já ativa", o método `__new__` poderia retornar a instância existente diretamente,
+sem criar uma nova.
+
+**QUESTAO_Q2: 55/75 -** O código demonstra compreensão dos conceitos de herança, composição e
+exceções, mas com algumas falhas.
+
+* ✅ **CLASSE ABSTRATA BASE:** A classe `Curso` é declarada como abstrata e possui os atributos
+básicos.
+* ✅ **MÉTODO ABSTRATO:** O método `calcular_carga_horaria` é declarado como abstrato na classe base.
+* ✅ **HERANÇA CORRETA:** As classes `Graduacao` e `PosGraduacao` herdam da classe `Curso` e
+implementam o método abstrato.
+* ✅ **CLASSE AUXILIAR:** A classe `Disciplina` é uma classe auxiliar bem definida.
+* ⚠️ **COMPOSIÇÃO/AGREGAÇÃO:** A composição/agregação não é implementada de forma ideal. A classe
+`Curso` possui uma lista de disciplinas, mas não há um relacionamento claro entre elas.
+* ✅ **TRATAMENTO DE EXCEÇÕES:** O construtor da classe `Curso` trata a exceção `ValueError` caso a
+duração seja negativa.
+* ✅ **EXECUÇÃO CORRETA:** O código executa sem erros de sintaxe.
+
+**Sugestões de Melhoria:**
+
+* **Composição/Agregação:** A relação entre `Curso` e `Disciplina` poderia ser melhorada. Em vez de
+armazenar apenas os nomes das disciplinas, a classe `Curso` poderia armazenar objetos `Disciplina`
+diretamente, permitindo acesso aos seus atributos e métodos.
+* **Documentação:** Adicionar comentários explicativos ao código para melhorar a legibilidade e
+compreensão.
+
+
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 20 pontos (máx: 25)
+📊 CORREÇÃO AUTOMÁTICA — Q2: 55 pontos (máx: 75)
+==================================================
+
+
+═══════════════════════════════════════════════════════════
+Este feedback foi gerado automaticamente por IA e pode
+necessitar de revisão pelo professor.

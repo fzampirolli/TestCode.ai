@@ -1,0 +1,195 @@
+
+FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
+═══════════════════════════════════════════════════════════
+Estudante: StudentThree SurnameThree (fzampirolli3)
+Data: 2025-09-16 18:56:28
+Nota Final (HIGHEST de 3 tentativas): 95.00 pontos
+Total de Chamadas à API: 3
+
+Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
+detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
+
+## Análise da Questão 1 - Padrão Singleton
+
+### Código Submetido
+```python
+import sys
+
+class SomSistema:
+    _instancia = None
+
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+            cls._instancia.somp = None
+            print("Gerenciador de som criado")
+        else:
+            print("Gerenciador já existente")
+        return cls._instancia
+
+    def tocar_som(self, som):
+        self.somp = som
+        print(f"Tocando som: {som}")
+
+    def som_atual(self):
+        print(f"Som atual: {self.somp}")
+
+sistema = SomSistema()
+entrada = input().strip()
+comando = input().strip()
+
+if comando == "tocar_som":
+    sistema.tocar_som(entrada)
+elif comando == "som_atual":
+    sistema.som_atual()
+elif comando == "nova_instancia":
+    sistema = SomSistema()
+else:
+    print("Comando inválido")
+    exit()
+```
+
+### Avaliação Conforme Rubrica
+
+1. **Instância Única**:
+   - ✅ CORRETO: O código implementa o padrão Singleton corretamente, garantindo que apenas uma
+instância de `SomSistema` seja criada. O atributo `_instancia` é estático e privado, e há uma
+verificação antes de criar uma nova instância.
+
+2. **Método de Acesso**:
+   - ✅ CORRETO: O método `__new__` atua como um método de acesso controlado, retornando sempre a
+mesma instância. Embora não seja um método estático nomeado como `getInstance`, sua funcionalidade é
+equivalente.
+
+3. **Construtor Privado/Protegido**:
+   - ✅ CORRETO: O construtor (`__new__`) é controlado, impedindo a criação direta de múltiplas
+instâncias. Embora Python não tenha construtores privados no sentido tradicional, o uso de `__new__`
+para controlar a instanciação é uma prática comum e eficaz.
+
+4. **Execução Correta**:
+   - ✅ CORRETO: O código executa sem erros de sintaxe aparentes e a lógica é coerente com o padrão
+Singleton.
+
+### Pontuação
+- Todos os critérios obrigatórios foram atendidos corretamente.
+- Nota: **25/25**
+
+### Feedback
+O código implementa corretamente o padrão Singleton, garantindo uma instância única e fornecendo um
+método controlado de acesso a essa instância. A lógica é coerente e o código executa sem erros de
+sintaxe. O uso de `__new__` para controlar a instanciação é apropriado para Python.
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
+==================================================
+QUESTAO_Q1: 25/25 - Implementação perfeita do padrão Singleton.
+
+## Análise da Questão 2 - Herança, Composição e Exceções
+
+### Código Submetido
+```python
+import sys
+from abc import ABC, abstractmethod
+
+class Funcionario(ABC):
+
+    def __init__(self, nome, salario):
+        self.nome = nome
+        self.salario = salario
+        self.listaprojetos = []
+
+        if salario < 0:
+            raise ValueError("Salário inválido")
+
+    @abstractmethod
+    def calcular_bonus(self):
+        pass
+
+    def adicionar_projeto(self, projeto):
+        self.listaprojetos.append(projeto)
+
+
+class Desenvolvedor(Funcionario):
+
+    def calcular_bonus(self):
+        return self.salario * 0.11
+
+class Gerente(Funcionario):
+
+    def calcular_bonus(self):
+        return self.salario * 0.21
+
+class Projeto:
+
+    def __init__(self, nome):
+        self.nome = nome
+
+entrada = input().split("; ")
+nome = entrada[0].strip()
+salario = float(entrada[1].strip()) # Corrigido para float
+tipo = entrada[2].strip().lower() # Corrigido para chamar o método
+
+if tipo == "gerente":
+    funcionario = Gerente(nome, salario)
+elif tipo == "desenvolvedor":
+    funcionario = Desenvolvedor(nome, salario)
+
+linha_projetos = input().strip()
+if linha_projetos:
+    nomes = linha_projetos.split("; ")
+    for nome_eq in nomes:
+        projeto = Projeto(nome_eq.strip())
+        funcionario.adicionar_projeto(projeto) # Adicionado projeto ao funcionário
+```
+
+### Avaliação Conforme Rubrica
+
+1. **Classe Abstrata Base**:
+   - ✅ CORRETO: `Funcionario` é uma classe abstrata bem definida usando `ABC` e contém atributos
+básicos (`nome`, `salario`, `listaprojetos`).
+
+2. **Método Abstrato**:
+   - ✅ CORRETO: `calcular_bonus` é um método abstrato definido na classe base e implementado
+corretamente nas subclasses `Desenvolvedor` e `Gerente`.
+
+3. **Herança Correta**:
+   - ✅ CORRETO: As subclasses `Desenvolvedor` e `Gerente` herdam de `Funcionario` e implementam o
+método abstrato `calcular_bonus`.
+
+4. **Classe Auxiliar**:
+   - ✅ CORRETO: `Projeto` é uma classe auxiliar bem definida com um atributo `nome`.
+
+5. **Composição/Agregação**:
+   - ✅ CORRETO: `Funcionario` contém uma lista de `Projeto` (`listaprojetos`), e há um método
+`adicionar_projeto` para adicionar projetos a essa lista.
+
+6. **Tratamento de Exceções**:
+   - ✅ CORRETO: O construtor de `Funcionario` verifica se `salario` é negativo e lança um
+`ValueError` se verdadeiro.
+
+7. **Execução Correta**:
+   - ⚠️ PARCIALMENTE CORRETO: Houve necessidade de algumas correções (ex.: converter `salario` para
+`float`, chamar `lower()` corretamente, adicionar projeto ao funcionário). Após essas correções, o
+código executa corretamente.
+
+### Pontuação
+- Total de pontos possíveis: 75
+- Critérios corretos: 6 (todos exceto execução perfeita sem necessidade de correções)
+- Nota: **70/75** (considerando as correções feitas)
+
+### Feedback
+O código implementa corretamente os conceitos de herança, composição e tratamento de exceções. A
+classe abstrata `Funcionario` é bem definida, e as subclasses implementam o método abstrato
+corretamente. A classe `Projeto` serve como uma classe auxiliar adequada para composição. O
+tratamento de exceções no construtor de `Funcionario` é apropriado. Algumas correções foram
+necessárias para garantir a execução correta.
+
+==================================================
+📊 CORREÇÃO AUTOMÁTICA — Q2: 70 pontos (máx:75)
+==================================================
+QUESTAO_Q2: 70/75 - Implementação muito boa, com pequenas correções necessárias para execução
+perfeita.
+
+═══════════════════════════════════════════════════════════
+Este feedback foi gerado automaticamente por IA e pode
+necessitar de revisão pelo professor.

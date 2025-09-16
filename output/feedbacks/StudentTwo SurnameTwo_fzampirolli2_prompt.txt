@@ -1,5 +1,5 @@
 # AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
-Data: 2025-09-15 08:49:03
+Data: 2025-09-16 18:55:47
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -80,48 +80,43 @@ Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import sys
-class SomSistema:
-    
+class CentralNotificacoes:
     _instancia = None
     
     def __new__(cls):
-        
-        if cls._instancia is None:
+        if cls._instancia == None:
             cls._instancia = super().__new__(cls)
-            cls._instancia.somp = None
-            print("Gerenciador de som criado")
+            cls._instancia.msg = ["Nova Conexão", "Mensagem recebida"]
+            print("Central iniciada")
             
-        else: 
-            print("Gerenciador já existente")
+        else:
+            print("Central já ativa")
             
         return cls._instancia
+        
+    def adicionar(self, msg):
+        self.msg.append(msg)
+        print(f"Nova notificação: {msg}")
+    
+    def listar(self):
+        print("Notificações:")
+        for msg in self.msg:
+            print(f"{msg}")
             
-    def tocar_som (self, som):
-        self.somp = som
-        print(f"Tocando som: {som}")
-        
-    def som_atual(self):
-        print(f"Som atual: {self.somp}")
-        
+msg = input()
+comando = input()
 
-sistema = SomSistema()
-entrada = input().strip()
-comando= input().strip()
+app = CentralNotificacoes()
 
-
-if comando == "tocar_som":
-    sistema.tocar_som(entrada)
-elif comando == "som_atual":
-    sistema.som_atual()
+if comando == "adicionar":
+    app.adicionar(msg)
+    
+elif comando == "listar":
+    app.adicionar(msg)
+    app.listar()
+    
 elif comando == "nova_instancia":
-    sistema = SomSistema()
-else:
-    print("Comando invalida")
-    exit()
-        
-            
-        
+    app = CentralNotificacoes()
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
@@ -207,62 +202,48 @@ Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import sys
-from abc import ABC, abstractmethod
+import abc from ABC, abstractmethod
 
-class Funcionario:
-    
-    def __init__(self, nome, salario):
-        
+class Disciplina:
+    def __init__(self, nome):
         self.nome = nome
-        self.salario = salario
-        self.listaprojetos = []
+
+class Curso(ABC):
+    def __init__(self, nome, duracao):
+        self.nome = nome
+        self.duracao = duracao
+        self.disciplinas = []
         
-        if salario<0:
-            raise ValueError("Salário inválido")
+        if duracao < 0:
+            raise ValueError("Duração inválida")
         
     @abstractmethod
-    def calcular_bonus(self):
+    def calcular_carga_horaria(self):
         pass
     
-    def adicionar_projeto(self, projeto)
-    
-    
-class Desenvolvedor(Funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.11
-    
-class Gerente(funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.21
+class Graduacao(Curso):
+    def __init__(self, nome, duracao):
+        super().__init__(nome, duracao)
         
-class Projeto:
-    
-    def __init__(self):
-        self.nome = nome
+    def calcular_carga_horaria(self):
+        carga = self.duracao * 200
+        print(f"Carga horária: {carga}")
         
-entrada = input().split("; ")
-nome = entrada[0].strip()
-salario = entrada[1].strip()
-tipo = entrada[2].strip().lower
+    def adicionar_disciplina(self, disciplina: Disciplina):
+        self.disciplinas.append(disciplina.nome)
+    
+class PosGraduacao(Curso):
+    def __init__(self, nome, duracao):
+        super().__init__(nome, duracao)
+        
+    def calcular_carga_horaria(self):
+        carga = self.duracao * 200
+        print(f"Carga horária: {carga}")
+        
+    def adicionar_disciplina(disciplina: Disciplina):
+        self.disciplinas.append(disciplina.nome)
+        
 
-if tipo == "Gerente":
-    funcionario = Gerente(nome,salario)
-elif tipo == "Desenvolvedor":
-    funcionario = Desenvolvedor(nome, salario)
-
-linha_projetos = input().strip()
-if linha_projetos:
-    nomes = linha_projetos.split("; ")
-    for nomes_eq in nomes:
-        projeto = Projeto(nomes_eq.strip())
-        
-    
-        
-    
-    
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q2: [NOTA]/75 - [comentário]

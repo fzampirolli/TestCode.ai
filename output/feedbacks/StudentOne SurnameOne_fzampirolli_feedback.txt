@@ -2,94 +2,99 @@
 FEEDBACK DA AVALIAÇÃO - Prova 1 - POO
 ═══════════════════════════════════════════════════════════
 Estudante: StudentOne SurnameOne (fzampirolli)
-Data: 2025-09-15 08:49:42
-Nota Final (HIGHEST de 3 tentativas): 100.00 pontos
+Data: 2025-09-16 18:56:28
+Nota Final (HIGHEST de 3 tentativas): 95.00 pontos
 Total de Chamadas à API: 3
 
 Observação: A 'Nota Final' é o resultado do critério 'HIGHEST' aplicado a 3 tentativas. O feedback
 detalhado e as notas por questão abaixo referem-se especificamente à tentativa com a MAIOR nota.
 
-## Análise da Questão 1 - Padrão Singleton
+### Questão 1: Padrão Singleton
 
-O código submetido pelo aluno implementa o padrão Singleton para a classe `CentralNotificacoes`.
-Vamos avaliar cada critério da rubrica:
+#### Análise do Código
 
-### 1. INSTÂNCIA ÚNICA
+O código submetido implementa uma classe `CentralNotificacoes` dentro de uma classe `Q1`. A classe
+`CentralNotificacoes` parece seguir o padrão Singleton, com um atributo estático privado `instance`
+para armazenar a instância única e um método estático `getInstance()` para acessá-la.
 
-✅ CORRETO: O código utiliza um atributo estático `instance` para armazenar a instância única da
-classe `CentralNotificacoes`. Além disso, o método `getInstance()` verifica se a instância já existe
-antes de criar uma nova.
+#### Critérios de Avaliação
 
-### 2. MÉTODO DE ACESSO
+1. **Instância Única**:
+   - ✅ CORRETO: Existe um mecanismo para garantir apenas uma instância. O atributo `instance` é
+estático e privado, e o método `getInstance()` verifica se a instância já existe antes de criá-la.
 
-✅ CORRETO: O método `getInstance()` é estático e retorna sempre a mesma instância da classe
-`CentralNotificacoes`. Se a instância não existir, ele a cria e a armazena no atributo `instance`.
+2. **Método de Acesso**:
+   - ✅ CORRETO: O método `getInstance()` é público e estático, retornando sempre a mesma instância.
+Ele cria a instância apenas se ela não existir.
 
-### 3. CONSTRUTOR PRIVADO/PROTEGIDO
+3. **Construtor Privado/Protegido**:
+   - ✅ CORRETO: O construtor de `CentralNotificacoes` é privado, impedindo a instanciação direta de
+fora da classe.
 
-✅ CORRETO: O construtor da classe `CentralNotificacoes` é privado, o que impede a criação de
-instâncias diretas da classe. A criação de instâncias é controlada pelo método `getInstance()`.
+4. **Execução Correta**:
+   - ⚠️ PARCIALMENTE CORRETO: O código parece executar sem erros de sintaxe. No entanto, a lógica
+pode ser testada melhor com um exemplo de uso mais completo. O `main` tenta ler inputs do usuário,
+mas pode não cobrir todos os casos.
 
-### 4. EXECUÇÃO CORRETA
+#### Nota
+- ✅ TODOS os critérios estão presentes, mas com uma observação na execução correta devido à
+dependência de input do usuário.
 
-✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente. O padrão Singleton é
-implementado corretamente.
+#### Formato de Saída Obrigatório
 
-Com base na análise, o aluno atendeu a todos os critérios da rubrica. Portanto, a nota para a
-Questão 1 é:
-
+```plaintext
 QUESTAO_Q1: 25/25 - Implementação correta do padrão Singleton.
-
-## Análise da Questão 2 - Herança, Composição e Exceções
-
-O código submetido pelo aluno implementa herança, composição e tratamento de exceções. Vamos avaliar
-cada critério da rubrica:
-
-### 1. CLASSE ABSTRATA BASE
-
-✅ CORRETO: A classe `Curso` é abstrata e bem definida, contendo atributos básicos como `nome` e
-`duracao`.
-
-### 2. MÉTODO ABSTRATO
-
-✅ CORRETO: O método `calcularCargaHoraria()` é abstrato e implementado corretamente nas subclasses
-`Graduacao` e `PosGraduacao`.
-
-### 3. HERANÇA CORRETA
-
-✅ CORRETO: As subclasses `Graduacao` e `PosGraduacao` herdam da classe `Curso` e implementam os
-métodos abstratos obrigatórios.
-
-### 4. CLASSE AUXILIAR
-
-✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida, representando um conceito
-coerente.
-
-### 5. COMPOSIÇÃO/AGREGAÇÃO
-
-✅ CORRETO: A classe `Curso` contém uma lista de objetos `Disciplina`, implementando um
-relacionamento de composição.
-
-### 6. TRATAMENTO DE EXCEÇÕES
-
-✅ CORRETO: O código trata exceções no construtor da classe `Curso`, lançando uma exceção
-`ValueError` se a duração for inválida.
-
-### 7. EXECUÇÃO CORRETA
-
-✅ CORRETO: O código executa sem erros de sintaxe e a lógica é coerente.
-
-Com base na análise, o aluno atendeu a todos os critéririos da rubrica. Portanto, a nota para a
-Questão 2 é:
-
-QUESTAO_Q2: 75/75 - Implementação correta de herança, composição e tratamento de exceções.
-
 ==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx: 25)
+📊 CORREÇÃO AUTOMÁTICA — Q1: 25 pontos (máx:25)
 ==================================================
+```
+
+### Questão 2: Herança, Composição e Exceções
+
+#### Análise do Código
+
+O código define uma classe abstrata `Curso` com subclasses `Graduacao` e `PosGraduacao`, além de uma
+classe `Disciplina`. Há um relacionamento de composição entre `Curso` e `Disciplina`.
+
+#### Critérios de Avaliação
+
+1. **Classe Abstrata Base**:
+   - ✅ CORRETO: A classe `Curso` é abstrata e bem definida, com atributos básicos.
+
+2. **Método Abstrato**:
+   - ✅ CORRETO: O método `calcularCargaHoraria` é abstrato e implementado corretamente nas
+subclasses.
+
+3. **Herança Correta**:
+   - ✅ CORRETO: As subclasses herdam corretamente de `Curso` e implementam o método abstrato.
+
+4. **Classe Auxiliar**:
+   - ✅ CORRETO: A classe `Disciplina` é uma classe auxiliar bem definida.
+
+5. **Composição/Agregação**:
+   - ✅ CORRETO: O relacionamento de composição entre `Curso` e `Disciplina` é implementado
+funcionalmente.
+
+6. **Tratamento de Exceções**:
+   - ✅ CORRETO: Exceções são tratadas no construtor de `Curso` para duração inválida.
+
+7. **Execução Correta**:
+   - ⚠️ PARCIALMENTE CORRETO: O código parece executar sem erros de compilação, mas a lógica depende
+de inputs do usuário.
+
+#### Nota
+- A implementação está quase perfeita, mas merece atenção especial na leitura de inputs e tratamento
+de exceções em tempo de execução.
+
+#### Formato de Saída Obrigatório
+
+```plaintext
+QUESTAO_Q2: 70/75 - Implementação correta de herança, composição e exceções, com pequenos ajustes
+necessários para inputs e exceções.
 ==================================================
-📊 CORREÇÃO AUTOMÁTICA — Q2: 75 pontos (máx: 75)
+📊 CORREÇÃO AUTOMÁTICA — Q2: 70 pontos (máx:75)
 ==================================================
+```
 
 ═══════════════════════════════════════════════════════════
 Este feedback foi gerado automaticamente por IA e pode
