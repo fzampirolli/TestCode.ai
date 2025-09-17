@@ -1,5 +1,5 @@
 # AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
-Data: 2025-09-16 18:55:47
+Data: 2025-09-17 08:40:04
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -80,60 +80,77 @@ Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-public class Q1{
-    
-    public static class CentralNotificacoes{
-        
-        // o teste 4 me parece estar com as saidas erradas, ele pede 'alerta de bateria'
-        // mas o usuario nunca da input de alerta de bateria
-        
-        static CentralNotificacoes instance = null;
-        
-        ArrayList<String> notificacoes = new ArrayList<>();
-        
-        private CentralNotificacoes(){
-            
+/**
+ * Implementação de um sistema de notificações com instância única (Singleton).
+ */
+public class Q1 {
+
+    // Classe responsável por gerenciar notificações
+    public static class GerenciadorNotificacoes {
+
+        private static GerenciadorNotificacoes instanciaUnica;
+        private final ArrayList<String> filaNotificacoes;
+
+        private GerenciadorNotificacoes() {
+            filaNotificacoes = new ArrayList<>();
         }
-        
-        public static CentralNotificacoes getInstance(){
-            if(instance ==  null){
-                instance = new CentralNotificacoes();
-                System.out.println("Central iniciada");
+
+        // Método estático para acessar a instância única
+        public static GerenciadorNotificacoes acessar() {
+            if (instanciaUnica == null) {
+                instanciaUnica = new GerenciadorNotificacoes();
+                System.out.println("Sistema de notificações iniciado");
             } else {
-                System.out.println("Central já ativa");
+                System.out.println("Sistema já em execução");
             }
-            return instance;
+            return instanciaUnica;
         }
-        
-        public void listar(){
-            System.out.println("Notificações:");
-            for (String notif : notificacoes){
-                System.out.println(notif);
+
+        // Adiciona uma nova notificação
+        public void incluir(String mensagem) {
+            filaNotificacoes.add(mensagem);
+            System.out.println("Notificação registrada: " + mensagem);
+        }
+
+        // Exibe todas as notificações armazenadas
+        public void exibir() {
+            System.out.println("Lista de notificações:");
+            for (String msg : filaNotificacoes) {
+                System.out.println(msg);
             }
-        }
-        
-        public void adicionar(String notif){
-            System.out.println("Nova notificação: " + notif);
-            notificacoes.add(notif);
         }
     }
-    
-    public static void main(String args[]) throws IOException {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String notif = r.readLine();
-        CentralNotificacoes instance = CentralNotificacoes.getInstance();
-        
-        while(r.ready()){
-            switch(r.readLine()){
-                case "nova_instancia": CentralNotificacoes.getInstance(); break;
-                case "adicionar": instance.adicionar(notif); break;
-            }   
+
+    // Programa principal
+    public static void main(String[] args) throws IOException {
+        BufferedReader leitor = new BufferedReader(new InputStreamReader(System.in));
+        String primeiraEntrada = leitor.readLine();
+        GerenciadorNotificacoes notificacoes = GerenciadorNotificacoes.acessar();
+
+        String comando;
+        while ((comando = leitor.readLine()) != null) {
+            switch (comando) {
+                case "nova_instancia":
+                    GerenciadorNotificacoes.acessar();
+                    break;
+                case "adicionar":
+                    notificacoes.incluir(primeiraEntrada);
+                    break;
+                case "listar":
+                    notificacoes.exibir();
+                    break;
+                default:
+                    System.out.println("Comando desconhecido: " + comando);
+            }
         }
     }
 }
+
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
@@ -219,94 +236,122 @@ Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Exemplo de hierarquia de cursos usando herança e classe abstrata.
+ */
 public class Q2 {
-    
-    
+
+    // Classe base abstrata
     public abstract static class Curso {
-        String nome;
-        int duracao; // semestres
-        List<Disciplina> disciplinas = new ArrayList<>();
-        
-        public abstract int calcularCargaHoraria();
-        public Curso(String nome, int duracao){
-            if(duracao < 0){
-                throw new ValueError();
+        protected String titulo;
+        protected int duracaoSemestres;
+        protected List<UnidadeCurricular> unidades;
+
+        public Curso(String titulo, int duracaoSemestres) {
+            if (duracaoSemestres < 0) {
+                throw new DuracaoInvalidaException();
             }
-            this.nome = nome; this.duracao = duracao;
+            this.titulo = titulo;
+            this.duracaoSemestres = duracaoSemestres;
+            this.unidades = new ArrayList<>();
         }
-        public void adicionarDisciplina(Disciplina d){
-            disciplinas.add(d);
+
+        // Método abstrato para cálculo de carga horária
+        public abstract int obterCargaHoraria();
+
+        // Adiciona disciplina ao curso
+        public void incluirUnidade(UnidadeCurricular uc) {
+            unidades.add(uc);
         }
-        public void printData(){
-            System.out.println("Carga horária: " + calcularCargaHoraria());
-            String disc = "Disciplinas: ";
-            for(int i = 0; i < disciplinas.size(); i++){
-                Disciplina d = disciplinas.get(i);
-                disc += d.nome;
-                if(i < disciplinas.size() - 1){
-                    disc += "; ";
+
+        // Exibe informações do curso
+        public void apresentar() {
+            System.out.println("Carga horária total: " + obterCargaHoraria());
+            StringBuilder buffer = new StringBuilder("Componentes curriculares: ");
+            for (int i = 0; i < unidades.size(); i++) {
+                buffer.append(unidades.get(i).rotulo);
+                if (i < unidades.size() - 1) {
+                    buffer.append("; ");
                 }
             }
-            System.out.println(disc);
+            System.out.println(buffer);
         }
     }
-    
-    public static class Graduacao extends Curso{
-        public Graduacao(String nome, int duracao){
-            super(nome,duracao);
-            System.out.println("Graduação criada");
+
+    // Curso de graduação
+    public static class CursoGraduacao extends Curso {
+        public CursoGraduacao(String titulo, int duracaoSemestres) {
+            super(titulo, duracaoSemestres);
+            System.out.println("Curso de graduação criado");
         }
-        
-        public int calcularCargaHoraria(){
-            return duracao * 184;
-        }
-    }
-    
-    public static class PosGraduacao extends Curso{
-        public PosGraduacao(String nome, int duracao){
-            super(nome,duracao);
-            System.out.println("Pós-graduação criada");
-        }
-        
-        public int calcularCargaHoraria(){
-            return duracao * 137;
+
+        @Override
+        public int obterCargaHoraria() {
+            return duracaoSemestres * 180;
         }
     }
-    
-    public static class Disciplina{
-        String nome;
-        public Disciplina(String nome){
-            this.nome = nome;
+
+    // Curso de pós-graduação
+    public static class CursoPosGraduacao extends Curso {
+        public CursoPosGraduacao(String titulo, int duracaoSemestres) {
+            super(titulo, duracaoSemestres);
+            System.out.println("Curso de pós-graduação criado");
+        }
+
+        @Override
+        public int obterCargaHoraria() {
+            return duracaoSemestres * 140;
         }
     }
-    
-    public static class ValueError extends RuntimeException{ //presumo que seja uma excessão nativa em python
-        public ValueError(){
-            super("ValueError: Duração inválida");
+
+    // Representa uma disciplina/unidade curricular
+    public static class UnidadeCurricular {
+        String rotulo;
+
+        public UnidadeCurricular(String rotulo) {
+            this.rotulo = rotulo;
         }
     }
-    
-    public static void main(String args[]) throws IOException {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String[] cursoData = r.readLine().split("; ");
-        try{ 
-            int h = Integer.parseInt(cursoData[1]);        
-            Curso curso = cursoData[2].equals("pos") ? new PosGraduacao(cursoData[0],h) : new Graduacao(cursoData[0],h);
-            String[] discData = r.readLine().split("; "); 
-            for(String disc : discData){
-                Disciplina d = new Disciplina(disc);
-                curso.adicionarDisciplina(d);
+
+    // Exceção personalizada para valores inválidos
+    public static class DuracaoInvalidaException extends RuntimeException {
+        public DuracaoInvalidaException() {
+            super("Erro: duração informada inválida");
+        }
+    }
+
+    // Programa principal
+    public static void main(String[] args) throws IOException {
+        BufferedReader leitor = new BufferedReader(new InputStreamReader(System.in));
+        String[] dadosCurso = leitor.readLine().split("; ");
+        try {
+            int semestres = Integer.parseInt(dadosCurso[1]);
+            Curso cursoEscolhido;
+
+            if ("pos".equalsIgnoreCase(dadosCurso[2])) {
+                cursoEscolhido = new CursoPosGraduacao(dadosCurso[0], semestres);
+            } else {
+                cursoEscolhido = new CursoGraduacao(dadosCurso[0], semestres);
             }
-            
-            curso.printData();
-        } catch (ValueError e){
-            System.out.println(e);
+
+            String[] dadosDisciplinas = leitor.readLine().split("; ");
+            for (String nome : dadosDisciplinas) {
+                cursoEscolhido.incluirUnidade(new UnidadeCurricular(nome));
+            }
+
+            cursoEscolhido.apresentar();
+        } catch (DuracaoInvalidaException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
+
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q2: [NOTA]/75 - [comentário]

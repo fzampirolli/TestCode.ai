@@ -1,5 +1,5 @@
 # AVALIAÇÃO AUTOMATIZADA DETALHADA - Prova 1 - POO
-Data: 2025-09-16 18:56:24
+Data: 2025-09-17 08:40:17
 
 ## INSTRUÇÕES GERAIS
 Você é um professor assistente especialista. Analise o código do aluno para cada questão COM BASE EM CADA ITEM DA RUBRICA FORNECIDA.
@@ -80,48 +80,46 @@ Onde XX é a nota de 0 a 25 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import sys
-class SomSistema:
-    
-    _instancia = None
-    
+class AudioManager:
+    _unique_instance = None
+
     def __new__(cls):
-        
-        if cls._instancia is None:
-            cls._instancia = super().__new__(cls)
-            cls._instancia.somp = None
-            print("Gerenciador de som criado")
-            
-        else: 
-            print("Gerenciador já existente")
-            
-        return cls._instancia
-            
-    def tocar_som (self, som):
-        self.somp = som
-        print(f"Tocando som: {som}")
-        
-    def som_atual(self):
-        print(f"Som atual: {self.somp}")
-        
+        if cls._unique_instance is None:
+            cls._unique_instance = super().__new__(cls)
+            cls._unique_instance._current_track = None
+            print("Módulo de áudio inicializado")
+        else:
+            print("Módulo de áudio já em uso")
+        return cls._unique_instance
 
-sistema = SomSistema()
-entrada = input().strip()
-comando= input().strip()
+    def reproduzir(self, faixa):
+        self._current_track = faixa
+        print(f"Reproduzindo: {faixa}")
+
+    def status(self):
+        if self._current_track:
+            print(f"Faixa em execução: {self._current_track}")
+        else:
+            print("Nenhuma faixa em execução no momento")
 
 
-if comando == "tocar_som":
-    sistema.tocar_som(entrada)
-elif comando == "som_atual":
-    sistema.som_atual()
-elif comando == "nova_instancia":
-    sistema = SomSistema()
-else:
-    print("Comando invalida")
-    exit()
-        
-            
-        
+# Execução principal
+if __name__ == "__main__":
+    player = AudioManager()
+    entrada = input().strip()
+    comando = input().strip()
+
+    if comando == "reproduzir":
+        player.reproduzir(entrada)
+    elif comando == "status":
+        player.reproduzir(entrada)
+        player.status()
+    elif comando == "nova_instancia":
+        player = AudioManager()
+    else:
+        print("Comando não reconhecido")
+        exit(1)
+
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q1: [NOTA]/25 - [comentário]
@@ -207,62 +205,73 @@ Onde XX é a nota de 0 a 75 baseada nos critérios acima.
 
 ### CÓDIGO SUBMETIDO PELO ALUNO:
 ```
-import sys
 from abc import ABC, abstractmethod
 
-class Funcionario:
-    
-    def __init__(self, nome, salario):
-        
-        self.nome = nome
-        self.salario = salario
-        self.listaprojetos = []
-        
-        if salario<0:
-            raise ValueError("Salário inválido")
-        
+class Colaborador(ABC):
+    def __init__(self, identificador, salario):
+        if float(salario) < 0:
+            raise ValueError("Valor de salário não permitido")
+
+        self.identificador = identificador
+        self.salario = float(salario)
+        self._atividades = []
+
     @abstractmethod
-    def calcular_bonus(self):
+    def obter_bonus(self):
         pass
-    
-    def adicionar_projeto(self, projeto)
-    
-    
-class Desenvolvedor(Funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.11
-    
-class Gerente(funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.21
-        
-class Projeto:
-    
-    def __init__(self):
-        self.nome = nome
-        
-entrada = input().split("; ")
-nome = entrada[0].strip()
-salario = entrada[1].strip()
-tipo = entrada[2].strip().lower
 
-if tipo == "Gerente":
-    funcionario = Gerente(nome,salario)
-elif tipo == "Desenvolvedor":
-    funcionario = Desenvolvedor(nome, salario)
+    def registrar_atividade(self, atividade):
+        self._atividades.append(atividade.titulo)
 
-linha_projetos = input().strip()
-if linha_projetos:
-    nomes = linha_projetos.split("; ")
-    for nomes_eq in nomes:
-        projeto = Projeto(nomes_eq.strip())
-        
-    
-        
-    
-    
+
+class Programador(Colaborador):
+    def obter_bonus(self):
+        return self.salario * 0.10
+
+
+class Coordenador(Colaborador):
+    def obter_bonus(self):
+        return self.salario * 0.20
+
+
+class Atividade:
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+
+if __name__ == "__main__":
+    try:
+        dados = input().split("; ")
+        nome = dados[0].strip()
+        salario = dados[1].strip()
+        categoria = dados[2].strip().lower()
+
+        if categoria == "coordenador":
+            pessoa = Coordenador(nome, salario)
+        elif categoria == "programador":
+            pessoa = Programador(nome, salario)
+        else:
+            print("Categoria informada não reconhecida")
+            exit(1)
+
+        linha = input().strip()
+        if linha:
+            itens = linha.split("; ")
+            for item in itens:
+                atividade = Atividade(item.strip())
+                pessoa.registrar_atividade(atividade)
+
+        print(f"{categoria.capitalize()} registrado")
+        print(f"Bônus calculado: {pessoa.obter_bonus()}")
+
+        if pessoa._atividades:
+            print(f"Atividades: {'; '.join(pessoa._atividades)}")
+
+    except ValueError as e:
+        print(e)
+    except Exception as e:
+        print(f"Falha de execução: {e}")
+
 ```
 
 Lembre-se de incluir a linha: QUESTAO_Q2: [NOTA]/75 - [comentário]
