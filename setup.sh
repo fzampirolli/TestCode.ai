@@ -148,7 +148,7 @@ echo "        source .venv/bin/activate"
 echo "      - To deactivate:"
 echo "        source .venv/bin/deactivate"
 echo "   3. To test the setup:"
-echo "      ./run.sh eval submissions"\
+echo "      ./run.sh eval submissions"
 echo "   4. For your classes:"
 echo "      - Edit: config/config.yaml"
 echo "      - Download the submissions from Moodle as a zip file"
