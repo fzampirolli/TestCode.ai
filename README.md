@@ -39,6 +39,10 @@ Run the wrapper script with one of the available commands:
 * `setup`
   Sets up the initial environment (run once).
 
+  ```bash
+  ./run.sh setup
+  ```
+
 * `prepare <zip_file>`
   Unzips and anonymizes submissions from Moodle.
   The mapping file is saved in `output/mapping.txt`.
