@@ -2,7 +2,7 @@
 
 Welcome to **TestCode.ai**, a free and open-source platform designed to support automated exam grading with the assistance of **Large Language Models (LLMs)**.
 
-Its main feature is its high flexibility through a central configuration file (config.yaml). This allows the user to define detailed evaluation rubrics and customize the prompts sent to a Large Language Model (LLM). Additionally, the system integrates the automatic AI-based evaluation, and feedback delivery by email.
+Its main feature is its flexibility, enabled through a central configuration file (`config.yaml`), which allows users to define detailed evaluation rubrics and customize the prompts sent to the LLM. Additionally, the system supports automatic AI-based evaluation and delivers feedback via email.
 
 ---
 
