@@ -1,70 +1,66 @@
-import sys
 from abc import ABC, abstractmethod
 
-class Funcionario(ABC):
-    
-    def __init__ (self, nome, salario):
-        
-        self.nome = nome
+class Colaborador(ABC):
+    def __init__(self, identificador, salario):
+        if float(salario) < 0:
+            raise ValueError("Valor de salário não permitido")
+
+        self.identificador = identificador
         self.salario = float(salario)
-        self.listaprojetos = []
-        
-        if salario < 0:
-            raise ValueError("Salário inválido")
-        
+        self._atividades = []
+
     @abstractmethod
-    def calcular_bonus(self):
+    def obter_bonus(self):
         pass
-    
-    def adicionar_projeto(self, projeto):
-        self.listaprojetos.append(projeto.nome)
-        
-    
-class Desenvolvedor(Funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.11
-    
-class Gerente(Funcionario):
-    
-    def calcular_bonus(self):
-        return self.salario*0.21
-        
-class Projeto:
-    
-    def __init__ (self, nome):
-        self.nome = nome
-        
-try: 
-    entrada = input().split("; ")
-    nome = entrada[0].strip()
-    salario = entrada[1].strip()
-    tipo = entrada[2].strip().lower()
 
-    if tipo == "Gerente":
-        funcionario = Gerente(nome,salario)
-    elif tipo == "Desenvolvedor":
-        funcionario = Desenvolvedor(nome, salario)
-    else:
-        print(f"Funcionario não encontrado")
+    def registrar_atividade(self, atividade):
+        self._atividades.append(atividade.titulo)
 
-    linha_projetos = input()
-    if linha_projetos:
-        nomes = linha_projetos.split("; ")
-        for nomes_eq in nomes:
-            projeto = Projeto(nomes_eq.strip())
-            funcionario.adicionar_projeto(projeto)
-        
-    print(f"{tipo} criado")
-    print(f"Bonus: {funcionario.calcular_bonus()}")
 
-    if funcionario.listaprojetos:
-        print(f"Projetos: {'; '.join(funcionario.listaprojetos)}")
-        
-except ValueError as e:
-    print(e)
-except Exception as e:
-    print(f"Erro: {e}")
-        
-    
-    
+class Programador(Colaborador):
+    def obter_bonus(self):
+        return self.salario * 0.10
+
+
+class Coordenador(Colaborador):
+    def obter_bonus(self):
+        return self.salario * 0.20
+
+
+class Atividade:
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+
+if __name__ == "__main__":
+    try:
+        dados = input().split("; ")
+        nome = dados[0].strip()
+        salario = dados[1].strip()
+        categoria = dados[2].strip().lower()
+
+        if categoria == "coordenador":
+            pessoa = Coordenador(nome, salario)
+        elif categoria == "programador":
+            pessoa = Programador(nome, salario)
+        else:
+            print("Categoria informada não reconhecida")
+            exit(1)
+
+        linha = input().strip()
+        if linha:
+            itens = linha.split("; ")
+            for item in itens:
+                atividade = Atividade(item.strip())
+                pessoa.registrar_atividade(atividade)
+
+        print(f"{categoria.capitalize()} registrado")
+        print(f"Bônus calculado: {pessoa.obter_bonus()}")
+
+        if pessoa._atividades:
+            print(f"Atividades: {'; '.join(pessoa._atividades)}")
+
+    except ValueError as e:
+        print(e)
+    except Exception as e:
+        print(f"Falha de execução: {e}")

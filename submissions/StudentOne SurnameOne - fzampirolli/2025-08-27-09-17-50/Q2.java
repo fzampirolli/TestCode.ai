@@ -1,88 +1,115 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Exemplo de hierarquia de cursos usando herança e classe abstrata.
+ */
 public class Q2 {
-    
-    
+
+    // Classe base abstrata
     public abstract static class Curso {
-        String nome;
-        int duracao; // semestres
-        List<Disciplina> disciplinas = new ArrayList<>();
-        
-        public abstract int calcularCargaHoraria();
-        public Curso(String nome, int duracao){
-            if(duracao < 0){
-                throw new ValueError();
+        protected String titulo;
+        protected int duracaoSemestres;
+        protected List<UnidadeCurricular> unidades;
+
+        public Curso(String titulo, int duracaoSemestres) {
+            if (duracaoSemestres < 0) {
+                throw new DuracaoInvalidaException();
             }
-            this.nome = nome; this.duracao = duracao;
+            this.titulo = titulo;
+            this.duracaoSemestres = duracaoSemestres;
+            this.unidades = new ArrayList<>();
         }
-        public void adicionarDisciplina(Disciplina d){
-            disciplinas.add(d);
+
+        // Método abstrato para cálculo de carga horária
+        public abstract int obterCargaHoraria();
+
+        // Adiciona disciplina ao curso
+        public void incluirUnidade(UnidadeCurricular uc) {
+            unidades.add(uc);
         }
-        public void printData(){
-            System.out.println("Carga horária: " + calcularCargaHoraria());
-            String disc = "Disciplinas: ";
-            for(int i = 0; i < disciplinas.size(); i++){
-                Disciplina d = disciplinas.get(i);
-                disc += d.nome;
-                if(i < disciplinas.size() - 1){
-                    disc += "; ";
+
+        // Exibe informações do curso
+        public void apresentar() {
+            System.out.println("Carga horária total: " + obterCargaHoraria());
+            StringBuilder buffer = new StringBuilder("Componentes curriculares: ");
+            for (int i = 0; i < unidades.size(); i++) {
+                buffer.append(unidades.get(i).rotulo);
+                if (i < unidades.size() - 1) {
+                    buffer.append("; ");
                 }
             }
-            System.out.println(disc);
+            System.out.println(buffer);
         }
     }
-    
-    public static class Graduacao extends Curso{
-        public Graduacao(String nome, int duracao){
-            super(nome,duracao);
-            System.out.println("Graduação criada");
+
+    // Curso de graduação
+    public static class CursoGraduacao extends Curso {
+        public CursoGraduacao(String titulo, int duracaoSemestres) {
+            super(titulo, duracaoSemestres);
+            System.out.println("Curso de graduação criado");
         }
-        
-        public int calcularCargaHoraria(){
-            return duracao * 184;
-        }
-    }
-    
-    public static class PosGraduacao extends Curso{
-        public PosGraduacao(String nome, int duracao){
-            super(nome,duracao);
-            System.out.println("Pós-graduação criada");
-        }
-        
-        public int calcularCargaHoraria(){
-            return duracao * 137;
+
+        @Override
+        public int obterCargaHoraria() {
+            return duracaoSemestres * 180;
         }
     }
-    
-    public static class Disciplina{
-        String nome;
-        public Disciplina(String nome){
-            this.nome = nome;
+
+    // Curso de pós-graduação
+    public static class CursoPosGraduacao extends Curso {
+        public CursoPosGraduacao(String titulo, int duracaoSemestres) {
+            super(titulo, duracaoSemestres);
+            System.out.println("Curso de pós-graduação criado");
+        }
+
+        @Override
+        public int obterCargaHoraria() {
+            return duracaoSemestres * 140;
         }
     }
-    
-    public static class ValueError extends RuntimeException{ //presumo que seja uma excessão nativa em python
-        public ValueError(){
-            super("ValueError: Duração inválida");
+
+    // Representa uma disciplina/unidade curricular
+    public static class UnidadeCurricular {
+        String rotulo;
+
+        public UnidadeCurricular(String rotulo) {
+            this.rotulo = rotulo;
         }
     }
-    
-    public static void main(String args[]) throws IOException {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String[] cursoData = r.readLine().split("; ");
-        try{ 
-            int h = Integer.parseInt(cursoData[1]);        
-            Curso curso = cursoData[2].equals("pos") ? new PosGraduacao(cursoData[0],h) : new Graduacao(cursoData[0],h);
-            String[] discData = r.readLine().split("; "); 
-            for(String disc : discData){
-                Disciplina d = new Disciplina(disc);
-                curso.adicionarDisciplina(d);
+
+    // Exceção personalizada para valores inválidos
+    public static class DuracaoInvalidaException extends RuntimeException {
+        public DuracaoInvalidaException() {
+            super("Erro: duração informada inválida");
+        }
+    }
+
+    // Programa principal
+    public static void main(String[] args) throws IOException {
+        BufferedReader leitor = new BufferedReader(new InputStreamReader(System.in));
+        String[] dadosCurso = leitor.readLine().split("; ");
+        try {
+            int semestres = Integer.parseInt(dadosCurso[1]);
+            Curso cursoEscolhido;
+
+            if ("pos".equalsIgnoreCase(dadosCurso[2])) {
+                cursoEscolhido = new CursoPosGraduacao(dadosCurso[0], semestres);
+            } else {
+                cursoEscolhido = new CursoGraduacao(dadosCurso[0], semestres);
             }
-            
-            curso.printData();
-        } catch (ValueError e){
-            System.out.println(e);
+
+            String[] dadosDisciplinas = leitor.readLine().split("; ");
+            for (String nome : dadosDisciplinas) {
+                cursoEscolhido.incluirUnidade(new UnidadeCurricular(nome));
+            }
+
+            cursoEscolhido.apresentar();
+        } catch (DuracaoInvalidaException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

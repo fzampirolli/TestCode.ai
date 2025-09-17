@@ -1,54 +1,70 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-public class Q1{
-    
-    public static class CentralNotificacoes{
-        
-        // o teste 4 me parece estar com as saidas erradas, ele pede 'alerta de bateria'
-        // mas o usuario nunca da input de alerta de bateria neste teste (ele da em outros)
-        
-        static CentralNotificacoes instance = null;
-        
-        ArrayList<String> notificacoes = new ArrayList<>();
-        
-        private CentralNotificacoes(){
-            
+/**
+ * Implementação de um sistema de notificações com instância única (Singleton).
+ */
+public class Q1 {
+
+    // Classe responsável por gerenciar notificações
+    public static class GerenciadorNotificacoes {
+
+        private static GerenciadorNotificacoes instanciaUnica;
+        private final ArrayList<String> filaNotificacoes;
+
+        private GerenciadorNotificacoes() {
+            filaNotificacoes = new ArrayList<>();
         }
-        
-        public static CentralNotificacoes getInstance(){
-            if(instance ==  null){
-                instance = new CentralNotificacoes();
-                System.out.println("Central iniciada");
+
+        // Método estático para acessar a instância única
+        public static GerenciadorNotificacoes acessar() {
+            if (instanciaUnica == null) {
+                instanciaUnica = new GerenciadorNotificacoes();
+                System.out.println("Sistema de notificações iniciado");
             } else {
-                System.out.println("Central já ativa");
+                System.out.println("Sistema já em execução");
             }
-            return instance;
+            return instanciaUnica;
         }
-        
-        public void listar(){
-            System.out.println("Notificações:");
-            for (String notif : notificacoes){
-                System.out.println(notif);
+
+        // Adiciona uma nova notificação
+        public void incluir(String mensagem) {
+            filaNotificacoes.add(mensagem);
+            System.out.println("Notificação registrada: " + mensagem);
+        }
+
+        // Exibe todas as notificações armazenadas
+        public void exibir() {
+            System.out.println("Lista de notificações:");
+            for (String msg : filaNotificacoes) {
+                System.out.println(msg);
             }
-        }
-        
-        public void adicionar(String notif){
-            System.out.println("Nova notificação: " + notif);
-            notificacoes.add(notif);
         }
     }
-    
-    public static void main(String args[]) throws IOException {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String notif = r.readLine();
-        CentralNotificacoes instance = CentralNotificacoes.getInstance();
-        
-        while(r.ready()){
-            switch(r.readLine()){
-                case "nova_instancia": CentralNotificacoes.getInstance(); break;
-                case "adicionar": instance.adicionar(notif); break;
-            }   
+
+    // Programa principal
+    public static void main(String[] args) throws IOException {
+        BufferedReader leitor = new BufferedReader(new InputStreamReader(System.in));
+        String primeiraEntrada = leitor.readLine();
+        GerenciadorNotificacoes notificacoes = GerenciadorNotificacoes.acessar();
+
+        String comando;
+        while ((comando = leitor.readLine()) != null) {
+            switch (comando) {
+                case "nova_instancia":
+                    GerenciadorNotificacoes.acessar();
+                    break;
+                case "adicionar":
+                    notificacoes.incluir(primeiraEntrada);
+                    break;
+                case "listar":
+                    notificacoes.exibir();
+                    break;
+                default:
+                    System.out.println("Comando desconhecido: " + comando);
+            }
         }
     }
 }

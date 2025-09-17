@@ -1,43 +1,39 @@
-import sys
-class SomSistema:
-    
-    _instancia = None
-    
+class AudioManager:
+    _unique_instance = None
+
     def __new__(cls):
-        
-        if cls._instancia is None:
-            cls._instancia = super().__new__(cls)
-            cls._instancia.somp = None
-            print("Gerenciador de som criado")
-            
-        else: 
-            print("Gerenciador já existente")
-            
-        return cls._instancia
-            
-    def tocar_som (self, som):
-        self.somp = som
-        print(f"Tocando som: {som}")
-        
-    def som_atual(self):
-        print(f"Som atual: {self.somp}")
-        
+        if cls._unique_instance is None:
+            cls._unique_instance = super().__new__(cls)
+            cls._unique_instance._current_track = None
+            print("Módulo de áudio inicializado")
+        else:
+            print("Módulo de áudio já em uso")
+        return cls._unique_instance
 
-sistema = SomSistema()
-entrada = input().strip()
-comando= input().strip()
+    def reproduzir(self, faixa):
+        self._current_track = faixa
+        print(f"Reproduzindo: {faixa}")
+
+    def status(self):
+        if self._current_track:
+            print(f"Faixa em execução: {self._current_track}")
+        else:
+            print("Nenhuma faixa em execução no momento")
 
 
-if comando == "tocar_som":
-    sistema.tocar_som(entrada)
-elif comando == "som_atual":
-    sistema.tocar_som(entrada)
-    sistema.som_atual()
-elif comando == "nova_instancia":
-    sistema = SomSistema()
-else:
-    print("Comando invalida")
-    exit()
-        
-            
-        
+# Execução principal
+if __name__ == "__main__":
+    player = AudioManager()
+    entrada = input().strip()
+    comando = input().strip()
+
+    if comando == "reproduzir":
+        player.reproduzir(entrada)
+    elif comando == "status":
+        player.reproduzir(entrada)
+        player.status()
+    elif comando == "nova_instancia":
+        player = AudioManager()
+    else:
+        print("Comando não reconhecido")
+        exit(1)
