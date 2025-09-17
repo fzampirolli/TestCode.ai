@@ -104,27 +104,6 @@ PARALLEL_JOBS=5
 LOG_LEVEL=INFO
 EOF
 
-# Create activation reminder script
-echo "📝 Creating virtual environment activation script..."
-cat > activate_env.sh << 'EOF'
-#!/bin/bash
-# Quick script to activate the virtual environment
-
-if [ ! -d ".venv" ]; then
-    echo "❌ Virtual environment not found. Run the setup script first."
-    exit 1
-fi
-
-source .venv/bin/activate
-echo "✅ Virtual environment activated"
-echo "📍 Current environment: $VIRTUAL_ENV"
-echo "🐍 Python version: $(python --version)"
-echo ""
-echo "To deactivate, simply run: deactivate"
-EOF
-
-chmod +x activate_env.sh
-
 # Create .gitignore if it doesn't exist
 if [ ! -f ".gitignore" ]; then
     echo "📝 Creating .gitignore file..."
@@ -163,9 +142,16 @@ echo "✅ Setup completed successfully!"
 echo ""
 echo "📋 Next steps:"
 echo "   1. Edit config/config.env and add your API_KEY"
-echo "   2. To activate the environment manually: source .venv/bin/activate"
-echo "   3. Or use the helper script: ./activate_env.sh"
-echo "   4. To deactivate: deactivate"
+echo "   2. (Optional) Edit other configs in:"
+echo "      - config/config.yaml"
+echo "   3. To activate the environment manually: source .venv/bin/activate"
+echo "      To deactivate: deactivate"
+echo "   4. To test the setup:"
+echo "      - ./run.sh eval submissions"
+echo "   5. For your classes:"
+echo "      - Download the submissions from Moodle as a zip file"
+echo "      - ./run.sh prepare your.zip"
+echo "      - ./run.sh eval submissions"
 echo ""
 echo "🔍 Environment info:"
 echo "   📁 Virtual environment: .venv/"
