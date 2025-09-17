@@ -8,10 +8,9 @@ Its main feature is its flexibility, enabled through a central configuration fil
 
 ## 🚀 Features
 - **Setup** of a complete evaluation environment.
-- **Preparation of submissions** from Moodle `.zip` files (unzip + anonymization).
+- **Preparation of submissions** from Moodle `.zip` files (unzip).
 - **Automated evaluation** of programming tasks using LLMs.
 - **Automatic feedback delivery** via email.
-- **Mapping file** generation for anonymized student folders.
 
 ---
 
@@ -44,7 +43,7 @@ Run the wrapper script with one of the available commands:
   ```
 
 * `prepare <zip_file>`
-  Unzips and anonymizes submissions from Moodle.
+  Unzips submissions from Moodle.
   The mapping file is saved in `output/mapping.txt`.
 
 * `eval <folder>`
